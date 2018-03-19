@@ -1,0 +1,157 @@
+<?php
+
+class SignalSender
+{
+	public $settings;
+
+	public function __construct($settings) {
+        $this->settings = $settings;
+    }
+	
+	function turnComputerOn($macaddress)
+	{
+		$this->runShellCommand('sudo wakeonlan '.$macaddress, false);
+	}
+
+	function killDelayProcess($name)
+	{
+		$this->runShellCommand($this->settings->sudo.$this->settings->mainPath.'executables'.DIRECTORY_SEPARATOR."processes".DIRECTORY_SEPARATOR."./process_kill.py ".$name, false);
+		$this->deleteDelayFile($name);
+	}
+
+	function disablePostProcessing($name, $seconds, $action)
+	{
+		$this->runShellCommand($this->settings->sudo.$this->settings->mainPath.'executables'.DIRECTORY_SEPARATOR."processes".DIRECTORY_SEPARATOR."./disable_post_processing.py ".$name." ".$seconds." ".$action, false);
+	}
+	
+	function delayProcess($name, $seconds, $action)
+	{
+		$this->killDelayProcess($name);
+
+		$delayedActionPath = $this->settings->sudo.$this->settings->mainPath.'executables'.DIRECTORY_SEPARATOR."processes".DIRECTORY_SEPARATOR."./delayed_action.py";
+
+		$this->saveDelayFile($name, $seconds);
+		
+		return $this->delay($delayedActionPath,$name,$seconds,$action);
+	}
+
+	function delay($path, $name, $time, $action)
+	{
+		return $path." ".$name." ".$time." ".$action;
+	}
+
+	function radioItemScriptPath($item)
+	{
+		if($item->sendOption == SendMethod::StandardRadioSignal)
+			return $this->settings->sudo.$this->settings->codeSendPath;
+		if($item->sendOption == SendMethod::ConradRadioSignal)
+			return $this->settings->sudo.$this->settings->conradCodeSendPath;
+	}
+	
+	function enableRadioItem($item, $outletDelayed, &$additionalActions)
+	{
+		foreach ($item->codeOn as $code) {
+			$this->runShellCommand($this->radioItemScriptPath($item) ." ". $code);
+		}
+	
+		$this->itemDelaySetUp($item, $outletDelayed, $additionalActions);
+	}
+	
+	function disableRadioItem($item)
+	{
+		$this->killDelayProcess($item->name);
+		
+		$this->runShellCommand($this->radioItemScriptPath($item) ." ". $item->codeOff);
+		
+		$this->disablePostProcessing($item->name, 0, "off");
+	}
+	
+	function enableWebItem($item, $outletDelayed, &$additionalActions)
+	{
+		foreach ($item->codeOn as $code) {
+			$page = Helpers::GetWebpageContent($item->UrlWithCode($code));
+		}
+	
+		$this->itemDelaySetUp($item, $outletDelayed, $additionalActions);
+	}
+	
+	function disableWebItem($item)
+	{
+		$this->killDelayProcess($item->name);
+		
+		$page = file_get_contents($item->CodeOff());
+		
+		$this->disablePostProcessing($item->name, 0, "off");
+	}
+	
+	function itemDelaySetUp($item, $outletDelayed, &$additionalActions)
+	{
+		// run additional action
+		$defaultDelay = $item->delay;
+	
+		if($outletDelayed != 0)
+			$defaultDelay = $outletDelayed;
+		
+		array_push($additionalActions, $this->delayProcess($item->name,$defaultDelay,"\"codeOff\""));
+	}
+	
+	function runActions($actions)
+	{
+		$shellScripts = "";
+		$i = 0;
+		foreach ($actions as $action) {
+			// this has a drawback when run in a loop scripts will be dependent and next will fire when previous ended
+			//$shellScripts=$shellScripts.$action.";";
+			
+			// & makes all these fire simultaneusly
+			// to avoid all use radio transmitter at the same time in case of same delay it is wrapped in sleep so they do not fire at the same time
+			// just as precausion each delay script will fire in 2 seconds difference
+			$shellScripts=$shellScripts."python -c \"import sys, os, time; time.sleep(".$i."); os.system('".$action."')\""." & ";
+			$i = $i + 2;
+		}
+		
+		if(strlen($shellScripts) > 0)
+			$this->runShellCommand($shellScripts, false);
+	}
+	
+	function runShellCommand($command, $sleep = true)
+	{
+		shell_exec($command);
+		
+		if($sleep)
+			sleep(1);
+	}
+	
+	function deleteDelayFile($name)
+	{
+		$filepathname = $this->settings->delayfilesPath.$name.'.json';	
+		
+		if (file_exists($filepathname))
+			unlink($filepathname);
+	}
+	
+	function saveDelayFile($name, $delay)
+	{
+		if(!($delay > 0))
+			return;
+	
+		if(!Helpers::MakeDir($this->settings->delayfilesPath))
+			return "No delayfiles dir";
+	
+		$filepathname = $this->settings->delayfilesPath.$name.'.json';	
+		
+		if (!file_exists($filepathname)) { file_put_contents($filepathname, ''); }
+		
+		$delayInfoText = file_get_contents($filepathname);   
+		$delayInfoObject = json_decode($delayInfoText,true);
+		
+		$delayInfoObject["delay"] = $delay; 
+		$delayInfoObject["time"] = time(); 
+			
+		$delayInfoText = json_encode($delayInfoObject);  
+		file_put_contents($filepathname, $delayInfoText);
+	}
+	
+}
+
+?>

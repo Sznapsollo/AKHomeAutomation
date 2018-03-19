@@ -1,0 +1,19 @@
+<div ng-repeat="item in items">
+	<power-switch-delay outlet-id="{{item.id}}" header="{{item.header}}" image={{item.image}} delay="{{item.delay}}" enable-on="{{item.enableOn}}" enable-off="{{item.enableOff}}" ng-if="item.type == 'powerswitchdelay'"></power-switch-delay>
+	<power-switch outlet-id="{{item.id}}" header="{{item.header}}" image={{item.image}} enable-on="{{item.enableOn}}" enable-off="{{item.enableOff}}" ng-if="item.type == 'powerswitch'"></power-switch>	
+	<power-switch-confirm outlet-id="{{item.id}}" header="{{item.header}}" question="{{item.question}}" enable-on="{{item.enableOn}}" enable-off="{{item.enableOff}}" ng-if="item.type == 'powerswitchconfirm'"></power-switch-confirm>				
+</div>
+
+<h3>{{translate('rpiResetHeader');}}</h3>
+<div class="btn-group btn-group-justified"  aria-label="...">
+  <div class="btn-group" role="group">
+    <button type="button" data-outletId="667" data-outletStatus="off" data-outletMessage="{{translate('rpiResetQuestion');}}" class="confirm-action btn btn-default btn-lg btn-danger">{{translate('reset');}}</button>
+  </div>
+</div>
+
+<h3>{{translate('rpiOffHeader');}}</h3>
+<div class="btn-group btn-group-justified"  aria-label="...">
+  <div class="btn-group" role="group">
+    <button type="button" data-outletId="666" data-outletStatus="off" data-outletMessage="{{translate('rpiOffQuestion');}}" class="confirm-action btn btn-default btn-lg btn-danger">{{translate('disable');}}</button>
+  </div>
+</div>

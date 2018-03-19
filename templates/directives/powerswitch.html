@@ -1,0 +1,13 @@
+
+<h3>
+	<img ng-src="graphics/icons/{{image}}" />
+	<span >{{header}}</span>
+</h3>
+<div class="btn-group btn-group-justified"  aria-label="...">
+  <div class="btn-group" role="group"  ng-if="enableOn">
+	<button  ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-success" ng-click="clickButton({'outletId':outletId,'status':'on','delay':0})">{{translate('enable');}}</button>
+  </div>
+  <div class="btn-group" role="group"  ng-if="enableOff">
+	<button  ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-warning" ng-click="clickButton({'outletId':outletId,'status':'off'})">{{translate('disable');}}</button>
+  </div>
+</div>

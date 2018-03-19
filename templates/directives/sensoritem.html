@@ -1,0 +1,13 @@
+
+<h3>
+	<span>{{header}}</span>
+	<img ng-click="toggleRegularOptions()" ng-src="graphics/{{calendarIconName}}" />
+	<img ng-click="toggleDevicesOptions()" ng-src="graphics/{{calendarIconName}}" />
+</h3>
+
+<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)"></regular-settings>
+
+<sensor-devices-settings ng-if="showDevices" outlet-id="{{outletId}}" sensor-devices-data="{{sensorDevicesData}}" on-sensor-devices-settings-saved="saveSensorDevicesSettings(msg)"></sensor-devices-settings>
+
+<div style="text-align: center" ng-if="showRegular || showDevices" confirmed-click="resetSensorData()" 
+    ng-confirm-click="{{translate('careful');}}">{{translate('reset');}}</div>

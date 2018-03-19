@@ -1,0 +1,12 @@
+<div class="logDetailsArea">
+	<div>
+		<a ng-click="orderByType = !orderByType;">Change Sort</a>
+		&nbsp;&nbsp;|&nbsp;&nbsp;
+		<a ng-if="!dataLoading" ng-click="checkLogDetails()">Refresh</a>
+	</div>
+	<div>
+		<div ng-class-odd="'oddRow'" ng-class-even="'evenRow'" ng-repeat='logItem in logContentLines  | orderBy:"toString()":orderByType'>
+			<div>{{logItem}}</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,146 @@
+{  
+	"webServerAddress":"http://88.88.88.88/home",
+	"satelliteServerAddresses":[],
+	"mainPath":"/var/www/html/home/",
+	"delayfilesPath":"/var/www/html/home/executables/delayfiles/",
+	"regularactionfilesPath":"/var/www/html/home/executables/regularactionfiles/",
+	"sensorsettingsfilesPath":"/var/www/html/home/executables/sensorsettingsfiles/",
+	"codeSendPath":"/var/www/html/home/RadioDevices/codesend",
+	"conradCodeSendPath":"/var/www/html/home/RadioDevices/codesendConrad",
+	"sensorAlarmMail":{  
+	  "enableMailingOnAlarm":false,
+	  "fromaddr":"------@gmail.com",
+	  "toaddr":"------@gmail.com",
+	  "password":"------",
+	  "smtpServerAddress":"smtp.gmail.com",
+	  "smtpServerPort":587
+	},
+	"saveDailyLogsToFile": true,
+	"saveDailySensorLogsToFile": true,
+	"translations":[ 
+      {  
+         "code":"homepage",
+         "description":"Strona Główna"
+      },
+	  {  
+         "code":"tab2",
+         "description":"Zaawansowane"
+      },
+	  {  
+         "code":"tab3",
+         "description":"Sensory"
+      },
+	  {  
+         "code":"close",
+         "description":"Zamknij"
+      },
+	  {  
+         "code":"careful",
+         "description":"Zastanów się!"
+      },
+	  {  
+         "code":"enable",
+         "description":"Włącz"
+      },
+      {  
+         "code":"disable",
+         "description":"Wyłącz"
+      },
+	  {  
+         "code":"reset",
+         "description":"Zresetuj"
+      },
+	  {  
+         "code":"save",
+         "description":"Zapisz"
+      },
+	  {  
+         "code":"rpiResetHeader",
+         "description":"Komputerek sterujący Pi - Reset"
+      },
+	  {  
+         "code":"rpiResetQuestion",
+         "description":"Na pewno zresetować Rasberraka?"
+      },
+	  {  
+         "code":"rpiResetMessage",
+         "description":"Rasberak się resetuje. Za chwilkę próba odświeżenia strony"
+      },
+	  {  
+         "code":"rpiOffHeader",
+         "description":"Komputerek sterujący Pi - Wyłączenie"
+      },
+	  {  
+         "code":"rpiOffQuestion",
+         "description":"Na pewno wyłączyć Rasberraka?"
+      },
+	  {  
+         "code":"rpiOffMessage",
+         "description":"Rasberak się wyłącza. Za chwilkę próba odświeżenia strony"
+      },
+      {  
+         "code":"day1",
+         "description":"Pn"
+      },
+      {  
+         "code":"day2",
+         "description":"Wt"
+      },
+      {  
+         "code":"day3",
+         "description":"Sr"
+      },
+      {  
+         "code":"day4",
+         "description":"Czw"
+      },
+      {  
+         "code":"day5",
+         "description":"Pt"
+      },
+      {  
+         "code":"day6",
+         "description":"Sb"
+      },
+      {  
+         "code":"day7",
+         "description":"Nd"
+      },
+      {  
+         "code":"logs_actions",
+         "description":"Action Logs"
+      },
+      {  
+         "code":"logs_sensors",
+         "description":"Sensor Logs"
+      },
+      {  
+         "code":"logs_exceptions",
+         "description":"Exception Logs"
+      },
+      {  
+         "code":"device",
+         "description":"Device"
+      },
+      {  
+         "code":"delay",
+         "description":"Delay"
+      },
+      {  
+         "code":"rebound",
+         "description":"Rebound"
+      },
+      {  
+         "code":"dependencyMethod",
+         "description":"Dependency method"
+      },
+      {  
+         "code":"dependencyOperation",
+         "description":"Operation"
+      },
+      {  
+         "code":"dependencyValue",
+         "description":"Value"
+      }
+   ]
+}

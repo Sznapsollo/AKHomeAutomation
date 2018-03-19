@@ -1,0 +1,150 @@
+<?php
+
+class SendMethod
+{
+	const StandardRadioSignal = 0;
+	const ConradRadioSignal = 1;
+	const WebAddressSignal = 2;
+	const MacAddressSignal = 3;
+}
+
+class ItemChecker
+{
+	public $nodes;
+	public $sensors;
+	
+	public function __construct() {
+	
+		$json = file_get_contents(dirname(__FILE__) . '/nodes.json');
+		
+		$itemsObject = json_decode($json);
+	
+        $this->nodes = array();
+		$this->sensors = $itemsObject->sensors;
+	
+		foreach($itemsObject->nodes as $node) 
+		{
+			if(property_exists($node, "sendOption") && ($node->sendOption == 0 || $node->sendOption == 1))
+				array_push($this->nodes, new IntItem($node));
+			else if(property_exists($node, "sendOption") && ($node->sendOption == 2))
+				array_push($this->nodes, new WebItem($node));
+			else if(property_exists($node, "sendOption") && ($node->sendOption == 3))
+				array_push($this->nodes, new MacItem($node));
+			else if(property_exists($node, "itemIDs") && ($node->itemIDs))
+				array_push($this->nodes, new GroupItem($node));
+		}
+    }
+	
+	function getItems($category) {
+		$nodes = array();
+	
+		foreach ($this->nodes as $item) {
+			if($category && $item->category == $category)
+				array_push($nodes, $item);
+			else
+				array_push($nodes, $item);
+		}
+		
+		return $nodes;
+	}
+	
+	function checkItem($id) {
+		foreach ($this->nodes as $node) {
+			if($node->name == $id)
+				return $node;
+		}
+	}
+
+	function getSensors() {
+		return $this->sensors;
+	}
+
+	function checkSensor($id) {
+		foreach ($this->sensors as $sensor) {
+			if($sensor->id == $id)
+				return $sensor;
+		}
+	}	
+}
+
+class BaseItem
+{
+	public $properties;
+	public $image;
+	
+	public function image() {
+		if(property_exists($this->properties, "image"))
+			return $this->properties->image;
+		else
+			return "no_image.jpg";
+	}
+	
+	public function __get($name) {
+		return $this->properties->$name;
+	}
+}
+
+class IntItem extends BaseItem
+{
+    public function __construct($properties) {
+        $this->properties = $properties;
+    }
+	
+	public function CodeOn()
+	{
+		return $this->codeOn[0];
+	}
+	
+	public function CodeOff()
+	{
+		return $this->codeOff;
+	}
+}
+
+class GroupItem extends BaseItem
+{
+	public function __construct($properties) {
+        $this->properties = $properties;
+    }
+}
+
+class WebItem extends IntItem
+{
+	public function __construct($properties) {
+        $this->properties = $properties;
+    }
+	
+	public function UrlWithCode($code)
+	{
+		return $this->address."?check=1&".$code;
+	}
+	
+	public function UrlWithCheck()
+	{
+		return $this->address."?check=1";
+	}
+	
+	public function CodeOn()
+	{
+		return $this->UrlWithCode($this->codeOn[0]);
+	}
+	
+	public function CodeOff()
+	{
+		return $this->UrlWithCode($this->codeOff);
+	}
+}
+
+class MacItem extends BaseItem
+{
+	public function __construct($properties) {
+        $this->properties = $properties;
+    }
+	
+	public function CodeOn()
+	{
+		return $this->codeOn[0];
+	}
+}
+
+?>

@@ -1,0 +1,18 @@
+<div class="pagerArea">
+	<div>
+		<span class="choosePageArea">Items per page: 
+			<select ng-model="selectedItemsPerPage" ng-options="item for item in itemsPerPageArray" ng-change="updateItemsPerPage()">
+			</select>
+		</span>		
+		<span class="choosePageArea">Page: 
+			<select ng-model="selectedPage" ng-options="page + 1 for page in pages" ng-change="updateSelectedPage()">
+			</select>
+		</span>
+	</div>
+	<div class="pagerButtons">
+		<a ng-show="canGoBack()" href="#/{{page}}/{{firstNode}}/{{itemsPerPage}}"><<</a>
+		<a ng-show="canGoBack()" href="#/{{page}}/{{previousNode}}/{{itemsPerPage}}"><</a>
+		<a ng-show="canGoNext()" href="#/{{page}}/{{nextNode}}/{{itemsPerPage}}">></a>
+		<a ng-show="canGoNext()" href="#/{{page}}/{{lastNode}}/{{itemsPerPage}}">>></a>
+	</div>
+</div>

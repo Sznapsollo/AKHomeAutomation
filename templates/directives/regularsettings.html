@@ -1,0 +1,22 @@
+
+<div ng-repeat="timeUnit in timeUnits">
+	<div class="btn-group btn-group-justified"  aria-label="...">
+		<div class="btn-group" role="group" ng-repeat="n in [0,1,2,3,4,5,6] track by $index">
+			<button type="button" ng-class="{'btn-success': isSetDay(timeUnit, n)}" class="btn btn-default" ng-click="toggleDay(timeUnit, n)" >{{translate('day'+(n+1));}}</button>
+		</div>
+	</div>
+	<div style="margin: 10px auto 10px auto; text-align: center; margin-top: 10px;">
+		<button type="button" class="btn btn-default"  style="margin-right: 10px; color: red; border: none;" aria-label="Left Align" ng-click="removeUnit(timeUnit)" ng-show="timeUnits.length > 1">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		</button>
+		<input type="time" ng-model="timeUnit.timeStart" name="time_start">&nbsp-&nbsp<input type="time" ng-model="timeUnit.timeEnd" name="time_end">
+	</div>
+</div>
+<div style="margin: 10px auto 10px auto; text-align: center">
+	<p style="margin-top: 10px">
+		<button type="button" class="btn btn-default" style="margin-right: 15px;" aria-label="Left Align" ng-click="addNew()">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</button>
+		<button type="button" ng-disabled="!isSaveEnabled()" class="btn btn-primary" ng-click="saveRegularSettings();" >{{translate('save');}}</button>
+	</p>
+</div>

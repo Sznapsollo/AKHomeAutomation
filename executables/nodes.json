@@ -1,0 +1,214 @@
+{
+	"sensors": [{
+		"id": "pir_ben_dover",
+		"header": "Pir Label",
+		"pin": 32,
+		"rebound": 20,
+		"timeUnits":[
+			{"timeStart":"00:00","timeEnd":"08:00","daysOfWeek":",0,1,2,3,4"},
+			{"timeStart":"15:30","timeEnd":"23:59","daysOfWeek":",0,1,2,3,4"},
+			{"timeStart":"00:00","timeEnd":"23:59","daysOfWeek":",5,6"}
+		],
+		"alarmTimeUnits":[
+			{"timeStart":"09:00","timeEnd":"15:00","daysOfWeek":",1,2,4"}
+		],
+		"on": [
+		{
+			"id": "roomlamp",
+			"delay": 600,
+			"rebound": 0,
+			"dependencyMethod": "checkLuminosity",
+			"dependencyOperation": "lwr",
+			"dependencyValue": 25
+		}],
+		"onAlarm": [
+		{
+			"id": "testswitch1",
+			"delay": 60
+		}]
+	}],
+	"nodes": [{
+			"name": "testswitch1",
+			"image": "lampaprzedpokoj.jpg",
+			"type": "powerswitchdelay",
+			"category": "general",
+			"header": "Radio Switch",
+			"question": "",
+			"codeOn": [
+				4433
+			],
+			"codeOff": 4436,
+			"delay": 7200,
+			"sendOption": 0,
+			"enableOn": true,
+			"enableOff": true,
+			"notifySatellites": false
+		},
+		{
+			"name": "coffee",
+			"image": "coffee.jpg",
+			"type": "powerswitchdelay",
+			"category": "general",
+			"header": "Coffee machine",
+			"question": "",
+			"codeOn": [
+				966491648
+			],
+			"codeOff": 899382784,
+			"delay": 7200,
+			"sendOption": 1,
+			"enableOn": true,
+			"enableOff": true,
+			"notifySatellites": false
+		},
+		{
+			"name": "humidfier",
+			"type": "powerswitchdelay",
+			"category": "general",
+			"header": "Humidifier",
+			"question": "",
+			"address": "http://192.168.20.121",
+			"codeOn": [
+				"pin=ON1"
+			],
+			"codeOff": "pin=OFF1",
+			"delay": 1800,
+			"sendOption": 2,
+			"enableOn": true,
+			"enableOff": true,
+			"codeDev": "---------"
+		},
+		{
+			"name": "roomlamp",
+			"image": "roomzyrandol.jpg",
+			"type": "powerswitchdelay",
+			"category": "general",
+			"header": "Living Room Lamp",
+			"question": "",
+			"codeOn": [
+				44331
+			],
+			"codeOff": 44361,
+			"delay": 1800,
+			"sendOption": 0,
+			"enableOn": true,
+			"enableOff": true
+		},
+		{
+			"name": "tvlamp",
+			"image": "tvlamp.jpg",
+			"type": "powerswitchdelay",
+			"category": "general",
+			"header": "TV Lamp",
+			"question": "",
+			"codeOn": [
+				44332
+			],
+			"codeOff": 44362,
+			"delay": 7200,
+			"sendOption": 0,
+			"enableOn": true,
+			"enableOff": true
+		},
+		{
+			"name": "roomlamp",
+			"image": "roomlamp.jpg",
+			"type": "powerswitchdelay",
+			"category": "general",
+			"header": "Room Lamp",
+			"question": "",
+			"codeOn": [
+				44333
+			],
+			"codeOff": 44363,
+			"delay": 7200,
+			"sendOption": 0,
+			"enableOn": true,
+			"enableOff": true,
+			"notifySatellites": false
+		},
+		{
+			"name": "roomlampsecond",
+			"image": "roomlampsecond.jpg",
+			"type": "powerswitchdelay",
+			"category": "general",
+			"header": "Room Lamp 2",
+			"question": "",
+			"codeOn": [
+				44334
+			],
+			"codeOff": 44364,
+			"delay": 7200,
+			"sendOption": 0,
+			"enableOn": true,
+			"enableOff": true
+		},
+		{
+			"name": "kitchenlights",
+			"image": "kitchenlights.jpg",
+			"type": "powerswitchdelay",
+			"category": "general",
+			"header": "Kitchen lights",
+			"question": "",
+			"codeOn": [
+				44335
+			],
+			"codeOff": 44365,
+			"delay": 7200,
+			"sendOption": 0,
+			"enableOn": true,
+			"enableOff": true
+		},
+		{
+			"name": "lavalamp",
+			"image": "lavalamp.jpg",
+			"type": "powerswitchdelay",
+			"category": "general",
+			"header": "Lampa lawa",
+			"question": "",
+			"codeOn": [
+				123
+			],
+			"codeOff": 12345,
+			"delay": 3600,
+			"sendOption": 0,
+			"enableOn": true,
+			"enableOff": true,
+			"codeDev": "--------"
+		},
+		{
+			"name": "alllights",
+			"image": "alllights.jpg",
+			"type": "powerswitch",
+			"category": "general",
+			"header": "All lights",
+			"question": "",
+			"itemIDs": [
+				"tvlamp",
+				"roomlamp",
+				"roomlampsecond",
+				"kitchenlights",
+				"lavalamp"
+			],
+			"enableOn": true,
+			"enableOff": true
+		},
+		{
+			"name": "tvstack",
+			"image": "tvstack.jpg",
+			"type": "powerswitchconfirm",
+			"category": "general",
+			"header": "TV stack",
+			"question": "Are you sure you want to turn it all off?",
+			"codeOn": [
+				12312
+			],
+			"codeOff": 2612312313508,
+			"delay": 0,
+			"sendOption": 0,
+			"enableOn": true,
+			"enableOff": true,
+			"codeDev": "-----"
+		}
+	]
+}
