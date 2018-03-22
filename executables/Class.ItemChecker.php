@@ -39,8 +39,11 @@ class ItemChecker
 		$nodes = array();
 	
 		foreach ($this->nodes as $item) {
-			if($category && $item->category == $category)
-				array_push($nodes, $item);
+			if($category)
+			{
+				if($item->category == $category)
+					array_push($nodes, $item);
+			}
 			else
 				array_push($nodes, $item);
 		}
