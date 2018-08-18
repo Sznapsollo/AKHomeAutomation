@@ -2,9 +2,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
-$request = file_get_contents('php://input');
-$input = json_decode($request);
-
 $fileName = null;
 $fileContent = null;
 

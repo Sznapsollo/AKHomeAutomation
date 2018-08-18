@@ -10,9 +10,6 @@ $itemChecker = new ItemChecker();
 $settings = new Settings();
 $id = null;
 
-$request = file_get_contents('php://input');
-$input = json_decode($request);
-
 if(isset($input->receive))
 {
 	if(isset($input->id))

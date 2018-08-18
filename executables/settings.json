@@ -20,91 +20,91 @@
 	"translations":[ 
       {  
          "code":"homepage",
-         "description":"Strona Główna"
+         "description":"Homepage"
       },
 	  {  
          "code":"tab2",
-         "description":"Zaawansowane"
+         "description":"Advanced"
       },
 	  {  
          "code":"tab3",
-         "description":"Sensory"
+         "description":"Sensors"
       },
 	  {  
          "code":"close",
-         "description":"Zamknij"
+         "description":"Close"
       },
 	  {  
          "code":"careful",
-         "description":"Zastanów się!"
+         "description":"Careful!"
       },
 	  {  
          "code":"enable",
-         "description":"Włącz"
+         "description":"Enable"
       },
       {  
          "code":"disable",
-         "description":"Wyłącz"
+         "description":"Disable"
       },
 	  {  
          "code":"reset",
-         "description":"Zresetuj"
+         "description":"Reset"
       },
 	  {  
          "code":"save",
-         "description":"Zapisz"
+         "description":"Save"
       },
 	  {  
          "code":"rpiResetHeader",
-         "description":"Komputerek sterujący Pi - Reset"
+         "description":"Raspberry Pi station - Reset"
       },
 	  {  
          "code":"rpiResetQuestion",
-         "description":"Na pewno zresetować Rasberraka?"
+         "description":"Are you sure you want to reset Raspberry Pi station?"
       },
 	  {  
          "code":"rpiResetMessage",
-         "description":"Rasberak się resetuje. Za chwilkę próba odświeżenia strony"
+         "description":"Raspberry Pi is being reseted. In a moment site will refresh."
       },
 	  {  
          "code":"rpiOffHeader",
-         "description":"Komputerek sterujący Pi - Wyłączenie"
+         "description":"Raspberry Pi station - Switch off"
       },
 	  {  
          "code":"rpiOffQuestion",
-         "description":"Na pewno wyłączyć Rasberraka?"
+         "description":"Are you sure you want to turn off Raspberry Pi station?"
       },
 	  {  
          "code":"rpiOffMessage",
-         "description":"Rasberak się wyłącza. Za chwilkę próba odświeżenia strony"
+         "description":"Raspberry Pi is being closed. In a moment site will refresh."
       },
       {  
          "code":"day1",
-         "description":"Pn"
+         "description":"Mo"
       },
       {  
          "code":"day2",
-         "description":"Wt"
+         "description":"Tu"
       },
       {  
          "code":"day3",
-         "description":"Sr"
+         "description":"We"
       },
       {  
          "code":"day4",
-         "description":"Czw"
+         "description":"Th"
       },
       {  
          "code":"day5",
-         "description":"Pt"
+         "description":"Fr"
       },
       {  
          "code":"day6",
-         "description":"Sb"
+         "description":"Sa"
       },
       {  
          "code":"day7",
-         "description":"Nd"
+         "description":"Su"
       },
       {  
          "code":"logs_actions",

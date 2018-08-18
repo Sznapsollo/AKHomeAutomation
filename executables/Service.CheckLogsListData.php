@@ -4,9 +4,6 @@ ini_set('display_errors', true);
 
 require_once("Class.Settings.php");
 
-$request = file_get_contents('php://input');
-$input = json_decode($request);
-
 $startIndex = 5;
 $itemsPerPage = 10;
 
