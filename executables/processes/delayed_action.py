@@ -3,7 +3,6 @@
 import time
 import os
 import sys
-from subprocess import call
 from sys import argv
 from socket import timeout
 
@@ -39,9 +38,9 @@ try:
 		if (node["sendOption"] == 2):
 				helper.loadPage(itemChecker.getWebAction(node, codearg), 0)
 		elif (node["sendOption"] == 1):
-				call([helper.settings.data["conradCodeSendPath"],str(node[codearg])])
+				helper.runRadioSwitch(helper.settings.data["conradCodeSendPath"],str(node[codearg]))
 		elif (node["sendOption"] == 0):
-				call([helper.settings.data["codeSendPath"],str(node[codearg])])
+				helper.runRadioSwitch(helper.settings.data["codeSendPath"],str(node[codearg]))
 
 		helper.deleteFile(helper.settings.data["delayfilesPath"]+'{0}.json'.format(namearg))
 		

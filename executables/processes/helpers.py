@@ -185,6 +185,10 @@ class Helper(object):
 
 		self.loadPageWithPost(serverAddress + "/executables/toggle.php", postData, 0)
 
+	def runRadioSwitch(self, name, code):
+		command = "python " + self.settings.data["mainPath"] + "executables/processes/run_radio_switch.py " + name +" "+ code
+		os.system(command)
+
 	def sendAlarmNotification(self, subject, message):
 		if "sensorAlarmMail" in self.settings.data:
 			try:

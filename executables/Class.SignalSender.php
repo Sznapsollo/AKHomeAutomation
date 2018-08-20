@@ -42,10 +42,12 @@ class SignalSender
 
 	function radioItemScriptPath($item)
 	{
+		$runRadioSwitchPath = $this->settings->mainPath.'executables'.DIRECTORY_SEPARATOR."processes".DIRECTORY_SEPARATOR."./run_radio_switch.py ";
+		
 		if($item->sendOption == SendMethod::StandardRadioSignal)
-			return $this->settings->sudo.$this->settings->codeSendPath;
+			return $this->settings->sudo.$runRadioSwitchPath.$this->settings->codeSendPath;
 		if($item->sendOption == SendMethod::ConradRadioSignal)
-			return $this->settings->sudo.$this->settings->conradCodeSendPath;
+			return $this->settings->sudo.$runRadioSwitchPath.$this->settings->conradCodeSendPath;
 	}
 	
 	function enableRadioItem($item, $outletDelayed, &$additionalActions)
@@ -98,16 +100,16 @@ class SignalSender
 	function runActions($actions)
 	{
 		$shellScripts = "";
-		$i = 0;
+		//$i = 0;
 		foreach ($actions as $action) {
 			// this has a drawback when run in a loop scripts will be dependent and next will fire when previous ended
 			//$shellScripts=$shellScripts.$action.";";
 			
-			// & makes all these fire simultaneusly
-			// to avoid all use radio transmitter at the same time in case of same delay it is wrapped in sleep so they do not fire at the same time
-			// just as precausion each delay script will fire in 2 seconds difference
-			$shellScripts=$shellScripts."python -c \"import sys, os, time; time.sleep(".$i."); os.system('".$action."')\""." & ";
-			$i = $i + 2;
+			//$shellScripts=$shellScripts."python -c \"import sys, os, time; time.sleep(".$i."); os.system('".$action."')\""." & ";
+			//$i = $i + 2;
+			
+			// this after introducing run_radio_switch. run all simultanously(&) but locking in (run_radio_switch) will make calls to radio switch work properly, sleep is no longer needed
+			$shellScripts=$shellScripts.$action." & ";
 		}
 		
 		if(strlen($shellScripts) > 0)
