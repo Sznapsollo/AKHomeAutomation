@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-	app.controller('LogsListController', function LogsListController($scope, $rootScope, $route, $compile, logsDataService) {
+	app.controller('LogsListController', function LogsListController($scope, $rootScope, $route, $compile, logsDataService, pageDataService) {
 		
 		$scope.itemscount = 0;
 		$scope.dataLoading = true;
@@ -9,8 +9,9 @@
 		$scope.url="";
 		
 		$scope.$on('$routeChangeSuccess',function(evt, absNewUrl, absOldUrl) {
-		   checkItemsData();
-		   $scope.logsType = $route.current.params.logsType;
+			initiatePageData();
+			checkItemsData();
+			$scope.logsType = $route.current.params.logsType;
 		});
 		
 		$scope.showNoResults = function() {
@@ -34,9 +35,6 @@
 					$scope.dataLoading = false;
 					$scope.items = dataResponse.data.items;
 					$scope.allCount = dataResponse.data.allCount;
-					automation.SetTranslations(dataResponse.data.translations);
-					$scope.pageTitle = automation.Translate('logs_' + $scope.logsType)
-					$rootScope.$broadcast('translationsReceived');
 					$rootScope.$broadcast('calculateImagesPaging', $scope.allCount);
 				},
 				function(response) {
@@ -45,6 +43,20 @@
 					console.log(error);
 					console.log(response);
 				});
-		}
+		};
+		function initiatePageData() {
+			pageDataService.checkPageData().then(
+				function(dataResponse) {
+					automation.SetPageFlags(dataResponse.data.pageflags);
+					automation.SetTranslations(dataResponse.data.translations);
+					$scope.pageTitle = automation.Translate('logs_' + $scope.logsType);
+					$rootScope.$broadcast('translationsReceived');
+				},
+				function(response) {
+					var error = 'Page data read error';
+					console.log(error);
+					console.log(response);
+				});
+		};
 	});
 })();

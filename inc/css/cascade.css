@@ -81,3 +81,13 @@
 .oddRow  {
   background: rgba(0,0,0,0.1);
 }
+
+.redBlinker {
+  animation: redblinker 2s linear infinite;
+}
+
+@keyframes redblinker {
+  50% {
+    color: red;
+  }
+}

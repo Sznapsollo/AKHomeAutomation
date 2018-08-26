@@ -2,8 +2,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
-require_once("Class.Settings.php");
-
 $startIndex = 5;
 $itemsPerPage = 10;
 
@@ -19,8 +17,6 @@ if(isset($input->receive)) {
 }
 
 if($category) {
-
-	$settings = new Settings();
 
 	$fileTypes = 'log';
 	$files = array();
@@ -61,7 +57,6 @@ if($category) {
 	$returnData = new stdClass();
 	$returnData->items = $returnFiles;
 	$returnData->allCount = count($files);
-	$returnData->translations = $settings->translations;
 	
 	echo json_encode($returnData);
 }

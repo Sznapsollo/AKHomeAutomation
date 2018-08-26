@@ -59,7 +59,7 @@
 			<li><a href="#/sensors">{{tab3Label}}</a></li>
 			<li><a href="#/logsList/actions/0/{{itemsPerPage}}">{{logsActionsLabel}}</a></li>
 			<li><a href="#/logsList/sensors/0/{{itemsPerPage}}">{{logsSensorsLabel}}</a></li>
-			<li><a href="#/logsList/exceptions/0/{{itemsPerPage}}">{{logsExceptionsLabel}}</a></li>
+			<li><a ng-class="{redBlinker: pageFlag('todayexcexists')}" href="#/logsList/exceptions/0/{{itemsPerPage}}">{{logsExceptionsLabel}}</a></li>
         </ul>
       </div>
     </div>

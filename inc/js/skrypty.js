@@ -80,7 +80,8 @@ function GetLocalStorage(index, defaultValue) {
 }
 
 var automation = function() {
-
+	
+	_pageFlags = null;
 	_translations = null;
 	_itemsDictionary = null;
 	
@@ -121,6 +122,15 @@ var automation = function() {
 		},
 		SetTranslations: function(translations) {
 			_translations = translations;
+		},
+		SetPageFlags: function(pageFlags) {
+			_pageFlags = pageFlags;
+		},
+		PageFlag: function(code) {
+			if(!_pageFlags)
+				return null;
+			else
+				return _pageFlags[code];
 		},
 		SetItemsDictionary: function(itemsDictionary) {
 			_itemsDictionary = itemsDictionary;

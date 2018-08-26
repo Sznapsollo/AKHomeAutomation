@@ -76,4 +76,14 @@
 		};
 	});
 	
+	app.service('pageDataService', function($http) {
+		this.checkPageData = function() {
+			return $http({
+				url: 'executables/Services.php',
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				data: {service: 'CheckPageData', receive: '1'}
+			});
+		};
+	});
 })();

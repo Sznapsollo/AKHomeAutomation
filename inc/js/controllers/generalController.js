@@ -5,7 +5,9 @@
 		
 		function translate(code) {
 			return automation.Translate(code);
-		}
+		};
+		
+		$scope.pageFlag = automation.PageFlag;
 		
 		$scope.$on('$routeChangeSuccess',function(evt, absNewUrl, absOldUrl) {
 		   $scope.itemsPerPage = GetLocalStorage(itemsPerPageStorageName, itemsPerPageDefault);

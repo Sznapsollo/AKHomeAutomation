@@ -22,7 +22,6 @@ if($category)
 	
 	$returnData = new stdClass();
 	$returnData->items = array();
-	$returnData->translations = $settings->translations;
 	
 	if($category == 'sensors')
 	{

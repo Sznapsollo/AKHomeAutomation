@@ -30,6 +30,9 @@ if(isset($input->service))
 		case "CheckLogsFileData":
 			require_once("Service.CheckLogsFileData.php");
 			break;
+		case "CheckPageData":
+			require_once("Service.CheckPageData.php");
+			break;
 	}
 }
 

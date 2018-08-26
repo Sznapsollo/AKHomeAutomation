@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-	app.controller('TabController', function TabController($scope, $rootScope, $route, itemsDataService) {
+	app.controller('TabController', function TabController($scope, $rootScope, $route, itemsDataService, pageDataService) {
 		
 		$scope.translate = translate;
 		
@@ -9,6 +9,7 @@
 		
 		function init()
 		{
+			initiatePageData();
 			checkItemsData();
 		};
 		
@@ -16,18 +17,29 @@
 			itemsDataService.checkItemsData($route.current.$$route.fromValue).then(
 				function(dataResponse) {
 					$scope.items = dataResponse.data.items;
-					automation.SetTranslations(dataResponse.data.translations);
 					if(dataResponse.data.itemsDictionary)
 						automation.SetItemsDictionary(dataResponse.data.itemsDictionary);
-						
-					$rootScope.$broadcast('translationsReceived');
 				},
 				function(response) {
 					var error = 'Items data read error';
 					console.log(error);
 					console.log(response);
 				});
-		}
+		};
+		
+		function initiatePageData() {
+			pageDataService.checkPageData().then(
+				function(dataResponse) {
+					automation.SetPageFlags(dataResponse.data.pageflags);
+					automation.SetTranslations(dataResponse.data.translations);
+					$rootScope.$broadcast('translationsReceived');
+				},
+				function(response) {
+					var error = 'Page data read error';
+					console.log(error);
+					console.log(response);
+				});
+		};
 		
 		function translate(code) {
 			return automation.Translate(code);
