@@ -1,8 +1,8 @@
 
 <h3>
-	<span>{{header}}</span>
-	<img ng-click="toggleRegularOptions()" ng-src="graphics/{{calendarIconName}}" />
-	<img ng-click="toggleDevicesOptions()" ng-src="graphics/{{calendarIconName}}" />
+	<span class="switchHeader">{{header}}</span>
+	<img class="switchCalendarIcon" ng-click="toggleRegularOptions()" ng-src="graphics/{{calendarIconName}}" />
+	<img class="switchCalendarIcon" ng-click="toggleDevicesOptions()" ng-src="graphics/{{calendarIconName}}" />
 </h3>
 
 <regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)"></regular-settings>

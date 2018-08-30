@@ -1,8 +1,8 @@
 
 <h3>
-	<img ng-click="toggleSliderOptions()" ng-src="graphics/icons/{{image}}" />
-	<span ng-click="toggleSliderOptions()">{{header}}</span>
-	<img ng-click="toggleRegularOptions()" ng-src="graphics/{{calendarIconName}}" />
+	<img class="switchIcon" ng-click="toggleSliderOptions()" ng-src="graphics/icons/{{image}}" />
+	<span class="switchHeader" ng-click="toggleSliderOptions()">{{header}}</span>
+	<img class="switchCalendarIcon" ng-click="toggleRegularOptions()" ng-src="graphics/{{calendarIconName}}" />
 	<div class="numberPicker">
 		<input ng-if="showTimer" type="number" ng-model="delayValue" ng-change="changeTimer(delayValue)" min="0" max="360"  class="form-control" data-min="0" />
 		<hours-and-minutes ng-click="toggleSliderOptions()" class="timerNormal" ng-if="!showTimer" delay-value="delayValue"></hours-and-minutes>
