@@ -55,6 +55,7 @@
 			scope: {
 				delayValue: '=',
 				showDate: '@',
+				onDelayedDisableClicked:'&'
 			},
 			templateUrl: 'templates/directives/hoursandminutes.html',
 			controller: 'HoursAndMinutesController'

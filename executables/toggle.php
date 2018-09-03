@@ -33,6 +33,14 @@ function disableItem($signalSender, $item)
 		$signalSender->disableRadioItem($item);
 }
 
+function delayedDisableItem($signalSender, $item, $outletDelayed, &$additionalActions)
+{
+	if($item instanceof WebItem)
+		$signalSender->delayedDisableWebItem($item, $outletDelayed, $additionalActions);
+	else if($item instanceof IntItem)
+		$signalSender->delayedDisableRadioItem($item, $outletDelayed, $additionalActions);
+}
+
 if ($outletLight == "666" && $outletStatus == "off") {
     $signalSender->runShellCommand("sudo poweroff");
 }
@@ -71,6 +79,11 @@ else if($outletLight)
 			}
 			else if($itemToProcess instanceof IntItem) {
 				disableItem($signalSender, $itemToProcess);
+			}
+		}
+		else if($outletStatus == "offd") {
+			if($itemToProcess instanceof IntItem) {
+				delayedDisableItem($signalSender, $itemToProcess, $outletDelayed, $additionalActions);
 			}
 		}
 	}

@@ -5,6 +5,7 @@
 		//console.log("HoursAndMinutesController");
 		
 		$scope.mathFloor = mathFloor;
+		$scope.translate = translate;
 		calculateTime();
 		
 		function mathFloor(number) {
@@ -24,6 +25,10 @@
 		function calculateTime() {
 		
 			$scope.calculatedTime =  new Date((new Date()).getTime() + $scope.delayValue*60000);
+		}
+		
+		function translate(code) {
+			return automation.Translate(code);
 		}
 	});
 	

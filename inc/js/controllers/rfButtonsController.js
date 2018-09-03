@@ -58,6 +58,9 @@
 		
 		function toggleSliderOptions() {
 			$scope.showTimer = !$scope.showTimer;
+			
+			if($scope.showTimer)
+				$scope.calculatedTime =  new Date((new Date()).getTime() + $scope.delayValue*60000);
 		}
 		
 		function getCssClass(value, defaultValue) {
@@ -69,6 +72,7 @@
 		
 		function changeTimer(value) {
 			$scope.delayValue = parseInt(value,10);
+			$scope.calculatedTime =  new Date((new Date()).getTime() + $scope.delayValue*60000);
 		}
 		
 		function changeValue(value) {

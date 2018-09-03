@@ -9,9 +9,9 @@
 	</div>
 </h3>
 
-<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)"></regular-settings>
+<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)" ></regular-settings>
 
-<hours-and-minutes class="timerChoice" ng-if="showTimer" show-date="true" delay-value="delayValue"></hours-and-minutes>
+<hours-and-minutes class="timerChoice" ng-if="showTimer" show-date="true" delay-value="delayValue" on-delayed-disable-clicked="clickButton({'outletId':outletId,'status':'offd','delay':delayValue*60})"></hours-and-minutes>
 <div ng-if="showTimer" class="input-group">
 	<span class="input-group-btn">
 		<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="changeValue(-1)">
@@ -21,7 +21,7 @@
 	<span class="input-group-btn">
 		&nbsp;
 	</span>
-	<input type="range" min="0" max="360" ng-model="delayValue" ng-change="changeTimer(delayValue)" class="form-control"  style="float: left;"/>
+	<input type="range" min="1" max="360" ng-model="delayValue" ng-change="changeTimer(delayValue)" class="form-control"  style="float: left;"/>
 	<span class="input-group-btn">
 		&nbsp;
 	</span>
@@ -34,7 +34,7 @@
 </div>
 <div class="btn-group btn-group-justified"  aria-label="...">
   <div class="btn-group" role="group"  ng-if="enableOn">
-	<button ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-success" ng-click="clickButton({'outletId':outletId,'status':'on','delay':delayValue*60})" ng-class="{'turnedOff':!isActive('pin2',1)}">{{translate('enable');}}</button>
+	<button ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-success" ng-click="clickButton({'outletId':outletId,'status':'on','delay':delayValue*60})" ng-class="{'turnedOff':!isActive('pin2',1)}">{{translate('enable');}}<span class="timerNormal" ng-if="showTimer">&nbsp;({{translate('disable_at')}}&nbsp;{{calculatedTime | date:'HH:mm'}})</span></button>
   </div>
   <div class="btn-group" role="group"  ng-if="enableOff">
 	<button  ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-warning" ng-click="clickButton({'outletId':outletId,'status':'off'})" ng-class="{'turnedOff':!isActive('pin2',0)}"><span ng-if="!timeEnd">{{translate('disable');}}</span><span ng-if="timeEnd"><span class="timeOff"><span class="timeEnd">{{timeEnd | date:'HH:mm:ss'}}</span> (<span class="disableDate">{{disableDate | date:'HH:mm'}}</span>)</span></span></button>

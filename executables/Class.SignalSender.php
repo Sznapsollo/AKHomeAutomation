@@ -68,6 +68,11 @@ class SignalSender
 		$this->disablePostProcessing($item->name, 0, "off");
 	}
 	
+	function delayedDisableRadioItem($item, $outletDelayed, &$additionalActions)
+	{
+		$this->itemDelaySetUp($item, $outletDelayed, $additionalActions);
+	}
+	
 	function enableWebItem($item, $outletDelayed, &$additionalActions)
 	{
 		foreach ($item->codeOn as $code) {
@@ -84,6 +89,11 @@ class SignalSender
 		$page = file_get_contents($item->CodeOff());
 		
 		$this->disablePostProcessing($item->name, 0, "off");
+	}
+	
+	function delayedDisableWebItem($item, $outletDelayed, &$additionalActions)
+	{
+		$this->itemDelaySetUp($item, $outletDelayed, $additionalActions);
 	}
 	
 	function itemDelaySetUp($item, $outletDelayed, &$additionalActions)
