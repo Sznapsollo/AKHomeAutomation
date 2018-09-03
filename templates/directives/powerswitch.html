@@ -2,6 +2,11 @@
 <h3>
 	<img class="switchIcon" ng-src="graphics/icons/{{image}}" />
 	<span class="switchHeader" >{{header}}</span>
+	<span class="machineAvailability" ng-if="subType == 'M'" ng-click="checkAvailability()">
+		<span ng-if="machineAvailability == null">{{translate('availability_not_checked')}}</span>
+		<span ng-if="machineAvailability" style="color:green">{{translate('availability_available')}}</span>
+		<span ng-if="machineAvailability == false" style="color:red">{{translate('availability_unavailable')}}</span>
+	</span>
 </h3>
 <div class="btn-group btn-group-justified"  aria-label="...">
   <div class="btn-group" role="group"  ng-if="enableOn">

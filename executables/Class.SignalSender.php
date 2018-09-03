@@ -24,20 +24,15 @@ class SignalSender
 		$this->runShellCommand($this->settings->sudo.$this->settings->mainPath.'executables'.DIRECTORY_SEPARATOR."processes".DIRECTORY_SEPARATOR."./disable_post_processing.py ".$name." ".$seconds." ".$action, false);
 	}
 	
-	function delayProcess($name, $seconds, $action)
+	function delayProcess($item, $seconds, $action)
 	{
-		$this->killDelayProcess($name);
+		$this->killDelayProcess($item->name);
 
 		$delayedActionPath = $this->settings->sudo.$this->settings->mainPath.'executables'.DIRECTORY_SEPARATOR."processes".DIRECTORY_SEPARATOR."./delayed_action.py";
 
-		$this->saveDelayFile($name, $seconds);
+		$this->saveDelayFile($item->name, $seconds);
 		
-		return $this->delay($delayedActionPath,$name,$seconds,$action);
-	}
-
-	function delay($path, $name, $time, $action)
-	{
-		return $path." ".$name." ".$time." ".$action;
+		return $delayedActionPath." ".$item->name." ".$seconds." ".$action." ".$item->processingStatus;
 	}
 
 	function radioItemScriptPath($item)
@@ -104,7 +99,7 @@ class SignalSender
 		if($outletDelayed != 0)
 			$defaultDelay = $outletDelayed;
 		
-		array_push($additionalActions, $this->delayProcess($item->name,$defaultDelay,"\"codeOff\""));
+		array_push($additionalActions, $this->delayProcess($item,$defaultDelay,"\"codeOff\""));
 	}
 	
 	function runActions($actions)

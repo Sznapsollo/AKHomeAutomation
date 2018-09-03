@@ -92,13 +92,18 @@
   }
 }
 
-.switchIcon, 
+.machineAvailability {
+	cursor: pointer;
+	font-size: 8pt;
+}
+
+.switchIconClickable, 
 .switchCalendarIcon,
-.switchHeader {
+.switchHeaderClickable {
 	cursor: pointer;
 }
 
-.switchIcon:hover, 
+.switchIconClickable:hover, 
 .switchCalendarIcon:hover {
   -webkit-animation-name: wobble-top;
   animation-name: wobble-top;
@@ -110,7 +115,7 @@
   animation-iteration-count: 1;
 }
 
-.switchHeader:hover {
+.switchHeaderClickable:hover {
 	color: #367d36;
 	-o-transition:.3s;
 	-ms-transition:.3s;

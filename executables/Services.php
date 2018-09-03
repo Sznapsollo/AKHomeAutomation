@@ -33,6 +33,9 @@ if(isset($input->service))
 		case "CheckPageData":
 			require_once("Service.CheckPageData.php");
 			break;
+		case "CheckMachineAvailability":
+			require_once("Service.CheckMachineAvailability.php");
+			break;
 	}
 }
 

@@ -265,11 +265,7 @@ class ProcessKill(object):
 
 		out, err = proc2.communicate()
 
-		count = 0
-		'''print("ile wierszy ", count)'''
-
 		for line in out.splitlines():
-			count += 1;
 			if(name in line):
 				self.helper.logDetailedMessage("[ProcessKill] file found: " + name)
 				
@@ -285,14 +281,4 @@ class ProcessKill(object):
 				
 				pid = int(line.split(None, 2)[1])
 				os.kill(pid,signal.SIGKILL)
-			
-				'''
-				print("killed process id ", pid)
-				print(line)
-				print('***',line.split(None, 2)[1],'***')
-				'''    
-				'''
-				root      7356  7349 29 20:49 pts/0    00:00:00 python ./var/www/html/wylaczniki/processes/process_delayed_action.py 2 69972
-				('***', '7356', '***')
-				('ile wierszy ', 5)
-				'''
+

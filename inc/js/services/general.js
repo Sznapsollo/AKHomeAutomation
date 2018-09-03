@@ -1,5 +1,15 @@
 (function(){
   'use strict';
+	app.service('machineAvailabilityService', function($http) {
+		this.checkMachineAvailability = function(id) {
+			return $http({
+				url: 'executables/Services.php',
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				data: {service: 'CheckMachineAvailability', receive: '1', id: id}
+			});
+		};
+	});
 	app.service('delayDataService', function($http) {
 		this.checkData = function(id) {
 			return $http({

@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-	app.controller('RFButtonsController', function RFButtonsController($scope, $timeout, delayDataService) {
+	app.controller('RFButtonsController', function RFButtonsController($scope, $timeout, delayDataService, machineAvailabilityService) {
 		
 		$scope.clickButton = clickButton;
 		$scope.getCssClass = getCssClass;
@@ -12,7 +12,9 @@
 		$scope.saveRegularSettings = saveRegularSettings;
 		$scope.calendarIconName = automation.CalendarIconName("");
 		$scope.translate = translate;
+		$scope.checkAvailability = checkAvailability;
 		
+		$scope.machineAvailability = null;
 		$scope.showTimer = false;
 		$scope.showRegular = false;
 		$scope.disableDate = null;
@@ -223,6 +225,18 @@
 			if($scope.data !== undefined && $scope.data.enabled !== undefined)
 				return $scope.data.enabled === value;
 			return true;
+		}
+		
+		function checkAvailability() {
+			machineAvailabilityService.checkMachineAvailability($scope.outletId).then(
+				function(dataResponse) {
+					$scope.machineAvailability = dataResponse.data.available;
+				},
+				function(response) {
+					var error = 'Availability data read error for ' + $scope.outletId;
+					console.log(error);
+					console.log(response);
+				});
 		}
 
 	});

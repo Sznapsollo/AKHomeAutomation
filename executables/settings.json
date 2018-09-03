@@ -19,6 +19,18 @@
 	"saveDailySensorLogsToFile": true,
 	"translations":[ 
       {  
+         "code":"availability_not_checked",
+         "description":"Check availability"
+      },
+	  {  
+         "code":"availability_available",
+         "description":"Available"
+      },
+	  {  
+         "code":"availability_unavailable",
+         "description":"Unavailable"
+      },
+	  {  
          "code":"homepage",
          "description":"Homepage"
       },

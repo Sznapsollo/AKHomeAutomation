@@ -9,7 +9,7 @@ from socket import timeout
 from helpers import ItemChecker
 from helpers import Helper
 
-scriptarg, namearg, timearg, codearg = argv
+scriptarg, namearg, timearg, codearg, processingstatusarg = argv
 
 itemChecker = ItemChecker()
 helper = Helper()
@@ -26,10 +26,10 @@ try:
 		notifySatellites = node["notifySatellites"]
 	
 	if notifySatellites is True:
-		helper.runSatellitesDeviceAction({'id':namearg, 'delay':timearg},'on',True)
+		helper.runSatellitesDeviceAction({'id':namearg, 'delay':timearg},str(processingstatusarg),True)
 	
 	if helper.saveDailyLogsToFile:
-		messageBody = "switch device " + str(namearg) + " with delay=" + str(timearg) + ", status=on"
+		messageBody = "switch device " + str(namearg) + " with delay=" + str(timearg) + ", status=" + str(processingstatusarg)
 		helper.writeLogToFile(time.strftime('actions/actions_%Y%m%d'), messageBody)
 	
 	if(int(timearg) > 0):

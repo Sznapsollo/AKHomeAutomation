@@ -51,6 +51,7 @@ else if($outletLight)
 {
 	$itemToProcess = $itemChecker->checkItem($outletLight);
 	if($itemToProcess != null) {
+		$itemToProcess->processingStatus = $outletStatus;
 		if($outletStatus == "on") {
 			if($itemToProcess instanceof GroupItem) {
 				foreach ($itemToProcess->itemIDs as $code) {
