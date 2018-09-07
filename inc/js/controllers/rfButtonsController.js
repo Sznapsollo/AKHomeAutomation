@@ -228,14 +228,17 @@
 		}
 		
 		function checkAvailability() {
+			$scope.busy = true;
 			machineAvailabilityService.checkMachineAvailability($scope.outletId).then(
 				function(dataResponse) {
 					$scope.machineAvailability = dataResponse.data.available;
+					$scope.busy = false;
 				},
 				function(response) {
 					var error = 'Availability data read error for ' + $scope.outletId;
 					console.log(error);
 					console.log(response);
+					$scope.busy = false;
 				});
 		}
 

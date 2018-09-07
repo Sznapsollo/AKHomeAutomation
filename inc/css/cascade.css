@@ -156,3 +156,8 @@
     transform: skew(0);
   }
 }
+
+.modal-body {
+    max-height: 100%;
+    overflow-y: auto;
+}
