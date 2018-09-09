@@ -10,23 +10,13 @@ $(document).ready(function()
 	    
 	});
 
-    $("#bodyContainer").on("click", ".confirm-action", function(event) {
-	    event.preventDefault();
-
-        $('#deleteModal .confirmTrigger').attr('data-outletId',$(this).attr('data-outletId'));
-        $('#deleteModal .confirmTrigger').attr('data-outletStatus',$(this).attr('data-outletStatus'));
-        $('#deleteModal .confirmMessage').html($(this).attr('data-outletMessage'));
-
-	    $('#deleteModal').modal('show');
-	});
-
     $('.nav a').on('click', function(){
         $('.navbar-toggle').click() //bootstrap 3.x by Richard
     });
 });
 
 var toggleOutlet = function(buttonClicked) {
-    performAction(buttonClicked.attr('data-outletId'), buttonClicked.attr('data-outletStatus'), 0);
+    performAction(buttonClicked.attr('data-outletId'), buttonClicked.attr('data-outletStatus'), buttonClicked.attr('data-outletDelayed'));
 };
 
 var performAction = function(id, status, delayed) {
@@ -107,9 +97,25 @@ var automation = function() {
 	    $('#logsModal').modal('show');
 	}
 	
+	function Confirm(id, status, delay, message) {
+	
+		var buttonLabel = status == 'on' ? Translate('enable') : Translate('disable');
+		
+		$('#deleteModal .confirmTrigger').attr('data-outletId',id);
+        $('#deleteModal .confirmTrigger').attr('data-outletStatus',status);
+		$('#deleteModal .confirmTrigger').attr('data-outletDelayed',delay);
+		$('#deleteModal .confirmTrigger').html(buttonLabel);
+        $('#deleteModal .confirmMessage').html(message);
+
+	    $('#deleteModal').modal('show');
+	}
+	
 	return {
 		CalendarIconName: function(value) {
 			return CalendarIconName(value);
+		},
+		Confirm: function(id, status, delay, message) {
+			return Confirm(id, status, delay, message);
 		},
 		FillAndLaunchLogModal: function(title, logBody) {
 			return FillAndLaunchLogModal(title, logBody);

@@ -3,6 +3,7 @@
 
 	app.controller('RFButtonsController', function RFButtonsController($scope, $timeout, delayDataService, machineAvailabilityService) {
 		
+		$scope.questions = {};
 		$scope.clickButton = clickButton;
 		$scope.getCssClass = getCssClass;
 		$scope.toggleSliderOptions = toggleSliderOptions;
@@ -34,12 +35,17 @@
 		});
 		
 		function clickButton(params) {
+		
 			$scope.busy = true;
 			
 			var mode = params.outletId;
-			var delayed = params.delay !== undefined && params.delay > 0 ? params.delay : 0;
-
-			performAction(mode, params.status, delayed);
+			var delayed = params.delay !== undefined ? params.delay : 0;
+			
+			if($scope.questions[params.status]) {
+				automation.Confirm(mode, params.status, delayed, $scope.questions[params.status])
+			}
+			else
+				performAction(mode, params.status, delayed);
 			
 			$timeout(function(){
 				$scope.showTimer = false;
@@ -59,10 +65,15 @@
 		}
 		
 		function toggleSliderOptions() {
+		
+			if(!$scope.delay)
+				return;
+				
 			$scope.showTimer = !$scope.showTimer;
 			
-			if($scope.showTimer)
-				$scope.calculatedTime =  new Date((new Date()).getTime() + $scope.delayValue*60000);
+			if($scope.showTimer) {
+				changeCalculatedTime();
+			}
 		}
 		
 		function getCssClass(value, defaultValue) {
@@ -74,7 +85,8 @@
 		
 		function changeTimer(value) {
 			$scope.delayValue = parseInt(value,10);
-			$scope.calculatedTime =  new Date((new Date()).getTime() + $scope.delayValue*60000);
+			
+			changeCalculatedTime();
 		}
 		
 		function changeValue(value) {
@@ -85,16 +97,30 @@
 			
 			if($scope.delayValue < 0 || $scope.delayValue > 600)
 				$scope.delayValue = orgValue;
+			changeCalculatedTime();
+		}
+		
+		function changeCalculatedTime() {
+			var whatDelay = $scope.delayValue ? $scope.delayValue : $scope.initialDelayValue;
+			if(whatDelay < 0)
+				$scope.calculatedTime =  "---"
+			else
+				$scope.calculatedTime =  new Date((new Date()).getTime() + whatDelay*60000);
 		}
 		
 		function init()
 		{
-			if($scope.delay == null)
+			$scope.questions.on = $scope.questionOn;
+			$scope.questions.off = $scope.questionOff;
+		
+			checkRegularActionData();
+		
+			if(!$scope.delay)
 				return;
 		
 			setDefaultDelay($scope.delay);
 			checkData();
-			checkRegularActionData();
+			
 			checkInterval(timerCheckData, checkData, 120);
 			checkInterval(timerCountDownDelay, countDownDelay, 1);
 		};

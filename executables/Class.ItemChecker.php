@@ -79,11 +79,15 @@ class BaseItem
 		if(property_exists($this->properties, "image"))
 			return $this->properties->image;
 		else
-			return "no_image.jpg";
+			return null;
+			//return "no_image.jpg";
 	}
 	
 	public function __get($name) {
-		return $this->properties->$name;
+		if(property_exists($this->properties, $name))
+			return $this->properties->$name;
+		else 
+			return null;
 	}
 }
 

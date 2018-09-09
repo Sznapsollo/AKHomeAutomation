@@ -1,23 +1,7 @@
 (function() {
   
-  
+
   app.directive('powerSwitch', function() {
-		return {
-			restrict: 'E',
-			scope: {
-				header: '@',
-				image: '@',
-				outletId: '@',
-				enableOn: '@',
-				enableOff: '@',
-				subType: '@',
-			},
-			templateUrl: 'templates/directives/powerswitch.html',
-			controller: 'RFButtonsController',
-		};
-	});
-  
-  app.directive('powerSwitchDelay', function() {
 		return {
 			restrict: 'E',
 			scope: {
@@ -28,30 +12,15 @@
 				enableOn: '@',
 				enableOff: '@',
 				subType: '@',
+				questionOn: '@',
+				questionOff: '@',
+				regularActions: '@',
 			},
-			templateUrl: 'templates/directives/powerswitchdelay.html',
+			templateUrl: 'templates/directives/powerswitch.html',
 			controller: 'RFButtonsController',
 		};
 	});
 	
-	app.directive('powerSwitchConfirm', function() {
-		return {
-			restrict: 'E',
-			scope: {
-				header: '@',
-				image: '@',
-				question: '@',
-				outletId: '@',
-				cssClass: '@',
-				enableOn: '@',
-				enableOff: '@',
-				subType: '@',
-			},
-			templateUrl: 'templates/directives/powerswitchconfirm.html',
-			controller: 'RFButtonsController',
-		};
-	});
-  
 	app.directive('hoursAndMinutes', function() {
 		return {
 			restrict: 'E',

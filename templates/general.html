@@ -1,9 +1,7 @@
 <div>
 
 	<div ng-repeat="item in items">
-		<power-switch-delay outlet-id="{{item.id}}" header="{{item.header}}" image={{item.image}} delay="{{item.delay}}" enable-on="{{item.enableOn}}" enable-off="{{item.enableOff}}" sub-type="{{item.subtype}}" ng-if="item.type == 'powerswitchdelay'"></power-switch-delay>
-		<power-switch outlet-id="{{item.id}}" header="{{item.header}}" enable-on="{{item.enableOn}}" image={{item.image}} enable-off="{{item.enableOff}}" sub-type="{{item.subtype}}" ng-if="item.type == 'powerswitch'"></power-switch>	
-		<power-switch-confirm outlet-id="{{item.id}}" header="{{item.header}}" question="{{item.question}}" enable-on="{{item.enableOn}}" enable-off="{{item.enableOff}}" sub-type="{{item.subtype}}" ng-if="item.type == 'powerswitchconfirm'"></power-switch-confirm>			
+		<power-switch outlet-id="{{item.id}}" header="{{item.header}}" image={{item.image}} delay="{{item.delay}}" enable-on="{{item.enableOn}}" enable-off="{{item.enableOff}}" sub-type="{{item.subtype}}" question-on="{{item.questionOn}}" question-off="{{item.questionOff}}" regular-actions="{{item.regularActions}}"></power-switch>
 	</div>
 	
 	<p>&nbsp;</p>

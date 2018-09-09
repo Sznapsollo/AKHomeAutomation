@@ -1,18 +1,47 @@
 
 <h3>
-	<img class="switchIcon" ng-src="graphics/icons/{{image}}" />
-	<span class="switchHeader" >{{header}}</span>
+	<img ng-if="image" class="switchIcon" ng-class="{'switchIconClickable':delay}" ng-click="toggleSliderOptions()" ng-src="graphics/icons/{{image}}" />
+	<span class="switchHeader" ng-class="{'switchHeaderClickable':delay}" ng-click="toggleSliderOptions()">{{header}}</span>
+	<img ng-if="regularActions" class="switchCalendarIcon" ng-click="toggleRegularOptions()" ng-src="graphics/{{calendarIconName}}" />
 	<span class="machineAvailability" ng-if="subType == 'M'" ng-click="checkAvailability()">
 		<span ng-if="machineAvailability == null">{{translate('availability_not_checked')}}</span>
 		<span ng-if="machineAvailability" style="color:green">{{translate('availability_available')}}</span>
 		<span ng-if="machineAvailability == false" style="color:red">{{translate('availability_unavailable')}}</span>
 	</span>
+	<div class="numberPicker" ng-if="delay">
+		<input ng-if="showTimer" type="number" ng-model="delayValue" ng-change="changeTimer(delayValue)" min="-1" max="360"  class="form-control" data-min="0" />
+		<hours-and-minutes ng-click="toggleSliderOptions()" class="timerNormal" ng-if="!showTimer" delay-value="delayValue"></hours-and-minutes>
+	</div>
 </h3>
+
+<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)" ></regular-settings>
+
+<hours-and-minutes class="timerChoice" ng-if="showTimer" show-date="true" delay-value="delayValue" on-delayed-disable-clicked="clickButton({'outletId':outletId,'status':'offd','delay':delayValue*60})"></hours-and-minutes>
+<div ng-if="showTimer" class="input-group">
+	<span class="input-group-btn">
+		<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="changeValue(-1)">
+			<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+		</button>
+	</span>
+	<span class="input-group-btn">
+		&nbsp;
+	</span>
+	<input type="range" min="1" max="360" ng-model="delayValue" ng-change="changeTimer(delayValue)" class="form-control"  style="float: left;"/>
+	<span class="input-group-btn">
+		&nbsp;
+	</span>
+	<span class="input-group-btn">
+		<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="changeValue(1)">
+			<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+		</button>
+	</span>
+	<p>&nbsp;</p>
+</div>
 <div class="btn-group btn-group-justified"  aria-label="...">
   <div class="btn-group" role="group"  ng-if="enableOn">
-	<button  ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-success" ng-click="clickButton({'outletId':outletId,'status':'on','delay':0})">{{translate('enable');}}</button>
+	<button ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-success" ng-click="clickButton({'outletId':outletId,'status':'on','delay':delayValue*60})" ng-class="{'turnedOff':!isActive('pin2',1), 'btn-info': questionOn}">{{translate('enable');}}<span class="timerNormal" ng-if="showTimer">&nbsp;({{translate('disable_at')}}&nbsp;{{calculatedTime | date:'HH:mm'}})</span></button>
   </div>
   <div class="btn-group" role="group"  ng-if="enableOff">
-	<button  ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-warning" ng-click="clickButton({'outletId':outletId,'status':'off'})">{{translate('disable');}}</button>
+	<button  ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-warning" ng-click="clickButton({'outletId':outletId,'status':'off'})" ng-class="{'turnedOff':!isActive('pin2',0), 'btn-danger': questionOff}"><span ng-if="!timeEnd">{{translate('disable');}}</span><span ng-if="timeEnd"><span class="timeOff"><span class="timeEnd">{{timeEnd | date:'HH:mm:ss'}}</span> (<span class="disableDate">{{disableDate | date:'HH:mm'}}</span>)</span></span></button>
   </div>
 </div>

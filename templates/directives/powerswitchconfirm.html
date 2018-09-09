@@ -1,9 +1,0 @@
-<h3 class="switchHeader">{{header}}</h3>
-<div class="btn-group btn-group-justified"  aria-label="...">
-  <div class="btn-group" role="group" ng-if="enableOn">
-	<button type="button" data-outletId="{{outletId}}" data-outletStatus="on" class="btn btn-default btn-lg toggleOutlet {{getCssClass(cssClass,'btn-success')}}">{{translate('enable');}}</button>
-  </div>
-  <div class="btn-group" role="group" ng-if="enableOff">
-	<button type="button" data-outletId="{{outletId}}" data-outletStatus="off" data-outletMessage="{{question}}" class="btn btn-default btn-lg btn-danger confirm-action">{{translate('disable');}}</button>
-  </div>
-</div>
