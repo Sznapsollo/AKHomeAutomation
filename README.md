@@ -41,12 +41,7 @@ Take care!
 Wanna touch base? office@webproject.waw.pl
 
 ## Example Screens
-|screenshot-components1|
 
-|screenshot-components2|
-
-|screenshot-components3|
-
-.. |screenshot-components1| image:: http://cultrides.com/test/Github/AKHomeAutomation/screen2.JPG :target: http://cultrides.com/test/Github/AKHomeAutomation
-.. |screenshot-components2| image:: http://cultrides.com/test/Github/AKHomeAutomation/screen1.JPG :target: http://cultrides.com/test/Github/AKHomeAutomation
-.. |screenshot-components3| image:: http://cultrides.com/test/Github/AKHomeAutomation/screen3.JPG :target: http://cultrides.com/test/Github/AKHomeAutomation
+![Image of AKHomeAutomation #1](http://cultrides.com/test/Github/AKHomeAutomation/screen2.JPG)
+![Image of AKHomeAutomation #1](http://cultrides.com/test/Github/AKHomeAutomation/screen1.JPG)
+![Image of AKHomeAutomation #1](http://cultrides.com/test/Github/AKHomeAutomation/screen3.JPG)
