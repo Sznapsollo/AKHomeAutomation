@@ -29,25 +29,7 @@ var performAction = function(id, status, delayed) {
 			console.log(status);
 		});
 
-	if(id === "666") {
-		$('#deleteModal .modal-body').html(automation.Translate('rpiOffMessage'));
-		$('#deleteModal .modal-header').hide();
-		$('#deleteModal .modal-footer').hide();
-		window.setTimeout(function() {
-		location.reload();	
-		},5000);
-	}
-	if(id === "667") {
-		$('#deleteModal .modal-body').html(automation.Translate('rpiResetMessage'));
-		$('#deleteModal .modal-header').hide();
-		$('#deleteModal .modal-footer').hide();
-		window.setTimeout(function() {
-		location.reload();	
-		},20000);
-	}
-	else {
-	   $('#deleteModal').modal('hide'); 
-	}
+	$('#deleteModal').modal('hide'); 
 }
 
 var itemsPerPageDefault = 48;

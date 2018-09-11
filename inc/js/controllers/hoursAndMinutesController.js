@@ -6,27 +6,16 @@
 		
 		$scope.mathFloor = mathFloor;
 		$scope.translate = translate;
-		calculateTime();
 		
 		function mathFloor(number) {
 			return Math.floor(number);
 		}
 		
-		$scope.$watch('delayValue', function(newValue, oldValue) {
-			if (newValue)
-				calculateTime();
-		}, true);
-		
 		function getTime() {
 			var date = new Date();
 			return date;
 		}
-		
-		function calculateTime() {
-		
-			$scope.calculatedTime =  new Date((new Date()).getTime() + $scope.delayValue*60000);
-		}
-		
+
 		function translate(code) {
 			return automation.Translate(code);
 		}

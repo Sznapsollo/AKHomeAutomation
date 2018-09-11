@@ -23,6 +23,8 @@ function enableItem($signalSender, $item, $outletDelayed, &$additionalActions)
 		$signalSender->enableWebItem($item, $outletDelayed, $additionalActions);
 	else if($item instanceof IntItem)
 		$signalSender->enableRadioItem($item, $outletDelayed, $additionalActions);
+	else if($item instanceof ShellItem)
+		$signalSender->enableShellItem($item, $outletDelayed, $additionalActions);
 }
 
 function disableItem($signalSender, $item)
@@ -31,6 +33,8 @@ function disableItem($signalSender, $item)
 		$signalSender->disableWebItem($item);
 	else if($item instanceof IntItem)
 		$signalSender->disableRadioItem($item);
+	else if($item instanceof ShellItem)
+		$signalSender->disableShellItem($item);
 }
 
 function delayedDisableItem($signalSender, $item, $outletDelayed, &$additionalActions)
@@ -41,13 +45,7 @@ function delayedDisableItem($signalSender, $item, $outletDelayed, &$additionalAc
 		$signalSender->delayedDisableRadioItem($item, $outletDelayed, $additionalActions);
 }
 
-if ($outletLight == "666" && $outletStatus == "off") {
-    $signalSender->runShellCommand("sudo poweroff");
-}
-else if ($outletLight == "667" && $outletStatus == "off") {
-    $signalSender->runShellCommand("sudo reboot");
-}
-else if($outletLight)
+if($outletLight)
 {
 	$itemToProcess = $itemChecker->checkItem($outletLight);
 	if($itemToProcess != null) {

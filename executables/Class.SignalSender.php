@@ -85,7 +85,25 @@ class SignalSender
 		
 		$this->disablePostProcessing($item->name, 0, "off");
 	}
+
+	function enableShellItem($item, $outletDelayed, &$additionalActions)
+	{
+		foreach ($item->codeOn as $code) {
+			$this->runShellCommand($code);
+		}
 	
+		$this->itemDelaySetUp($item, $outletDelayed, $additionalActions);
+	}
+	
+	function disableShellItem($item)
+	{
+		$this->killDelayProcess($item->name);
+		
+		$this->runShellCommand($item->codeOff);
+		
+		$this->disablePostProcessing($item->name, 0, "off");
+	}
+
 	function delayedDisableWebItem($item, $outletDelayed, &$additionalActions)
 	{
 		$this->itemDelaySetUp($item, $outletDelayed, $additionalActions);

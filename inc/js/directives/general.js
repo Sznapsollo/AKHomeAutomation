@@ -27,6 +27,7 @@
 			scope: {
 				delayValue: '=',
 				showDate: '@',
+				calculatedTime: '=',
 				onDelayedDisableClicked:'&'
 			},
 			templateUrl: 'templates/directives/hoursandminutes.html',

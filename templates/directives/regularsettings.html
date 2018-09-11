@@ -2,7 +2,7 @@
 <div ng-repeat="timeUnit in timeUnits">
 	<div class="btn-group btn-group-justified"  aria-label="...">
 		<div class="btn-group" role="group" ng-repeat="n in [0,1,2,3,4,5,6] track by $index">
-			<button type="button" ng-class="{'btn-success': isSetDay(timeUnit, n)}" class="btn btn-default" ng-click="toggleDay(timeUnit, n)" >{{translate('day'+(n+1));}}</button>
+			<button type="button" ng-class="{'btn-info': isSetDay(timeUnit, n)}" class="btn btn-default" ng-click="toggleDay(timeUnit, n)" >{{translate('day'+(n+1));}}</button>
 		</div>
 	</div>
 	<div style="margin: 10px auto 10px auto; text-align: center; margin-top: 10px;">

@@ -2,7 +2,9 @@
   'use strict';
 
 	app.controller('RFButtonsController', function RFButtonsController($scope, $timeout, delayDataService, machineAvailabilityService) {
-		
+
+		$scope.minSliderValue = -1;
+		$scope.maxSliderValue = 360;
 		$scope.questions = {};
 		$scope.clickButton = clickButton;
 		$scope.getCssClass = getCssClass;
@@ -90,13 +92,12 @@
 		}
 		
 		function changeValue(value) {
-			
-			var orgValue = $scope.delayValue;
-		
+ 
+			if((value < 0 && $scope.delayValue <= $scope.minSliderValue) || (value > 0 && $scope.delayValue >= $scope.maxSliderValue))
+				return; 
+
 			$scope.delayValue += value;
-			
-			if($scope.delayValue < 0 || $scope.delayValue > 600)
-				$scope.delayValue = orgValue;
+
 			changeCalculatedTime();
 		}
 		
@@ -118,7 +119,7 @@
 			if(!$scope.delay)
 				return;
 		
-			setDefaultDelay($scope.delay);
+			setDefaultDelay(parseInt($scope.delay));
 			checkData();
 			
 			checkInterval(timerCheckData, checkData, 120);

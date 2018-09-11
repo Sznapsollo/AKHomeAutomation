@@ -62,7 +62,7 @@
 		{
 			"name": "humidfier",
 			"category": "general",
-			"header": "Humidifier",
+			"header": "Humidfier Web Switch",
 			"regularActions" : true,
 			"address": "http://192.168.20.121",
 			"codeOn": [
@@ -106,7 +106,7 @@
 			"enableOff": true
 		},
 		{
-			"name": "roomlamp",
+			"name": "roomlamp2",
 			"image": "roomlamp.jpg",
 			"category": "general",
 			"header": "Room Lamp",
@@ -122,57 +122,11 @@
 			"notifySatellites": false
 		},
 		{
-			"name": "roomlampsecond",
-			"image": "roomlampsecond.jpg",
-			"category": "general",
-			"header": "Room Lamp 2",
-			"regularActions" : true,
-			"codeOn": [
-				44334
-			],
-			"codeOff": 44364,
-			"delay": 7200,
-			"sendOption": 0,
-			"enableOn": true,
-			"enableOff": true
-		},
-		{
-			"name": "kitchenlights",
-			"image": "kitchenlights.jpg",
-			"category": "general",
-			"header": "Kitchen lights",
-			"regularActions" : true,
-			"codeOn": [
-				44335
-			],
-			"codeOff": 44365,
-			"delay": 7200,
-			"sendOption": 0,
-			"enableOn": true,
-			"enableOff": true
-		},
-		{
-			"name": "lavalamp",
-			"image": "lavalamp.jpg",
-			"category": "general",
-			"header": "Lampa lawa",
-			"regularActions" : true,
-			"codeOn": [
-				123
-			],
-			"codeOff": 12345,
-			"delay": 3600,
-			"sendOption": 0,
-			"enableOn": true,
-			"enableOff": true,
-			"codeDev": "--------"
-		},
-		{
 			"name": "computertv",
 			"image": "7.jpg",
 			"category": "general",
 			"header": "Computer TV",
-			"regularActions" : true,
+			"regularActions" : false,
 			"codeOn": [
 				"44:8A:88:98:81:C7"
 			],
@@ -181,22 +135,6 @@
 			"enableOn": true,
 			"enableOff": false,
 			"codeDev": "--------"
-		},
-		{
-			"name": "alllights",
-			"image": "alllights.jpg",
-			"category": "general",
-			"header": "All lights",
-			"questionOn": "Really? All lights?",
-			"itemIDs": [
-				"tvlamp",
-				"roomlamp",
-				"roomlampsecond",
-				"kitchenlights",
-				"lavalamp"
-			],
-			"enableOn": true,
-			"enableOff": true
 		},
 		{
 			"name": "tvstack",
@@ -213,6 +151,53 @@
 			"enableOn": true,
 			"enableOff": true,
 			"codeDev": "-----"
+		},
+		{
+			"name": "alllights",
+			"image": "alllights.jpg",
+			"category": "general",
+			"header": "All lights",
+			"questionOn": "Really? All lights? You can go blind!",
+			"questionOff": "Oh no! The darkness!",
+			"itemIDs": [
+				"tvlamp",
+				"roomlamp",
+				"roomlampsecond",
+				"kitchenlights",
+				"lavalamp"
+			],
+			"enableOn": true,
+			"enableOff": true
+		},
+		{
+			"name": "rasberryrebootitem",
+			"category": "advanced",
+			"header": "Reboot Rasberry Device",
+			"regularActions": false,
+			"codeOn": [
+				"sudo reboot"
+			],
+			"codeOff": "sudo reboot",
+			"questionOff": "Are you sure you want to reboot raspberry device?",
+			"sendOption": 4,
+			"enableOn": false,
+			"enableOff": true,
+			"codeDev": "--------"
+		},
+		{
+			"name": "rasberryoffitem",
+			"category": "advanced",
+			"header": "Turn Off Rasberry Device",
+			"regularActions": false,
+			"codeOn": [
+				"sudo reboot"
+			],
+			"codeOff": "sudo poweroff",
+			"questionOff": "Are you sure you want to turn raspberry device off?",
+			"sendOption": 4,
+			"enableOn": false,
+			"enableOff": true,
+			"codeDev": "--------"
 		}
 	]
 }

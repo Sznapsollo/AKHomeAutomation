@@ -30,6 +30,8 @@ class ItemChecker
 				array_push($this->nodes, new WebItem($node));
 			else if(property_exists($node, "sendOption") && ($node->sendOption == 3))
 				array_push($this->nodes, new MacItem($node));
+			else if(property_exists($node, "sendOption") && ($node->sendOption == 4))
+				array_push($this->nodes, new ShellItem($node));
 			else if(property_exists($node, "itemIDs") && ($node->itemIDs))
 				array_push($this->nodes, new GroupItem($node));
 		}
@@ -145,13 +147,22 @@ class WebItem extends IntItem
 class MacItem extends BaseItem
 {
 	public function __construct($properties) {
-        $this->properties = $properties;
-    }
+		$this->properties = $properties;
+	}
 	
 	public function CodeOn()
 	{
 		return $this->codeOn[0];
 	}
+}
+
+
+class ShellItem extends IntItem
+{
+	public function __construct($properties) {
+		$this->properties = $properties;
+	}
+
 }
 
 ?>

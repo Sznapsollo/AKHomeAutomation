@@ -66,30 +66,6 @@
          "code":"save",
          "description":"Save"
       },
-	  {  
-         "code":"rpiResetHeader",
-         "description":"Raspberry Pi station - Reset"
-      },
-	  {  
-         "code":"rpiResetQuestion",
-         "description":"Are you sure you want to reset Raspberry Pi station?"
-      },
-	  {  
-         "code":"rpiResetMessage",
-         "description":"Raspberry Pi is being reseted. In a moment site will refresh."
-      },
-	  {  
-         "code":"rpiOffHeader",
-         "description":"Raspberry Pi station - Switch off"
-      },
-	  {  
-         "code":"rpiOffQuestion",
-         "description":"Are you sure you want to turn off Raspberry Pi station?"
-      },
-	  {  
-         "code":"rpiOffMessage",
-         "description":"Raspberry Pi is being closed. In a moment site will refresh."
-      },
       {  
          "code":"day1",
          "description":"Mo"
@@ -157,6 +133,14 @@
       {  
          "code":"dependencyValue",
          "description":"Value"
+      },
+      {  
+         "code":"default_delay",
+         "description":"Default delay"
+      },
+      {  
+         "code":"no_delay",
+         "description":"No delay"
       }
    ]
 }

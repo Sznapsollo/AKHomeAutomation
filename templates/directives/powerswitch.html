@@ -9,33 +9,35 @@
 		<span ng-if="machineAvailability == false" style="color:red">{{translate('availability_unavailable')}}</span>
 	</span>
 	<div class="numberPicker" ng-if="delay">
-		<input ng-if="showTimer" type="number" ng-model="delayValue" ng-change="changeTimer(delayValue)" min="-1" max="360"  class="form-control" data-min="0" />
+		<input ng-if="showTimer" type="number" ng-model="delayValue" ng-change="changeTimer(delayValue)" min="{{minSliderValue}}" max="{{maxSliderValue}}"  class="form-control" data-min="0" />
 		<hours-and-minutes ng-click="toggleSliderOptions()" class="timerNormal" ng-if="!showTimer" delay-value="delayValue"></hours-and-minutes>
 	</div>
 </h3>
 
-<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)" ></regular-settings>
+<div  ng-class="{'sub-section': showRegular || showTimer}">
+	<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)" ></regular-settings>
 
-<hours-and-minutes class="timerChoice" ng-if="showTimer" show-date="true" delay-value="delayValue" on-delayed-disable-clicked="clickButton({'outletId':outletId,'status':'offd','delay':delayValue*60})"></hours-and-minutes>
-<div ng-if="showTimer" class="input-group">
-	<span class="input-group-btn">
-		<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="changeValue(-1)">
-			<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-		</button>
-	</span>
-	<span class="input-group-btn">
-		&nbsp;
-	</span>
-	<input type="range" min="1" max="360" ng-model="delayValue" ng-change="changeTimer(delayValue)" class="form-control"  style="float: left;"/>
-	<span class="input-group-btn">
-		&nbsp;
-	</span>
-	<span class="input-group-btn">
-		<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="changeValue(1)">
-			<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-		</button>
-	</span>
-	<p>&nbsp;</p>
+	<hours-and-minutes class="timerChoice" ng-if="showTimer" show-date="true" delay-value="delayValue" calculated-time="calculatedTime" on-delayed-disable-clicked="clickButton({'outletId':outletId,'status':'offd','delay':delayValue*60})"></hours-and-minutes>
+	<div ng-if="showTimer" class="input-group">
+		<span class="input-group-btn">
+			<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="changeValue(-1)">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+			</button>
+		</span>
+		<span class="input-group-btn">
+			&nbsp;
+		</span>
+		<input type="range" min="{{minSliderValue}}" max="{{maxSliderValue}}" ng-model="delayValue" ng-change="changeTimer(delayValue)" class="form-control" style="float: left;" />
+		<span class="input-group-btn">
+			&nbsp;
+		</span>
+		<span class="input-group-btn">
+			<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="changeValue(1)">
+				<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+			</button>
+		</span>
+		<p>&nbsp;</p>
+	</div>
 </div>
 <div class="btn-group btn-group-justified"  aria-label="...">
   <div class="btn-group" role="group"  ng-if="enableOn">
