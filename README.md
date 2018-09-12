@@ -18,20 +18,20 @@ AKHomeAutomation is Raspberry Pi based home automation / smart home / smart hous
 - allows to define PIR sensor(s) connected to Raspberry pi and basing on their signal can operate defined devices and/or trigger alarm/sen alarm mails
 
 ### How it looks
-- under <a href="http://cultrides.com/test/Github/AKHomeAutomation" target="_blank">this address</a> you can have a peek at user interface of AKHomeAutomation. It is just UI deployed on shared host with no functionality attached so you will not be able to do anything. It is just to present UI how it displays nodes, scheduling options  etc. It is generated from same nodes.json that is uploaded here.
+- under **<a href="http://cultrides.com/test/Github/AKHomeAutomation" target="_blank">UI Demo address</a>** you can have a peek at user interface of AKHomeAutomation. It is just UI deployed on shared host with no functionality attached so you will not be able to do anything. It is just to present UI how it displays nodes, scheduling options  etc. It is generated from same nodes.json that is uploaded here.
 
 ## Installation & Usage
 
-- <a href="https://github.com/Sznapsollo/AKHomeAutomation/blob/master/Readme_HomeAutomation_instructions.pdf" target="_blank">Readme_HomeAutomation_instructions.pdf</a> file contains detailed description of all that I think is important to make this system work and understand how it works/present it/deploy it. I am not very skilled at doc creation so if I missed something or described in not very clear manner let me know I will try to make it better
-- this <a href="https://www.youtube.com/watch?v=C19ARWDYR3c&list=PLjd2MVjW6mhFygrvXyVcdNoq6pHK8MdUW" target="_blank">AKHomeAUtomation Youtube playlist</a> will contain any vids that I make regarding this system. So far I have made some describing in short radio switches connecting and in general how this works
+- **<a href="https://github.com/Sznapsollo/AKHomeAutomation/blob/master/Readme_HomeAutomation_instructions.pdf" target="_blank">Readme_HomeAutomation_instructions.pdf</a>** file contains detailed description of all that I think is important to make this system work and understand how it works/present it/deploy it. I am not very skilled at doc creation so if I missed something or described in not very clear manner let me know I will try to make it better
+- this **<a href="https://www.youtube.com/watch?v=C19ARWDYR3c&list=PLjd2MVjW6mhFygrvXyVcdNoq6pHK8MdUW" target="_blank">AKHomeAUtomation Youtube playlist</a>** will contain any vids that I make regarding this system. So far I have made some describing in short radio switches connecting and in general how this works
 
 ## What you need to run it
 
-- It is described in <a href="https://github.com/Sznapsollo/AKHomeAutomation/blob/master/Readme_HomeAutomation_instructions.pdf" target="_blank">Readme_HomeAutomation_instructions.pdf</a> but just to make it clear
+- It is described in **<a href="https://github.com/Sznapsollo/AKHomeAutomation/blob/master/Readme_HomeAutomation_instructions.pdf" target="_blank">Readme_HomeAutomation_instructions.pdf</a>** but just to make it clear
 - to run the system you just need Raspberry Pi
-- to control radio controller power switches you would need such switches and RF radio transmitter like XY-FST
-- to control web controlled power switches you would need such switches - SONOFF devices are ideal for this with custom scripts uploaded. I use such scripts but have not yet uploaded them here will probably do so in the feature with some explanation hot to flash these switches.
-- to use pir sensor you would need pir sensor for Raspberry PI like HC SR501
+- to control radio controller power switches you would need such switches and RF radio transmitter like **XY-FST**
+- to control web controlled power switches you would need such switches - **SONOFF** devices are ideal for this with custom scripts uploaded. I use such scripts but have not yet uploaded them here will probably do so in the feature with some explanation hot to flash these switches.
+- to use pir sensor you would need pir sensor for Raspberry PI like **HC SR501**
 
 ## Notes
 - enjoy it but also be responsible with it. Do not rely on radio controlled switches to connect them to some heavy-duty stuff that might prove dangerous (for example. dont operate owen with it or dont rely on it regarding some security devices - radio controllers may fail and they can also be easily fooled).
@@ -42,6 +42,11 @@ Wanna touch base? office@webproject.waw.pl
 
 ## Example Screens
 
+##### Set timeout disable when enabling device (optional)
 ![Image of AKHomeAutomation #1](http://cultrides.com/test/Github/AKHomeAutomation/screen2.JPG)
+
+##### Set scheduled regular actions defining when device should be ON and when OFF (optional)
 ![Image of AKHomeAutomation #1](http://cultrides.com/test/Github/AKHomeAutomation/screen1.JPG)
+
+##### Example homepage with some configured devices
 ![Image of AKHomeAutomation #1](http://cultrides.com/test/Github/AKHomeAutomation/screen3.JPG)
