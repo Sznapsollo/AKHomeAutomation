@@ -27,8 +27,8 @@ AKHomeAutomation is Raspberry Pi based home automation / smart home / smart hous
 
 ## What you need to run it
 
-- It is described in **<a href="https://github.com/Sznapsollo/AKHomeAutomation/blob/master/Readme_HomeAutomation_instructions.pdf" target="_blank">Readme_HomeAutomation_instructions.pdf</a>** but just to make it clear
-- to run the system you just need Raspberry Pi
+- described in detail in **<a href="https://github.com/Sznapsollo/AKHomeAutomation/blob/master/Readme_HomeAutomation_instructions.pdf" target="_blank">Readme_HomeAutomation_instructions.pdf</a>**
+- to run the system you just need Raspberry Pi with Apache + PHP configured, Python is also used but it is by default included in Raspbian. Configuration is described in instructions above.
 - to control radio controller power switches you would need such switches and RF radio transmitter like **XY-FST**
 - to control web controlled power switches you would need such switches - **SONOFF** devices are ideal for this with custom scripts uploaded. I use such scripts but have not yet uploaded them here will probably do so in the feature with some explanation hot to flash these switches.
 - to use pir sensor you would need pir sensor for Raspberry PI like **HC SR501**
