@@ -170,6 +170,8 @@ class Sensor(object):
 			
 			for device in self.onDevices:
 				
+				onStatus = "on"
+				
 				#option for device by default not present in config file
 				if "timeUnits" in device and self.validateTimeUnits(device["timeUnits"]) is False:
 					self.messageSensorInfo("[Device "+device["id"]+"] out if time units bounds. Ignoring...")
@@ -190,6 +192,7 @@ class Sensor(object):
 						if currentEventTime > deviceOffTimeOffMargin:
 							self.messageSensorInfo("Device " + device["id"] + " delay time passed or will just pass("+str((deviceOffTime-currentEventTime).seconds)+"s). Its delay time is "+deviceOffTime.strftime('%Y-%m-%d %H:%M:%S')+". Checking Further...")
 							message.body += "[ON] "
+							onStatus = "offd"
 						else:
 							continue
 					else:
@@ -210,7 +213,7 @@ class Sensor(object):
 								updateLastValidSignalDate = False
 								continue
 
-				message.body += "enabling device " + str(device["id"]) + " with delay " + str(device["delay"])
+				message.body += "enabling device " + str(device["id"]) + ", delay " + str(device["delay"]) + ", status " + onStatus
 				self.messageSensorInfo(message.body)
 
 				if helper.saveDailySensorLogsToFile:
@@ -218,7 +221,7 @@ class Sensor(object):
 
 				device["lastTriggered"] = currentEventTime
 				
-				threading.Thread(target=helper.runDeviceAction, args=(device, "on", iteration)).start()
+				threading.Thread(target=helper.runDeviceAction, args=(device, onStatus, iteration)).start()
 				
 				iteration = iteration+2
 
