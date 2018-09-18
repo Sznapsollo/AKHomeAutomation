@@ -57,9 +57,9 @@ if($category)
 		
 			$defaultDelayValue = $item->delay ? $item->delay/60 : null;
 			if($item instanceof IntItem)
-				array_push($returnData->items, array('id' => $item->name, 'type' => $item->type, 'image'=> $item->image(), 'delay' => $defaultDelayValue, 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => "I"));
+				array_push($returnData->items, array('id' => $item->name, 'image'=> $item->image(), 'delay' => $defaultDelayValue, 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => "I"));
 			else if($item instanceof GroupItem || $item instanceof MacItem)
-				array_push($returnData->items, array('id' => $item->name, 'type' => $item->type, 'image'=> $item->image(), 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => $item instanceof MacItem ? "M" : "G"));
+				array_push($returnData->items, array('id' => $item->name, 'image'=> $item->image(), 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => $item instanceof MacItem ? "M" : "G"));
 		}
 	}
 	

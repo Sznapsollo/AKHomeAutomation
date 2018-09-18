@@ -140,7 +140,7 @@ class Helper(object):
 			self.writeExceptionToFile('Server failed due to timeout to ' + url)
 			time.sleep(10)
 			self.loadPage(url, retries + 1)
-		except Exception, e:
+		except Exception as e:
 			message = "[loadPageWithPost] exc " + str(e)
 			self.writeExceptionToFile(message)
 			self.logMessage(message)
@@ -161,7 +161,7 @@ class Helper(object):
 	def runSatellitesDeviceAction(self, device, status, async):
 		try:
 			#pass to satellites if defined
-		   if "satelliteServerAddresses" in self.settings.data:
+			if "satelliteServerAddresses" in self.settings.data:
 				for serverAddr in self.settings.data["satelliteServerAddresses"]:
 					if self.settings.data["webServerAddress"] not in serverAddr:
 						if async:
@@ -169,7 +169,7 @@ class Helper(object):
 							t.start()
 						else:
 							self.runDeviceActionInner(serverAddr,device,status,0.0)
-		except Exception, e:
+		except Exception as e:
 			message = "[Exception passing signal to satellites] exc " + str(e)
 			self.writeExceptionToFile(message)
 			self.logMessage(message)
@@ -214,7 +214,7 @@ class Helper(object):
 				else:
 					self.logDetailedMessage('sensorAlarmMail.enableMailingOnAlarm disabled')
 			
-			except Exception, e:
+			except Exception as e:
 				message = "[Exception sendAlarmNotification] exc " + str(e)
 				self.writeExceptionToFile(message)
 				self.logMessage(message)
@@ -231,7 +231,7 @@ class Helper(object):
 			
 			with open(filePath, 'a+') as excFile:
 				excFile.write(str(timestamp + ': ' + text + '\r\n' + traceback.format_exc()+ '\r\n'))
-		except Exception, e:
+		except Exception as e:
 			message = "[Exception file save error'] exc " + str(e)
 			self.logMessage(message)
 
@@ -247,7 +247,7 @@ class Helper(object):
 			
 			with open(filePath, 'a+') as excFile:
 				excFile.write(str(timestamp + ': ' + text + '\r\n'))
-		except Exception, e:
+		except Exception as e:
 			message = "[Log file save error'] exc " + str(e)
 			self.writeExceptionToFile(message)
 			self.logMessage(message)
@@ -255,7 +255,7 @@ class Helper(object):
 class ProcessKill(object):
 
 	def __init__(self, helper, name):
-                self.helper = helper
+		self.helper = helper
 
 		''' if another instance running then kill it '''
 		proc1 = subprocess.Popen(['ps','-ef'], stdout=subprocess.PIPE)
@@ -271,7 +271,7 @@ class ProcessKill(object):
 				
 				try:
 						self.helper.deleteFile(helper.settings.data["delayfilesPath"]+'{0}.json'.format(name))
-				except Exception, e:
+				except Exception as e:
 						message = "[ProcessKill] exc " + str(e)
 						self.helper.writeExceptionToFile(message)
 						self.helper.logMessage(message)
