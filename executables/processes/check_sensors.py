@@ -340,7 +340,7 @@ if __name__ == "__main__":
 
 	except KeyboardInterrupt:
 		GPIO.cleanup()
-	except Exception, e:
+	except Exception as e:
 		message = "[check_sensors] exc " + str(e)
 		helper.writeExceptionToFile(message)
 		helper.logMessage(message)

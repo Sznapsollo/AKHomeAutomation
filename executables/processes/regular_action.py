@@ -162,9 +162,9 @@ if __name__ == "__main__":
 				checker.validate()
 			
 			processBox.displayprocessList()
-
+			
 			time.sleep(helper.regularActionsCheckInterval)
-	except Exception, e:
+	except Exception as e:
 		message = "[regular_action] exc " + str(e)
 		helper.writeExceptionToFile(message)
 		helper.logMessage(message)

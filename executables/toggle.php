@@ -11,9 +11,12 @@ $itemChecker = new ItemChecker();
 $settings = new Settings();
 $signalSender = new SignalSender($settings);
 
-$outletLight = $_POST['outletId'];
-$outletStatus = $_POST['outletStatus'];
-$outletDelayed = $_POST['outletDelayed'];
+$request = file_get_contents('php://input');
+$input = json_decode($request);
+
+$outletLight = isset($input->outletId) ? $input->outletId : $_POST['outletId'];
+$outletStatus = isset($input->outletStatus) ? $input->outletStatus : $_POST['outletStatus'];
+$outletDelayed = isset($input->outletDelayed) ? $input->outletDelayed : $_POST['outletDelayed'];
 
 $additionalActions = array();
 
