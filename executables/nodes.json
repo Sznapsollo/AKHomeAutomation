@@ -29,6 +29,7 @@
 	}],
 	"nodes": [{
 			"name": "testswitch1",
+			"hotword": "test switch",
 			"image": "lampaprzedpokoj.jpg",
 			"category": "general",
 			"header": "Radio Switch",
@@ -45,6 +46,7 @@
 		},
 		{
 			"name": "coffee",
+			"hotword": "coffee",
 			"image": "coffee.jpg",
 			"category": "general",
 			"header": "Coffee machine",
@@ -77,6 +79,7 @@
 		},
 		{
 			"name": "roomlamp",
+			"hotword": "room lamp",
 			"image": "roomzyrandol.jpg",
 			"category": "general",
 			"header": "Living Room Lamp",
@@ -92,6 +95,7 @@
 		},
 		{
 			"name": "tvlamp",
+			"hotword": "tv lamp",
 			"image": "tvlamp.jpg",
 			"category": "general",
 			"header": "TV Lamp",
@@ -123,6 +127,7 @@
 		},
 		{
 			"name": "computertv",
+			"hotword": "computer tv",
 			"image": "7.jpg",
 			"category": "general",
 			"header": "Computer TV",
