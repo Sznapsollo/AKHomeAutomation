@@ -3,7 +3,8 @@
 
 	app.controller('SensorItemController', function SensorItemController($scope, $window, sensorsDataService) {
 	
-		$scope.calendarIconName = automation.CalendarIconName('');
+		$scope.calendarIconName = automation.GetIcon('calendar','');
+		$scope.actionIconName = automation.GetIcon('action','');
 		$scope.saveRegularSettings = saveRegularSettings;
 		$scope.saveSensorDevicesSettings = saveSensorDevicesSettings;
 		$scope.showRegular = false;
@@ -31,8 +32,10 @@
 				$scope.regularActionData.timeUnits = JSON.parse($scope.timeUnits);
 			}
 			
-			if($scope.customData)
-				$scope.calendarIconName = automation.CalendarIconName("_enabled");
+			if($scope.customData) {
+				$scope.calendarIconName = automation.GetIcon('calendar','_enabled');
+				$scope.actionIconName = automation.GetIcon('action','_enabled');
+			}
 				
 			if($scope.onDevices !== undefined && $scope.onDevices.length > 0) {
 				$scope.sensorDevicesData.onDevices = JSON.parse($scope.onDevices);

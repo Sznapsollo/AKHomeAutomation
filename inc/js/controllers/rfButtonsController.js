@@ -13,7 +13,7 @@
 		$scope.changeTimer = changeTimer;
 		$scope.changeValue = changeValue;
 		$scope.saveRegularSettings = saveRegularSettings;
-		$scope.calendarIconName = automation.CalendarIconName("");
+		$scope.calendarIconName = automation.GetIcon('calendar','');
 		$scope.translate = translate;
 		$scope.checkAvailability = checkAvailability;
 		
@@ -179,12 +179,12 @@
 						}
 							
 						if(existsSetting)
-							$scope.calendarIconName = automation.CalendarIconName("_enabled");
+							$scope.calendarIconName = automation.GetIcon('calendar', '_enabled');
 						else
-							$scope.calendarIconName = automation.CalendarIconName("");
+							$scope.calendarIconName = automation.GetIcon('calendar', '');
 					}
 					else
-						$scope.calendarIconName = automation.CalendarIconName("");
+						$scope.calendarIconName = automation.GetIcon('calendar', '');
 				},
 				function(response) {
 					var error = 'Regular action data read error for ' + $scope.outletId;

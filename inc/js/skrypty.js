@@ -57,8 +57,20 @@ var automation = function() {
 	_translations = null;
 	_itemsDictionary = null;
 	
-	function CalendarIconName(value) {
-		return "calendar_icon"+value+".jpg";
+	function GetIcon(name, value) {
+		
+		switch(name) {
+			case "calendar":
+				return "calendar_icon"+value+".jpg";
+				break;
+			case "action":
+				return "actions_icon"+value+".jpg";
+				break;
+			default:
+				return "";
+		} 
+		
+		return "";
 	}
 	
 	function Translate(code) {
@@ -93,8 +105,8 @@ var automation = function() {
 	}
 	
 	return {
-		CalendarIconName: function(value) {
-			return CalendarIconName(value);
+		GetIcon: function(name, value) {
+			return GetIcon(name, value);
 		},
 		Confirm: function(id, status, delay, message) {
 			return Confirm(id, status, delay, message);
