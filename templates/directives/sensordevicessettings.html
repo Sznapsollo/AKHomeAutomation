@@ -10,21 +10,21 @@
 		<label for="device">{{translate('device')}}</label>
 		<select name="device" ng-model="onDevice.id" ng-options="device.id as (device.header) for device in devicesDictionary">
 		</select>
-		
+		<p/>
 		<label for="delay">{{translate('delay')}}</label>
 		<input name="delay" type="number"  ng-model="onDevice.delay" />
-		
+		<p/>
 		<label for="rebound">{{translate('rebound')}}</label>
 		<input name="rebound" type="number" ng-model="onDevice.rebound" />
 		<p/>
 		<label for="dependencyMethod">{{translate('dependencyMethod')}}</label>
 		<select name="dependencyMethod" ng-model="onDevice.dependencyMethod" ng-options="dependencyMethod.value as (dependencyMethod.name) for dependencyMethod in dependencyMethods">
 		</select>
-		
+		<p/>
 		<label for="dependencyOperation">{{translate('dependencyOperation')}}</label>
 		<select name="dependencyOperation" ng-model="onDevice.dependencyOperation" ng-options="dependencyOperation.value as (dependencyOperation.name) for dependencyOperation in dependencyOperations">
 		</select>
-		
+		<p/>
 		<label for="dependencyValue">{{translate('dependencyValue')}}</label>
 		<input name="dependencyValue" type="number" ng-model="onDevice.dependencyValue" />
 	</div>
