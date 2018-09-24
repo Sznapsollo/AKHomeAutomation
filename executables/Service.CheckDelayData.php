@@ -26,7 +26,7 @@ if($id)
 	
 		if($item instanceof IntItem)
 		{
-			$filepathname = $settings->delayfilesPath.$id.'.json';	
+			$filepathname = $settings->delayfilesPath.$id.'.json';
 			
 			if (file_exists($filepathname)) { $delayInfoText = file_get_contents($filepathname); }
 			

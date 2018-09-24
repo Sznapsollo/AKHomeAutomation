@@ -5,25 +5,69 @@
 	
 		$scope.calendarIconName = automation.GetIcon('calendar','');
 		$scope.actionIconName = automation.GetIcon('action','');
+		$scope.alarmTimeUnitsIconName = automation.GetIcon('alarmTimeUnits','');
+		$scope.alarmDevicesIconName = automation.GetIcon('alarmDevices','');
 		$scope.saveRegularSettings = saveRegularSettings;
 		$scope.saveSensorDevicesSettings = saveSensorDevicesSettings;
+		$scope.sensorAlarmSettingsSaved = sensorAlarmSettingsSaved;
 		$scope.showRegular = false;
 		$scope.showDevices = false;
+		$scope.showAlarmTimeUnits = false;
+		$scope.showAlarmDevices = false;
 		$scope.regularActionData = {};
 		$scope.sensorDevicesData = {};
 		$scope.resetSensorData = resetSensorData;
 		$scope.translate = translate;
 		$scope.toggleRegularOptions = toggleRegularOptions;
 		$scope.toggleDevicesOptions = toggleDevicesOptions;
+		$scope.toggleAlarmsTimeUnits = toggleAlarmsTimeUnits;
+		$scope.toggleAlarmsDevices = toggleAlarmsDevices;
+		
+		$scope.pageFlag = automation.PageFlag;
 		
 		init();
 		
+		function toggleAll(show) {
+			$scope.showRegular = show;
+			$scope.showDevices = show;
+			$scope.showAlarmTimeUnits = show;
+			$scope.showAlarmDevices = show;
+		}
+		
 		function toggleRegularOptions() {
-			$scope.showRegular = !$scope.showRegular;
+			if($scope.showRegular) {
+				toggleAll(false);
+				return;
+			}
+			toggleAll(false);
+			$scope.showRegular = true;
 		}
 		
 		function toggleDevicesOptions() {
-			$scope.showDevices = !$scope.showDevices;
+			if($scope.showDevices) {
+				toggleAll(false);
+				return;
+			}
+			toggleAll(false);
+			$scope.showDevices = true;
+		}
+		
+		function toggleAlarmsTimeUnits() {
+			if($scope.showAlarmTimeUnits) {
+				toggleAll(false);
+				return;
+			}
+			toggleAll(false);
+			$scope.showAlarmTimeUnits = true;
+		}
+		
+		function toggleAlarmsDevices() {
+			if($scope.showAlarmDevices) {
+				toggleAll(false);
+				return;
+			}
+			toggleAll(false);
+			$scope.showAlarmDevices = true;
 		}
 		
 		function init()
@@ -43,8 +87,7 @@
 		};
 		
 		function resetSensorData() {
-			$scope.showRegular = false;
-			$scope.showDevices = false;
+			toggleAll(false)
 			
 			sensorsDataService.setSensorTimelineData($scope.outletId, null).then(
 				function(dataResponse) {
@@ -59,8 +102,7 @@
 		}
 		
 		function saveRegularSettings(msg) {
-			$scope.showRegular = false;
-			$scope.showDevices = false;
+			toggleAll(false)
 			
 			sensorsDataService.setSensorTimelineData($scope.outletId, msg).then(
 				function(dataResponse) {
@@ -75,8 +117,7 @@
 		}
 		
 		function saveSensorDevicesSettings(msg) {
-			$scope.showRegular = false;
-			$scope.showDevices = false;
+			toggleAll(false)
 			
 			sensorsDataService.setSensorDevicesData($scope.outletId, msg).then(
 				function(dataResponse) {
@@ -88,6 +129,10 @@
 					console.log(response);
 				}
 			);
+		}
+		
+		function sensorAlarmSettingsSaved(msg) {
+			toggleAll(false)
 		}
 		
 		function translate(code) {

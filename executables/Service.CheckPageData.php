@@ -9,10 +9,11 @@ if(isset($input->receive)) {
 	$settings = new Settings();
 	$returnData = new stdClass();
 
-	$todayexcfilepathname = '../logs/exceptions/exceptions_'.date("Ymd").'.log';				
+	$todayexcfilepathname = '../logs/exceptions/exceptions_'.date("Ymd").'.log';
 	
 	$returnData->pageflags = new stdClass();
 	$returnData->pageflags->todayexcexists = file_exists($todayexcfilepathname);
+	$returnData->pageflags->canChangeAlarmSettings = $settings->canChangeAlarmSettings;
 	$returnData->translations = $settings->translations;
 	
 	echo json_encode($returnData);

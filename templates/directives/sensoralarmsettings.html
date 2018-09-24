@@ -1,0 +1,9 @@
+<h3>{{translate('alarm_settings')}}</h3>
+
+<div ng-if="mode=='time'">
+	<regular-settings ng-if="alarmData" outlet-id="{{alarmData.id}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveAlarmTimeUnits(msg)"></regular-settings>
+</div>
+<div ng-if="mode=='devices'">
+	<sensor-alarm-devices-settings ng-if="alarmData" outlet-id="{{alarmData.id}}"
+	sensor-devices-data="{{devicesData}}" 	on-sensor-devices-settings-saved="saveAlarmDevices(msg)"></sensor-alarm-devices-settings>
+</div>

@@ -66,6 +66,12 @@ var automation = function() {
 			case "action":
 				return "actions_icon"+value+".jpg";
 				break;
+			case "alarmTimeUnits":
+				return "alarm_time_units_icon"+value+".jpg";
+				break;
+			case "alarmDevices":
+				return "alarm_devices_icon"+value+".jpg";
+				break;
 			default:
 				return "";
 		} 

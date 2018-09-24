@@ -17,8 +17,13 @@
 	},
 	"saveDailyLogsToFile": true,
 	"saveDailySensorLogsToFile": true,
+	"canChangeAlarmSettings": false,
 	"translations":[ 
       {  
+         "code":"alarm_settings",
+         "description":"Alarm Settings"
+      },
+	  {  
          "code":"availability_not_checked",
          "description":"Check availability"
       },

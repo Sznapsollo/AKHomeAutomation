@@ -1,0 +1,3 @@
+If you enabled the "canChangeAlarmSettings" in settings.json and you got here because you were getting probably 404 errors when clicking on alarm icon for sensor - this is because it was done on purpose as a precaution. To enable changing sensor alarm settings just change "_Services.php" file name in this folder to "Services.php".
+
+However if someone except for you would be using web UI of AKHomeAutomation system then secure this admin folder by passwording it by puttin proper .htaccess and .htpasswd files inside of this folder. This way when clicking on alarm icon in web ui - user would be promped with login & pass question which, if not answered correctly, would prevent unwanted users from messing with sensor alarm settings.

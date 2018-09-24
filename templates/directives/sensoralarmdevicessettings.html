@@ -1,0 +1,25 @@
+
+<div ng-repeat="onDevice in onDevices">
+	
+	<div style="display: inline-block;">
+		<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="removeDevice(onDevice)" >
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		</button>
+	</div>
+	<div style="display: inline-block;vertical-align:top;">
+		<label for="device">{{translate('device')}}</label>
+		<select name="device" ng-model="onDevice.id" ng-options="device.id as (device.header) for device in devicesDictionary">
+		</select>
+		<p/>
+		<label for="delay">{{translate('delay')}}</label>
+		<input name="delay" type="number"  ng-model="onDevice.delay" />
+	</div>
+</div>
+<div style="margin: 10px auto 10px auto; text-align: center">
+	<p style="margin-top: 10px">
+		<button type="button" class="btn btn-default" style="margin-right: 15px;" aria-label="Left Align" ng-click="addNew()">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</button>
+		<button type="button" ng-disabled="!isSaveEnabled()" class="btn btn-primary" ng-click="saveSensorDevicesSettings();" >{{translate('save');}}</button>
+	</p>
+</div>

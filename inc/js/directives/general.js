@@ -76,6 +76,32 @@
 		};
 	});
 	
+	app.directive('sensorAlarmDevicesSettings', function() {
+		return {
+			restrict: 'E',
+			scope: {
+				outletId: '@',
+				sensorDevicesData: '@',
+				onSensorDevicesSettingsSaved:'&'
+			},
+			templateUrl: 'templates/directives/sensoralarmdevicessettings.html',
+			controller: 'SensorDevicesSettingsController',
+		};
+	});
+	
+	app.directive('sensorAlarmSettings', function() {
+		return {
+			restrict: 'E',
+			scope: {
+				outletId: '@',
+				mode: '@',
+				onSensorAlarmSettingsSaved:'&'
+			},
+			templateUrl: 'templates/directives/sensoralarmsettings.html',
+			controller: 'SensorAlarmSettingsController',
+		};
+	});
+	
 	app.directive('pager', function() {
 		return {
 			restrict: 'E',

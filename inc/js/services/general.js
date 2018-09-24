@@ -65,6 +65,30 @@
 				data: {service: 'SetSensorActionData', receive: '1', id: id, onDevices: onDevices}
 			});
 		};
+		this.checkSensorAlarmData = function(id) {
+			return $http({
+				url: 'executables/admin/Services.php',
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				data: {service: 'CheckSensorAlarmData', receive: '1', id: id}
+			});
+		};
+		this.setSensorAlarmTimelineData = function(id, timeLine) {
+			return $http({
+				url: 'executables/admin/Services.php',
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				data: {service: 'SetSensorAlarmData', receive: '1', id: id, timeLine: timeLine}
+			});
+		};
+		this.setSensorAlarmDevicesData = function(id, onDevices) {
+			return $http({
+				url: 'executables/admin/Services.php',
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				data: {service: 'SetSensorAlarmData', receive: '1', id: id, onDevices: onDevices}
+			});
+		};
 	});
 	
 	app.service('logsDataService', function($http, $route) {
