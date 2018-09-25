@@ -20,6 +20,10 @@
 	"canChangeAlarmSettings": false,
 	"translations":[ 
       {  
+         "code":"search",
+         "description":"Search"
+      },
+	  {  
          "code":"alarm_settings",
          "description":"Alarm Settings"
       },

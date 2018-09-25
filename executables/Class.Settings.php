@@ -12,9 +12,12 @@ class Settings
 		$this->settings = json_decode($json);
 		$this->sudo = "sudo ";
     }
-	
+
 	public function __get($name) {
-		return $this->settings->$name;
+		if(property_exists($this->settings, $name))
+			return $this->settings->$name;
+		else 
+			return null;
 	}
 }
 

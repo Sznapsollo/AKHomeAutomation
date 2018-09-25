@@ -5,6 +5,7 @@
 		
 		$scope.orderByType = true;
 		$scope.checkLogDetails = checkLogDetails;
+		$scope.translate = translate;
 		
 		$scope.$on('$routeChangeSuccess',function(evt, absNewUrl, absOldUrl) {
 		   checkItemsData();
@@ -29,5 +30,8 @@
 			);
 		}
 		
+		function translate(code) {
+			return automation.Translate(code);
+		}
 	});
 })();

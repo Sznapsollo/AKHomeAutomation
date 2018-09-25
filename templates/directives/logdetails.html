@@ -1,11 +1,15 @@
 <div class="logDetailsArea">
 	<div>
 		<a ng-click="orderByType = !orderByType;">Change Sort</a>
-		&nbsp;&nbsp;|&nbsp;&nbsp;
+		&nbsp;|&nbsp;
 		<a ng-if="!dataLoading" ng-click="checkLogDetails()">Refresh</a>
+		&nbsp;|&nbsp;
+		<input type="text" style="width: 100px" ng-model="query" placeholder="{{translate('search');}}">
+		&nbsp;|&nbsp;
+		{{(logContentLines | filter:query).length}}
 	</div>
 	<div>
-		<div ng-class-odd="'oddRow'" ng-class-even="'evenRow'" ng-repeat='logItem in logContentLines  | orderBy:"toString()":orderByType'>
+		<div ng-class-odd="'oddRow'" ng-class-even="'evenRow'" ng-repeat='logItem in logContentLines  | orderBy:"toString()":orderByType | filter:query'>
 			<div>{{logItem}}</div>
 		</div>
 	</div>

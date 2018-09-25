@@ -219,6 +219,8 @@ class Helper(object):
 				self.writeExceptionToFile(message)
 				self.logMessage(message)
 				
+	def str2bool(self, v):
+		return v.lower() in ("yes", "true", "t", "1")
 	def writeExceptionToFile(self, text):
 		try:
 			timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
