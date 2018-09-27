@@ -16,6 +16,7 @@ AKHomeAutomation is Raspberry Pi based home automation / smart home / smart hous
 - provides way to define scheduled working periods for devices by simply clicking in UI
 - allows to define auto disable option with delay times after which devices would be turned off (energy saving for forgetting and salvation for lazy ones ;-))
 - allows to define PIR sensor(s) connected to Raspberry pi and basing on their signal can operate defined devices and/or trigger alarm/sen alarm mails
+- can be easily integrated with Google Voice kit to use voice commands. Example script in one of my repositories.
 
 ### How it looks
 - under **<a href="http://cultrides.com/test/Github/AKHomeAutomation" target="_blank">UI Demo address</a>** you can have a peek at user interface of AKHomeAutomation. It is just UI deployed on shared host with no functionality attached so you will not be able to do anything. It is just to present UI how it displays nodes, scheduling options  etc. It is generated from same nodes.json that is uploaded here.
