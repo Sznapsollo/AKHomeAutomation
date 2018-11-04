@@ -25,7 +25,7 @@ if($category)
 	
 	if($category == 'sensors')
 	{
-		$items = $itemChecker->getSensors();	
+		$items = $itemChecker->getSensors();
 
 		foreach ($items as $item) {
 			$filepathname = $settings->sensorsettingsfilesPath.$item->id.'.json';	

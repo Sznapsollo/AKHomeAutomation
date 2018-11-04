@@ -14,6 +14,9 @@ if(isset($input->receive)) {
 	$returnData->pageflags = new stdClass();
 	$returnData->pageflags->todayexcexists = file_exists($todayexcfilepathname);
 	$returnData->pageflags->canChangeAlarmSettings = $settings->canChangeAlarmSettings;
+	$returnData->pageflags->serverDateTime = new stdClass();
+	$returnData->pageflags->serverDateTime->serverTimeStamp = time();
+	$returnData->pageflags->serverDateTime->serverCompareTime = date('H:i');
 	$returnData->translations = $settings->translations;
 	
 	echo json_encode($returnData);

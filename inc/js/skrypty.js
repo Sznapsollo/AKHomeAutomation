@@ -79,6 +79,21 @@ var automation = function() {
 		return "";
 	}
 	
+	function ProcessPageFlags() {
+		if(_pageFlags.serverDateTime) {
+			var currentTime = new Date()
+			var localTimeStamp = Math.floor(Date.now() / 1000);
+			var localTime = currentTime.getHours() + ":" + currentTime.getMinutes();
+			var timestampDiff = _pageFlags.serverDateTime.serverTimeStamp - localTimeStamp
+			if(timestampDiff > 10 * 60 * 1000) {
+				_pageFlags.timeDifferenceDetected = true;
+				console.log('Difference in time: ' + timestampDiff);
+				console.log('Server time:' + _pageFlags.serverDateTime.serverCompareTime);
+				console.log('Local time:' + localTime);
+			}
+		}
+	}
+	
 	function Translate(code) {
 		if(_translations == null)
 			return "";
@@ -131,6 +146,7 @@ var automation = function() {
 		},
 		SetPageFlags: function(pageFlags) {
 			_pageFlags = pageFlags;
+			ProcessPageFlags();
 		},
 		PageFlag: function(code) {
 			if(!_pageFlags)
