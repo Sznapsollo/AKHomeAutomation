@@ -44,10 +44,10 @@ Wanna touch base? office@webproject.waw.pl
 ## Example Screens
 
 ##### Set timeout disable when enabling device (optional)
-![Image of AKHomeAutomation #1](http://cultrides.com/test/Github/AKHomeAutomation/screen2.JPG)
+![Image of AKHomeAutomation #1](http://cultrides.com/test/Github/AKHomeAutomation/screen2.JPG?)
 
 ##### Set scheduled regular actions defining when device should be ON and when OFF (optional)
-![Image of AKHomeAutomation #2](http://cultrides.com/test/Github/AKHomeAutomation/screen1.JPG)
+![Image of AKHomeAutomation #2](http://cultrides.com/test/Github/AKHomeAutomation/screen1.JPG?)
 
 ##### Example homepage with some configured devices
-![Image of AKHomeAutomation #3](http://cultrides.com/test/Github/AKHomeAutomation/screen3.JPG)
+![Image of AKHomeAutomation #3](http://cultrides.com/test/Github/AKHomeAutomation/screen3.JPG?)
