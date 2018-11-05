@@ -2,17 +2,17 @@ $(document).ready(function()
 {
 	$("#bodyContainer").on("click", ".toggleOutlet", function(event)
 	{
-        toggleOutlet($(this));
-    });	
+		toggleOutlet($(this));
+	});	
 
-    $('#deleteModal').on('show', function() {
-	    
-	    
+	$('.modal').on('shown.bs.modal', function (e) {
+		$('html').addClass('freezePage'); 
+		$('body').addClass('freezePage');
 	});
-
-    $('.nav a').on('click', function(){
-        $('.navbar-toggle').click() //bootstrap 3.x by Richard
-    });
+	$('.modal').on('hidden.bs.modal', function (e) {
+		$('html').removeClass('freezePage');
+		$('body').removeClass('freezePage');
+	});
 });
 
 var toggleOutlet = function(buttonClicked) {

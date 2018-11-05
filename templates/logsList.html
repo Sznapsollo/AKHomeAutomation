@@ -1,6 +1,6 @@
 <div class="pageContent">
 	
-	<h3>{{pageTitle}}</h3>
+	<h4>{{pageTitle}}</h4>
 	
 	<div ng-repeat="item in items track by $index">
 		<a href="" ng-click="getFileContent(item.name)">{{item.name}}</a>
@@ -10,7 +10,8 @@
 
 	<div ng-show="showNoResults()" class="noResults">There are no logs of this type.</div>
 
-	<p/>
+	<div>&nbsp;</div>
+	
 	<div ng-hide="showNoResults()">
 		<pager page="logsList/{{logsType}}"></pager>
 	</div>

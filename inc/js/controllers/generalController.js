@@ -1,16 +1,17 @@
 (function(){
-  'use strict';
+	'use strict';
 
-	app.controller('GeneralController', function GeneralController($scope, $rootScope) {
+	app.controller('GeneralController', function GeneralController($scope, $rootScope, $location) {
 		
 		function translate(code) {
 			return automation.Translate(code);
 		};
 		
 		$scope.pageFlag = automation.PageFlag;
-		
+		$scope.currentPath = '';
 		$scope.$on('$routeChangeSuccess',function(evt, absNewUrl, absOldUrl) {
-		   $scope.itemsPerPage = GetLocalStorage(itemsPerPageStorageName, itemsPerPageDefault);
+			$scope.currentPath = $location.path();
+			$scope.itemsPerPage = GetLocalStorage(itemsPerPageStorageName, itemsPerPageDefault);
 		});
 		
 		function translateAll() {

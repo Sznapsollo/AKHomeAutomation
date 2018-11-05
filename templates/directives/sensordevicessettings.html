@@ -2,8 +2,8 @@
 <div ng-repeat="onDevice in onDevices">
 	
 	<div style="display: inline-block;">
-		<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="removeDevice(onDevice)" >
-			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		<button type="button" class="btn btn-default" style="color: red;" aria-label="Left Align" ng-click="removeDevice(onDevice)" >
+			<i class="fa fa-times"></i>
 		</button>
 	</div>
 	<div style="display: inline-block;vertical-align:top;">
@@ -32,7 +32,7 @@
 <div style="margin: 10px auto 10px auto; text-align: center">
 	<p style="margin-top: 10px">
 		<button type="button" class="btn btn-default" style="margin-right: 15px;" aria-label="Left Align" ng-click="addNew()">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			<i class="fa fa-plus"></i>
 		</button>
 		<button type="button" ng-disabled="!isSaveEnabled()" class="btn btn-primary" ng-click="saveSensorDevicesSettings();" >{{translate('save');}}</button>
 	</p>

@@ -1,13 +1,13 @@
 
-<h3>
+<div class="sensorswitch">
 	<span class="switchHeader">{{header}}</span>
 	<img class="switchCalendarIcon" ng-click="toggleRegularOptions()" ng-src="graphics/{{calendarIconName}}" />
 	<img class="switchCalendarIcon" ng-click="toggleDevicesOptions()" ng-src="graphics/{{actionIconName}}" />
 	<img ng-if="pageFlag('canChangeAlarmSettings')" class="switchCalendarIcon" ng-click="toggleAlarmsTimeUnits()" ng-src="graphics/{{alarmTimeUnitsIconName}}" />
 	<img ng-if="pageFlag('canChangeAlarmSettings')" class="switchCalendarIcon" ng-click="toggleAlarmsDevices()" ng-src="graphics/{{alarmDevicesIconName}}" />
-</h3>
+</div>
 
-<div  ng-class="{'sub-section': showRegular || showDevices || showAlarmTimeUnits || showAlarmDevices}">
+<div ng-class="{'sub-section': showRegular || showDevices || showAlarmTimeUnits || showAlarmDevices}">
 	<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)"></regular-settings>
 
 	<sensor-devices-settings ng-if="showDevices" outlet-id="{{outletId}}"

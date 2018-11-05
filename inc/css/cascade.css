@@ -1,3 +1,17 @@
+.btn {
+	background-image: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 49%, rgba(0,0,0,0.02) 51%, rgba(0,0,0,0.05));
+	background-repeat: repeat-x;
+}
+
+.powerswitchbuttons .btn-disable {
+	border: 1px solid #cccccc;
+	background-color: #efefef;
+}
+
+.powerswitchbuttons .timeOff {
+	font-size: 18px;
+}
+
 .turnedOff {
 	opacity: 0.5;
 }
@@ -51,35 +65,35 @@
 }
 
 .pagerArea  A {
-  font-family: tahoma;
-  font-size: 10pt;
-  color: #555555;
-  text-decoration: none;
-  padding: 10px;
-  border: 1px solid #ffffff;
-  text-transform: uppercase;
-  background: rgba(255,255,255,0.3);
+	font-family: tahoma;
+	font-size: 10pt;
+	color: #555555;
+	text-decoration: none;
+	padding: 10px;
+	border: 1px solid #ffffff;
+	text-transform: uppercase;
+	background: rgba(255,255,255,0.3);
 }
 
 .pagerArea  A:visited {
-  color: #555555;
-  text-decoration: none;
+	color: #555555;
+	text-decoration: none;
 }
 
 .pagerArea  A:active {
-  color: #555555;
-  text-decoration: none;
+	color: #555555;
+	text-decoration: none;
 }
 
 .pagerArea  A:hover {
-  color: #3399ff;
-  text-decoration: none;
-  border: 1px solid #3399ff;
-  border-radius: 5px;
+	color: #3399ff;
+	text-decoration: none;
+	border: 1px solid #3399ff;
+	border-radius: 5px;
 }
 
 .evenRow  {
-  background: rgba(0,0,0,0.1);
+	background: rgba(0,0,0,0.1);
 }
 
 .redBlinker {
@@ -87,14 +101,24 @@
 }
 
 @keyframes redblinker {
-  50% {
-    color: red;
-  }
+	50% {
+		color: red;
+	}
 }
 
 .machineAvailability {
 	cursor: pointer;
 	font-size: 8pt;
+}
+
+.sensorswitch,
+.powerswitch {
+	margin: 15px 0 8px 0;
+}
+
+.sensorswitch .switchHeader,
+.powerswitch .switchHeader {
+	font-size: 24px;
 }
 
 .switchIconClickable, 
@@ -105,14 +129,14 @@
 
 .switchIconClickable:hover, 
 .switchCalendarIcon:hover {
-  -webkit-animation-name: wobble-top;
-  animation-name: wobble-top;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-timing-function: ease-in-out;
-  animation-timing-function: ease-in-out;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
+	-webkit-animation-name: wobble-top;
+	animation-name: wobble-top;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-timing-function: ease-in-out;
+	animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: 1;
+	animation-iteration-count: 1;
 }
 
 .switchHeaderClickable:hover {
@@ -158,12 +182,18 @@
 }
 
 .modal-body {
-    max-height: 100%;
-    overflow-y: auto;
+	max-height: 100%;
+	overflow-y: auto;
 }
 
 .sub-section {
-    border-radius: 5px; 
-    background-image: linear-gradient(#e2e2e2, white); 
-    padding: 10px;
+	border-radius: 5px; 
+	background-image: linear-gradient(#e2e2e2, white); 
+	padding: 10px;
+}
+
+.freezePage{
+	overflow: hidden;
+	height: 100%;
+	position: relative;
 }

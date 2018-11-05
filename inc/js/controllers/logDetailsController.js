@@ -19,7 +19,7 @@
 			logsDataService.checkLogsFileData($scope.logName).then(
 				function(dataResponse) {
 					$scope.dataLoading = false;
-					$scope.logContentLines = dataResponse.data.loglines;
+					$scope.logContentLines = dataResponse.data.loglines.filter(function(el) { return el; });
 				},
 				function(response) {
 					var error = $routeParams.logsType + ' ' + $scope.logName + ' file data read error';

@@ -2,108 +2,103 @@
 <html ng-app="automationApp">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <script src="inc/lib/jquery-2.2.0.min.js"></script>
-  <script src="inc/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="inc/bootstrap-3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="inc/css/cascade.css">
-  <link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
-  
-  <script src="inc/lib/angular.min.js"></script>
-  <script src="inc/lib/angular-route.min.js"></script>
-  <script src="inc/js/app.js"></script>
-  <script src="inc/js/directives/general.js"></script>
-  <script src="inc/js/controllers/generalController.js"></script>
-  <script src="inc/js/controllers/tabController.js"></script>
-  <script src="inc/js/controllers/rfButtonsController.js"></script>
-  <script src="inc/js/controllers/sensorItemController.js"></script>
-  <script src="inc/js/controllers/sensorDevicesSettingsController.js"></script>
-  <script src="inc/js/controllers/sensorAlarmSettingsController.js"></script>
-  <script src="inc/js/controllers/regularSettingsController.js"></script>
-  <script src="inc/js/controllers/hoursAndMinutesController.js"></script>
-  <script src="inc/js/controllers/logsListController.js"></script>
-  <script src="inc/js/controllers/logDetailsController.js"></script>
-  <script src="inc/js/controllers/pagerController.js"></script>
-  <script src="inc/js/services/general.js"></script>
-  <script src="inc/js/filters/general.js"></script>
-  <script src="inc/js/skrypty.js"></script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="inc/lib/jquery-3.3.1.min.js"></script>
+	<script src="inc/bootstrap-4.1.3-dist/js/bootstrap.min.js" ></script>
+	<link rel="stylesheet" href="inc/bootstrap-4.1.3-dist/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="inc/font-awesome-4.3.0/css/font-awesome.min.css" >
+	<link rel="stylesheet" href="inc/css/cascade.css">
+	<link rel="icon" href="graphics/favicon.ico" type="image/x-icon">
 
-  <title>AKHomeAutomation</title>
-  <style>
-    body {
-      padding-top: 70px
-    }
-  </style>
+	<script src="inc/lib/angular.min.js"></script>
+	<script src="inc/lib/angular-route.min.js"></script>
+	
+	<script src="inc/js/app.js"></script>
+	<script src="inc/js/directives/general.js"></script>
+	<script src="inc/js/controllers/generalController.js"></script>
+	<script src="inc/js/controllers/tabController.js"></script>
+	<script src="inc/js/controllers/rfButtonsController.js"></script>
+	<script src="inc/js/controllers/sensorItemController.js"></script>
+	<script src="inc/js/controllers/sensorDevicesSettingsController.js"></script>
+	<script src="inc/js/controllers/sensorAlarmSettingsController.js"></script>
+	<script src="inc/js/controllers/regularSettingsController.js"></script>
+	<script src="inc/js/controllers/hoursAndMinutesController.js"></script>
+	<script src="inc/js/controllers/logsListController.js"></script>
+	<script src="inc/js/controllers/logDetailsController.js"></script>
+	<script src="inc/js/controllers/pagerController.js"></script>
+	<script src="inc/js/services/general.js"></script>
+	<script src="inc/js/filters/general.js"></script>
+	<script src="inc/js/skrypty.js"></script>
+
+	<title>AKHomeAutomation</title>
 </head>
 
 <body id="bodyContainer" ng-controller="GeneralController">
-  <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" ng-class="{redBlinker: pageFlag('timeDifferenceDetected')}" href=".">{{homeLabel}}</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <!--<li class="active"><a href="#!/general">Main page</a></li>-->
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-			<li><a href="#/advanced">{{tab2Label}}</a></li>
-			<li><a href="#/sensors">{{tab3Label}}</a></li>
-			<li><a href="#/logsList/actions/0/{{itemsPerPage}}">{{logsActionsLabel}}</a></li>
-			<li><a href="#/logsList/sensors/0/{{itemsPerPage}}">{{logsSensorsLabel}}</a></li>
-			<li><a ng-class="{redBlinker: pageFlag('todayexcexists')}" href="#/logsList/exceptions/0/{{itemsPerPage}}">{{logsExceptionsLabel}}</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container" id="mainContainer">
-    <ng-view></ng-view>
-  </div>
-
-   <div id="deleteModal" role="dialog" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" data-dismiss="modal" class="close">&times;</button>
-            <h4 class="modal-title">{{carefulLabel}}</h4>
-          </div>
-          <div class="modal-body">
-            <p class="confirmMessage"></p>
-            <button type="button" class="btn btn-default btn-lg btn-warning toggleOutlet confirmTrigger"></button>
-          </div>
-          <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-default">{{closeLabel}}</button>
-          </div>
-        </div>
-      </div>
-    </div>
+	<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+		<a class="navbar-brand" href=".">{{homeLabel}}</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAutomation" aria-controls="navbarAutomation" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-stretch" id="navbarAutomation">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item" ng-class="{active: currentPath == '' || currentPath.indexOf('advanced') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/advanced">{{tab2Label}}</a></li>
+				<li class="nav-item" ng-class="{active: currentPath.indexOf('sensors') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/sensors">{{tab3Label}}</a></li>
+				<li class="nav-item" ng-class="{active: currentPath.indexOf('logsList/actions') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/logsList/actions/0/{{itemsPerPage}}">{{logsActionsLabel}}</a></li>
+				<li class="nav-item"  ng-class="{active: currentPath.indexOf('logsList/sensors') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/logsList/sensors/0/{{itemsPerPage}}">{{logsSensorsLabel}}</a></li>
+				<li class="nav-item" ng-class="{active: currentPath.indexOf('logsList/exceptions') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" ng-class="{redBlinker: pageFlag('todayexcexists')}" href="#/logsList/exceptions/0/{{itemsPerPage}}">{{logsExceptionsLabel}}</a></li>
+			</ul>
+			<span ng-if="pageFlag('timeDifferenceDetected')" class="navbar-text redBlinker">
+				Check Log
+			</span>
+		</div>
+	</nav>
 	
-	 <div id="logsModal" role="dialog" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" data-dismiss="modal" class="close">&times;</button>
-            <h4 class="modal-title"></h4>
-          </div>
-          <div class="modal-body">
-            <p class="logBody"></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-default">{{closeLabel}}</button>
-          </div>
-        </div>
-      </div>
-    </div>
+	<p style="height: 70px"></p>
+	
+	<div class="container" id="mainContainer">
+		<ng-view></ng-view>
+	</div>
+
+	<div id="deleteModal" role="dialog" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">{{carefulLabel}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="confirmMessage"></p>
+					<button type="button" class="btn btn-default btn-lg btn-warning toggleOutlet confirmTrigger"></button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" data-dismiss="modal" class="btn btn-default">{{closeLabel}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="logsModal" role="dialog" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="logBody"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" data-dismiss="modal" class="btn btn-default">{{closeLabel}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
