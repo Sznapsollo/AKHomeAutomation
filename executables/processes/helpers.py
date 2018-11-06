@@ -155,8 +155,8 @@ class Helper(object):
 			timestamp = time.strftime('[%Y-%m-%d %H:%M:%S]: ')
 			print (timestamp+message+"\n")
 
-	def runDeviceAction(self, device, status, iteration):
-		self.runDeviceActionInner(self.settings.data["webServerAddress"], device, status, iteration)
+	def runDeviceAction(self, device, status):
+		self.runDeviceActionInner(self.settings.data["webServerAddress"], device, status)
 
 	def runSatellitesDeviceAction(self, device, status, async):
 		try:
@@ -165,19 +165,17 @@ class Helper(object):
 				for serverAddr in self.settings.data["satelliteServerAddresses"]:
 					if self.settings.data["webServerAddress"] not in serverAddr:
 						if async:
-							t = threading.Thread(target=self.runDeviceActionInner, args=(serverAddr,device,status,0.0))
+							t = threading.Thread(target=self.runDeviceActionInner, args=(serverAddr,device,status))
 							t.start()
 						else:
-							self.runDeviceActionInner(serverAddr,device,status,0.0)
+							self.runDeviceActionInner(serverAddr,device,status)
 		except Exception as e:
 			message = "[Exception passing signal to satellites] exc " + str(e)
 			self.writeExceptionToFile(message)
 			self.logMessage(message)
 			
-	def runDeviceActionInner(self, serverAddress, device, status, iteration):
-		if iteration > 0:
-		   time.sleep(float(iteration))
-		   
+	def runDeviceActionInner(self, serverAddress, device, status):
+
 		postData = {'outletId' : device["id"], 'outletStatus'  : status, 'outletDelayed': device["delay"]}
 		messageBody = "switch device " + str(device["id"]) + " ,status " + status + " ,delay " + str(device["delay"])
 		

@@ -3,5 +3,5 @@
 	<span ng-if="delayValue < 60">{{delayValue%60 | number}}m&nbsp;</span>
 	<span ng-if="delayValue == 0">{{translate('default_delay')}}&nbsp;</span>
 	<span ng-if="delayValue < 0">{{translate('no_delay')}}&nbsp;</span>
-	<span ng-if="showDate">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a style="cursor: pointer" ng-click="onDelayedDisableClicked()">{{translate('disable_at')}}&nbsp;{{calculatedTime | date:'HH:mm'}}</a>
+	<span ng-if="showDate">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="" style="cursor: pointer" ng-click="onDelayedDisableClicked()">{{translate('disable_at')}}&nbsp;{{calculatedTime | date:'HH:mm'}}</a>
 </div>

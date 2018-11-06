@@ -40,10 +40,10 @@
 	</div>
 </div>
 <div class="powerswitchbuttons btn-group d-flex"  aria-label="...">
-  <div class="btn-group w-100" role="group"  ng-if="enableOn">
+  <div class="btn-group w-100" role="group" ng-if="enableOn.toLowerCase() == 'true'">
 	<button ng-disabled="busy" type="button" class="btn btn-default btn-lg btn-success w-100" ng-click="clickButton({'outletId':outletId,'status':'on','delay':delayValue*60})" ng-class="{'turnedOff':!isActive('pin2',1), 'btn-info': questionOn}">{{translate('enable');}}<span class="timerNormal" ng-if="showTimer">&nbsp;({{translate('disable_at')}}&nbsp;{{calculatedTime | date:'HH:mm'}})</span></button>
   </div>
-  <div class="btn-group w-100" role="group"  ng-if="enableOff">
+  <div class="btn-group w-100" role="group"  ng-if="enableOff.toLowerCase() == 'true'">
 	<button  ng-disabled="busy" type="button" class="btn btn-default btn-lg w-100" ng-click="clickButton({'outletId':outletId,'status':'off'})" ng-class="{'turnedOff':!isActive('pin2',0), 'btn-danger': questionOff, 'btn-disable': !questionOff}"><span ng-if="!timeEnd">{{translate('disable');}}</span><span ng-if="timeEnd"><span class="timeOff"><span class="timeEnd">{{timeEnd | date:'HH:mm:ss'}}</span> (<span class="disableDate">{{disableDate | date:'HH:mm'}}</span>)</span></span></button>
   </div>
 </div>

@@ -130,11 +130,10 @@ class Sensor(object):
 					return False
 		return True
 
-	def checkInput(self, iteration):
+	def checkInput(self):
 		
 		if not self.enabled:
 			self.messageSensorInfo('sensor disabled')
-			return iteration
 		
 		newState = GPIO.input(self.pin)
 
@@ -150,14 +149,14 @@ class Sensor(object):
 					self.lastValidAlarmSignal = currentEventTime
 					self.sendAlarmNotification = True
 					for alarmDevice in self.onAlarmDevices:
-						threading.Thread(target=helper.runDeviceAction, args=(alarmDevice, "on", iteration)).start()
+						threading.Thread(target=helper.runDeviceAction, args=(alarmDevice, "on")).start()
 
 			if self.validateTimeUnits(self.timeUnits) is False:
 				self.messageSensorInfo('out if time units bounds. Ignoring...')
-				return iteration
+				return
 
 			if self.checkReboundSeconds(currentEventTime, self.lastValidSignal, self.rebound, "[Sensor rebound] "):
-				return iteration
+				return
 
 			self.messageSensorInfo('valid signal detected!')
 			
@@ -221,9 +220,7 @@ class Sensor(object):
 
 				device["lastTriggered"] = currentEventTime
 				
-				threading.Thread(target=helper.runDeviceAction, args=(device, onStatus, iteration)).start()
-				
-				iteration = iteration+2
+				threading.Thread(target=helper.runDeviceAction, args=(device, onStatus)).start()
 
 			if updateLastValidSignalDate:
 				self.lastValidSignal = currentEventTime
@@ -241,7 +238,7 @@ class Sensor(object):
 				alarmMessageBody = "[Sensor "+self.id+"] triggered at " + time.strftime('[%Y-%m-%d %H:%M:%S]')
 				helper.sendAlarmNotification("Sensor "+self.id+" triggered", alarmMessageBody)
 
-		return iteration
+		return
 
 	def checkReboundSeconds(self, currentEventTime, againstTime, rebound, message):
 		if againstTime is not None:
@@ -328,13 +325,12 @@ if __name__ == "__main__":
 		checkUpdatesSensors()
 		
 		while True:
-			iteration = 0
 			for sensor in sensorsList:
 				customSensorSetting = sensorsOverrideList.getSensor(sensor.id)
 				if customSensorSetting is None:
-					sensor.checkInput(iteration)
+					sensor.checkInput()
 				else:
-					customSensorSetting.checkInput(iteration)
+					customSensorSetting.checkInput()
 
 			time.sleep(0.00005)
 

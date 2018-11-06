@@ -123,9 +123,9 @@ class Checker(object):
 
 	def processRun(self, process, enable):
 		if enable:
-			helper.runDeviceAction({'id':process.name, 'delay':-1}, "on", 0)
+			helper.runDeviceAction({'id':process.name, 'delay':-1}, "on")
 		else:
-			helper.runDeviceAction({'id':process.name, 'delay':-1}, "off", 0)
+			helper.runDeviceAction({'id':process.name, 'delay':-1}, "off")
 
 		time.sleep(2)
 

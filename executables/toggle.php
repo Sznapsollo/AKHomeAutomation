@@ -57,6 +57,7 @@ if($outletLight)
 			if($itemToProcess instanceof GroupItem) {
 				foreach ($itemToProcess->itemIDs as $code) {
 					$subItemToProcess = $itemChecker->checkItem($code);
+					$subItemToProcess->processingStatus = $outletStatus;
 					if($subItemToProcess) {
 						enableItem($signalSender, $subItemToProcess, $outletDelayed, $additionalActions);
 						sleep(1);
