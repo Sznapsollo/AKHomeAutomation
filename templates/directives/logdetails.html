@@ -10,7 +10,7 @@
 	</div>
 	<div>
 		<div ng-class-odd="'oddRow'" ng-class-even="'evenRow'" ng-repeat='logItem in logContentLines | orderBy:"toString()":orderByType | filter:query track by $index'>
-			<div>{{logItem}}</div>
+			<div style="word-wrap: break-word;">{{logItem}}</div>
 			
 		</div>
 	</div>

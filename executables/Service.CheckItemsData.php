@@ -55,7 +55,7 @@ if($category)
 	
 		foreach ($items as $item) {
 		
-			$defaultDelayValue = $item->delay ? $item->delay/60 : null;
+			$defaultDelayValue = $item->delay ? ($item->delay < 0 ? -1 :ceil($item->delay/60)) : null;
 			if($item instanceof IntItem)
 				array_push($returnData->items, array('id' => $item->name, 'hotword' => $item->hotword, 'image'=> $item->image(), 'delay' => $defaultDelayValue, 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => "I"));
 			else if($item instanceof GroupItem || $item instanceof MacItem)
