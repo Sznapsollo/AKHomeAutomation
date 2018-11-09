@@ -8,28 +8,34 @@ from socket import timeout
 
 from helpers import ItemChecker
 from helpers import Helper
+from helpers import RequestPropertyManager
 
-scriptarg, namearg, timearg, codearg, processingstatusarg = argv
+scriptarg, namearg, timearg, codearg, statusarg, sourcearg = argv
 
 itemChecker = ItemChecker()
 helper = Helper()
+requestProperties = RequestPropertyManager()
 
 node = itemChecker.checkItem(namearg)
 
 if node is None:
-	helper.writeExceptionToFile("Not found "+namearg);
+	helper.writeExceptionToFile("Not found " + str(namearg));
 
 try:
+	requestProperties.setRequestProperties(namearg, timearg, statusarg, sourcearg)
+
 	#satellites notification is default
 	notifySatellites = True
 	if "notifySatellites" in node:
 		notifySatellites = node["notifySatellites"]
 	
 	if notifySatellites is True:
-		helper.runSatellitesDeviceAction({'id':namearg, 'delay':timearg},str(processingstatusarg),True)
+		helper.runSatellitesDeviceAction(requestProperties,True)
 	
 	if helper.saveDailyLogsToFile:
-		messageBody = "switch device " + str(namearg) + " with delay=" + str(timearg) + ", status=" + str(processingstatusarg)
+		messageBody = "device " + str(namearg) + ", delay=" + str(timearg) + ", status=" + str(statusarg)
+		if requestProperties.hasRequestSource() is True:
+			messageBody += ", source=" + str(sourcearg)
 		helper.writeLogToFile(time.strftime('actions/actions_%Y%m%d'), messageBody)
 	
 	if(int(timearg) > 0):
@@ -49,7 +55,10 @@ try:
 			helper.writeLogToFile(time.strftime('actions/actions_%Y%m%d'), messageBody)
 			
 except Exception, e:
-	message = "[delayed_action] node " + node["name"] + " exc " + str(e)
+	message = "[delayed_action error] for: "
+	for arg in argv:
+		message += str(arg)
+	message += str(e)
 	helper.writeExceptionToFile(message)
 	helper.logMessage(message)
 	pass

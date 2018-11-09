@@ -14,9 +14,10 @@ $signalSender = new SignalSender($settings);
 $request = file_get_contents('php://input');
 $input = json_decode($request);
 
-$outletLight = isset($input->outletId) ? $input->outletId : $_POST['outletId'];
-$outletStatus = isset($input->outletStatus) ? $input->outletStatus : $_POST['outletStatus'];
-$outletDelayed = isset($input->outletDelayed) ? $input->outletDelayed : $_POST['outletDelayed'];
+$outletLight = isset($input->outletId) ? $input->outletId : (isset($_POST['outletId']) ? $_POST['outletId'] : null);
+$outletStatus = isset($input->outletStatus) ? $input->outletStatus : (isset($_POST['outletStatus']) ? $_POST['outletStatus'] : null);
+$outletDelayed = isset($input->outletDelayed) ? $input->outletDelayed : (isset($_POST['outletDelayed']) ? $_POST['outletDelayed'] : null);
+$outletSource = isset($input->outletSource) ? $input->outletSource : (isset($_POST['outletSource']) ? $_POST['outletSource'] : null);
 
 $additionalActions = array();
 
@@ -53,11 +54,13 @@ if($outletLight)
 	$itemToProcess = $itemChecker->checkItem($outletLight);
 	if($itemToProcess != null) {
 		$itemToProcess->processingStatus = $outletStatus;
+		$itemToProcess->processingSource = $outletSource ? $outletSource : "-";
 		if($outletStatus == "on") {
 			if($itemToProcess instanceof GroupItem) {
 				foreach ($itemToProcess->itemIDs as $code) {
 					$subItemToProcess = $itemChecker->checkItem($code);
 					$subItemToProcess->processingStatus = $outletStatus;
+					$subItemToProcess->processingSource = $outletSource ? $outletSource : "-";
 					if($subItemToProcess) {
 						enableItem($signalSender, $subItemToProcess, $outletDelayed, $additionalActions);
 						sleep(1);
@@ -75,6 +78,8 @@ if($outletLight)
 			if($itemToProcess instanceof GroupItem) {
 				foreach ($itemToProcess->itemIDs as $code) {
 					$subItemToProcess = $itemChecker->checkItem($code);
+					$subItemToProcess->processingStatus = $outletStatus;
+					$subItemToProcess->processingSource = $outletSource ? $outletSource : "-";
 					if($subItemToProcess)
 						disableItem($signalSender, $subItemToProcess);
 						sleep(1);

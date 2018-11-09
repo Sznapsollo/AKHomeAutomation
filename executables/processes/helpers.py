@@ -52,6 +52,33 @@ class ItemChecker(object):
 	def getSensors(self):
 		return self.lists["sensors"]
 
+class RequestPropertyManager(object):
+	
+	postData = None
+
+	def __init__(self):
+		self.postData = {"outletId":None, "outletDelayed": None, "outletStatus": None, "outletSource": None }
+	
+	def getRequestPostData(self):
+		return self.postData
+	def setRequestProperties(self, id, delay, status, source):
+		self.postData["outletId"] = id
+		self.postData["outletDelayed"] = delay
+		self.postData["outletStatus"] = status
+		if source != '-':
+			self.postData["outletSource"] = source
+	def setRequestPropertiesFromPostData(self, postDataRef):
+		self.postData["outletId"] = ''.join(postDataRef["outletId"])
+		self.postData["outletDelayed"] = ''.join(postDataRef["outletDelayed"])
+		self.postData["outletStatus"] = ''.join(postDataRef["outletStatus"])
+		self.postData["outletSource"] = (''.join(postDataRef["outletSource"])) if postDataRef["outletSource"] is not None else None
+		
+	def hasRequestSource(self):
+		return self.postData["outletSource"] is not None
+
+	def setRequestSource(self, source):
+		self.postData["outletSource"] = source
+
 class Helper(object):
 
 	loggingEnabled = False
@@ -155,29 +182,34 @@ class Helper(object):
 			timestamp = time.strftime('[%Y-%m-%d %H:%M:%S]: ')
 			print (timestamp+message+"\n")
 
-	def runDeviceAction(self, device, status):
-		self.runDeviceActionInner(self.settings.data["webServerAddress"], device, status)
+	def runDeviceAction(self, requestProperties):
+		self.runDeviceActionInner(self.settings.data["webServerAddress"], requestProperties)
 
-	def runSatellitesDeviceAction(self, device, status, async):
+	def runSatellitesDeviceAction(self, requestProperties, async):
 		try:
+			#copy request but change source to current server
+			satelliteRequestProperties = RequestPropertyManager()
+			satelliteRequestProperties.setRequestPropertiesFromPostData(requestProperties.getRequestPostData())
+			satelliteRequestProperties.setRequestSource(self.settings.data["webServerAddress"])
 			#pass to satellites if defined
 			if "satelliteServerAddresses" in self.settings.data:
 				for serverAddr in self.settings.data["satelliteServerAddresses"]:
 					if self.settings.data["webServerAddress"] not in serverAddr:
 						if async:
-							t = threading.Thread(target=self.runDeviceActionInner, args=(serverAddr,device,status))
+							t = threading.Thread(target=self.runDeviceActionInner, args=(serverAddr,satelliteRequestProperties))
 							t.start()
 						else:
-							self.runDeviceActionInner(serverAddr,device,status)
+							self.runDeviceActionInner(serverAddr,satelliteRequestProperties)
 		except Exception as e:
 			message = "[Exception passing signal to satellites] exc " + str(e)
 			self.writeExceptionToFile(message)
 			self.logMessage(message)
 			
-	def runDeviceActionInner(self, serverAddress, device, status):
-
-		postData = {'outletId' : device["id"], 'outletStatus'  : status, 'outletDelayed': device["delay"]}
-		messageBody = "switch device " + str(device["id"]) + " ,status " + status + " ,delay " + str(device["delay"])
+	def runDeviceActionInner(self, serverAddress, requestProperties):
+		postData = requestProperties.getRequestPostData()
+		messageBody = "device " + str(postData["outletId"]) + " ,status " + postData["outletStatus"] + " ,delay " + str(postData["outletDelayed"])
+		if requestProperties.hasRequestSource() is True:
+			messageBody += ", source=" + str(postData["outletSource"])
 		
 		self.logMessage(messageBody)
 

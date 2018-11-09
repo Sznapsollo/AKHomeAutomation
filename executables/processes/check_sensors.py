@@ -12,6 +12,7 @@ from subprocess import call
 
 from helpers import ItemChecker
 from helpers import Helper
+from helpers import RequestPropertyManager
 
 itemChecker = ItemChecker()
 helper = Helper()
@@ -149,7 +150,9 @@ class Sensor(object):
 					self.lastValidAlarmSignal = currentEventTime
 					self.sendAlarmNotification = True
 					for alarmDevice in self.onAlarmDevices:
-						threading.Thread(target=helper.runDeviceAction, args=(alarmDevice, "on")).start()
+						requestProperties = RequestPropertyManager()
+						requestProperties.setRequestProperties(alarmDevice['id'], alarmDevice['delay'], "on", "Sensor_Alarm")
+						threading.Thread(target=helper.runDeviceAction, args=([requestProperties])).start()
 
 			if self.validateTimeUnits(self.timeUnits) is False:
 				self.messageSensorInfo('out if time units bounds. Ignoring...')
@@ -219,8 +222,9 @@ class Sensor(object):
 					helper.writeLogToFile(time.strftime('sensors/sensors_%Y%m%d'), message.body)
 
 				device["lastTriggered"] = currentEventTime
-				
-				threading.Thread(target=helper.runDeviceAction, args=(device, onStatus)).start()
+				requestProperties = RequestPropertyManager()
+				requestProperties.setRequestProperties(device['id'], device['delay'], onStatus, "Sensor")
+				threading.Thread(target=helper.runDeviceAction, args=([requestProperties])).start()
 
 			if updateLastValidSignalDate:
 				self.lastValidSignal = currentEventTime

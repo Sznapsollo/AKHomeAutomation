@@ -11,6 +11,7 @@ from pprint import pprint
 
 from helpers import ItemChecker
 from helpers import Helper
+from helpers import RequestPropertyManager
 from helpers import ProcessKill
 
 itemChecker = ItemChecker()
@@ -122,10 +123,12 @@ class Checker(object):
 			self.process.dayoffperformed = today.weekday()
 
 	def processRun(self, process, enable):
+		requestProperties = RequestPropertyManager()
+		requestProperties.setRequestProperties(process.name, -1, "on" if enable else "off", "Scheduled")
 		if enable:
-			helper.runDeviceAction({'id':process.name, 'delay':-1}, "on")
+			helper.runDeviceAction(requestProperties)
 		else:
-			helper.runDeviceAction({'id':process.name, 'delay':-1}, "off")
+			helper.runDeviceAction(requestProperties)
 
 		time.sleep(2)
 

@@ -19,11 +19,11 @@ class SignalSender
 		$this->deleteDelayFile($name);
 	}
 
-	function disablePostProcessing($item, $seconds, $action)
+	function disablePostProcessing($item, $seconds)
 	{
 		$notifySatellites = property_exists($item->properties, "notifySatellites") ? $item->notifySatellites : true;
 
-		$this->runShellCommand($this->settings->sudo.$this->settings->mainPath.'executables'.DIRECTORY_SEPARATOR."processes".DIRECTORY_SEPARATOR."./disable_post_processing.py ".$item->name." ".$seconds." ".$action." ".(int)$notifySatellites, false);
+		$this->runShellCommand($this->settings->sudo.$this->settings->mainPath.'executables'.DIRECTORY_SEPARATOR."processes".DIRECTORY_SEPARATOR."./disable_post_processing.py ".$item->name." ".$seconds." ".$item->processingStatus." ".$item->processingSource." ".(int)$notifySatellites, false);
 	}
 	
 	function delayProcess($item, $seconds, $action)
@@ -34,7 +34,7 @@ class SignalSender
 
 		$this->saveDelayFile($item->name, $seconds);
 		
-		return $delayedActionPath." ".$item->name." ".$seconds." ".$action." ".$item->processingStatus;
+		return $delayedActionPath." ".$item->name." ".$seconds." ".$action." ".$item->processingStatus." ".$item->processingSource;
 	}
 
 	function radioItemScriptPath($item)
@@ -62,7 +62,7 @@ class SignalSender
 		
 		$this->runShellCommand($this->radioItemScriptPath($item) ." ". $item->codeOff);
 		
-		$this->disablePostProcessing($item, 0, "off");
+		$this->disablePostProcessing($item, 0);
 	}
 	
 	function delayedDisableRadioItem($item, $outletDelayed, &$additionalActions)
@@ -85,7 +85,7 @@ class SignalSender
 		
 		$page = file_get_contents($item->CodeOff());
 		
-		$this->disablePostProcessing($item, 0, "off");
+		$this->disablePostProcessing($item, 0);
 	}
 
 	function enableShellItem($item, $outletDelayed, &$additionalActions)
@@ -103,7 +103,7 @@ class SignalSender
 		
 		$this->runShellCommand($item->codeOff);
 		
-		$this->disablePostProcessing($item, 0, "off");
+		$this->disablePostProcessing($item, 0);
 	}
 
 	function delayedDisableWebItem($item, $outletDelayed, &$additionalActions)

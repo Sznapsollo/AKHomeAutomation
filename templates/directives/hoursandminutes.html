@@ -1,4 +1,5 @@
 <div style="margin: 0 auto 0 auto; text-align: center">
+	<span ng-if="delayValue >= 60">{{mathFloor(delayValue/60) | number:0}}h&nbsp;{{delayValue%60 | number}}m&nbsp;</span>
 	<span ng-if="!showDate && delayValue >= 0 && delayValue < 60 ">{{delayValue%60 | number}}m&nbsp;</span>
 	<span ng-if="showDate && delayValue < 60 ">{{delayValue%60 | number}}m&nbsp;</span>
 	
