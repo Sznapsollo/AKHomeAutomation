@@ -182,18 +182,13 @@
 }
 
 .modal-body {
-	max-height: 100%;
-	overflow-y: auto;
+	max-height: calc(100vh - 220px);
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 }
 
 .sub-section {
 	border-radius: 5px; 
 	background-image: linear-gradient(#e2e2e2, white); 
 	padding: 10px;
-}
-
-.freezePage{
-	overflow: hidden;
-	height: 100%;
-	position: relative;
 }
