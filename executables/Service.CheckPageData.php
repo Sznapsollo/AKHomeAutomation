@@ -17,6 +17,7 @@ if(isset($input->receive)) {
 	$returnData->pageflags->serverDateTime = new stdClass();
 	$returnData->pageflags->serverDateTime->serverTimeStamp = time();
 	$returnData->pageflags->serverDateTime->serverCompareTime = date('H:i');
+	$returnData->pageflags->logsDropdownFilter = $settings->logsDropdownFilter;
 	$returnData->translations = $settings->translations;
 	
 	echo json_encode($returnData);

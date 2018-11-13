@@ -14,7 +14,8 @@ var performAction = function(id, status, delayed) {
 	$.post('executables/toggle.php', {
 			outletId: id,
 			outletStatus: status,
-			outletDelayed: delayed
+			outletDelayed: delayed,
+			outletSource: 'Web',
 		},
 		function(data, status) {
 			console.log(status);
@@ -117,6 +118,9 @@ var automation = function() {
 	}
 	
 	return {
+		BoolValue: function(value) {
+			return value == 'true';
+		},
 		GetIcon: function(name, value) {
 			return GetIcon(name, value);
 		},

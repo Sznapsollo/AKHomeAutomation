@@ -1,18 +1,35 @@
 (function(){
   'use strict';
 
-	app.controller('LogDetailsController', function LogDetailsController($scope, logsDataService) {
+	app.controller('LogDetailsController', function LogDetailsController($scope, $route, logsDataService) {
 		
 		$scope.orderByType = true;
 		$scope.checkLogDetails = checkLogDetails;
 		$scope.translate = translate;
+		$scope.dropdownItemsData = [];
 		
 		$scope.$on('$routeChangeSuccess',function(evt, absNewUrl, absOldUrl) {
-		   checkItemsData();
-		   $scope.logsType = $route.current.params.logsType;
+			checkItemsData();
+			$scope.logsType = $route.current.params.logsType;
 		});
 		
-		checkLogDetails();
+		function init() {
+			checkLogDetails();
+			var filterDropdownValues = automation.PageFlag("logsDropdownFilter");
+			if(filterDropdownValues) {
+				for(var filterDropdownValuesIndex = 0; filterDropdownValuesIndex < filterDropdownValues.length; filterDropdownValuesIndex++) {
+					if(filterDropdownValues[filterDropdownValuesIndex].name == $route.current.params.logsType) {
+						$scope.dropdownItemsData = filterDropdownValues[filterDropdownValuesIndex].values;
+						
+						if($scope.dropdownItemsData && $scope.dropdownItemsData.length > 0)
+							$scope.dropdownItemsSelected = $scope.dropdownItemsData[0];
+						break;
+					}
+				}
+			}
+		}
+		
+		init();
 		
 		function checkLogDetails() {
 			$scope.dataLoading = true;

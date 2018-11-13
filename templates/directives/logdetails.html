@@ -1,15 +1,21 @@
 <div class="logDetailsArea">
-	<div>
+	<div class="form-inline">
 		<a href="" ng-click="orderByType = !orderByType;">Change Sort</a>
 		&nbsp;|&nbsp;
 		<a href="" ng-if="!dataLoading" ng-click="checkLogDetails()">Refresh</a>
+		<i ng-if="dataLoading" class="fa fa-cog fa-spin"></i>
 		&nbsp;|&nbsp;
-		<input type="text" style="width: 100px" ng-model="query" placeholder="{{translate('search');}}">
+		<input type="text" style="width: 100px" ng-model="query" placeholder="{{translate('search');}}" class="form-control" >
+		<span ng-show="dropdownItemsData.length > 0" >
+			&nbsp;|&nbsp;
+			<select name="dropdownOptions" id="dropdownOptions" ng-model="dropdownItemsSelected" ng-options="dropdownItem.name for dropdownItem in dropdownItemsData track by dropdownItem.searchQuery" class="form-control" >
+			</select>
+		</span>
 		&nbsp;|&nbsp;
-		{{(logContentLines | filter:query).length}}
+		{{(logContentLines | filter:dropdownItemsSelected.searchQuery | filter:query).length}}
 	</div>
 	<div>
-		<div ng-class-odd="'oddRow'" ng-class-even="'evenRow'" ng-repeat='logItem in logContentLines | orderBy:"toString()":orderByType | filter:query track by $index'>
+		<div ng-class-odd="'oddRow'" ng-class-even="'evenRow'" ng-repeat='logItem in logContentLines | orderBy:"toString()":orderByType | filter:dropdownItemsSelected.searchQuery | filter:query track by $index'>
 			<div style="word-wrap: break-word;">{{logItem}}</div>
 			
 		</div>

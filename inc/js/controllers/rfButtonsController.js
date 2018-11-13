@@ -6,6 +6,7 @@
 		$scope.minSliderValue = -1;
 		$scope.maxSliderValue = 360;
 		$scope.questions = {};
+		$scope.boolValue = function(value) {return automation.BoolValue(value)};
 		$scope.clickButton = clickButton;
 		$scope.getCssClass = getCssClass;
 		$scope.toggleSliderOptions = toggleSliderOptions;

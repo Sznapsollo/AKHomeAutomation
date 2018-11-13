@@ -151,7 +151,7 @@ class Sensor(object):
 					self.sendAlarmNotification = True
 					for alarmDevice in self.onAlarmDevices:
 						requestProperties = RequestPropertyManager()
-						requestProperties.setRequestProperties(alarmDevice['id'], alarmDevice['delay'], "on", "Sensor_Alarm")
+						requestProperties.setRequestProperties(alarmDevice['id'], alarmDevice['delay'], "on", "Alarm_Sensor")
 						threading.Thread(target=helper.runDeviceAction, args=([requestProperties])).start()
 
 			if self.validateTimeUnits(self.timeUnits) is False:
