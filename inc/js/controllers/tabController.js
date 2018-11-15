@@ -4,6 +4,7 @@
 	app.controller('TabController', function TabController($scope, $rootScope, $route, itemsDataService, pageDataService) {
 		
 		$scope.translate = translate;
+		$scope.dataLoading = true;
 		
 		init();
 		
@@ -14,14 +15,17 @@
 		};
 		
 		function checkItemsData() {
+			$scope.dataLoading = true;
 			itemsDataService.checkItemsData($route.current.$$route.fromValue).then(
 				function(dataResponse) {
+					$scope.dataLoading = false;
 					$scope.items = dataResponse.data.items;
 					if(dataResponse.data.itemsDictionary)
 						automation.SetItemsDictionary(dataResponse.data.itemsDictionary);
 				},
 				function(response) {
 					var error = 'Items data read error';
+					$scope.dataLoading = false;
 					console.log(error);
 					console.log(response);
 				});

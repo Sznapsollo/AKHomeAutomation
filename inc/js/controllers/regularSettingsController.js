@@ -12,6 +12,7 @@
 		$scope.addNew = addNew;
 		$scope.removeUnit = removeUnit;
 		$scope.translate = translate;
+		$scope.dataLoading = true;
 		
 		init();
 		
@@ -69,6 +70,7 @@
 		
 		function init()
 		{
+			$scope.dataLoading = true;
 			if($scope.regularActionData !== undefined && $scope.regularActionData.length > 0) {
 				$scope.regularActionData = JSON.parse($scope.regularActionData);
 				if(!($scope.regularActionData.length == 0)) {
@@ -81,6 +83,7 @@
 			if($scope.timeUnits.length == 0) {
 				$scope.addNew();
 			}
+			$scope.dataLoading = false;
 		};
 		
 		function saveRegularSettings() {

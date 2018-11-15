@@ -1,3 +1,7 @@
-<div ng-repeat="item in items">
-	<sensor-item outlet-id="{{item.id}}" header="{{item.header}}" time-units="{{item.timeUnits}}" on-devices="{{item.on}}" custom-data="{{item.customData}}" ></sensor-item>
+<div class="pageContent">
+	<i ng-show="dataLoading" class="fa fa-spinner fa-4x fa-spin"></i>
+	<div ng-repeat="item in items">
+		<sensor-item outlet-id="{{item.id}}" header="{{item.header}}" time-units="{{item.timeUnits}}" on-devices="{{item.on}}" custom-data="{{item.customData}}" ></sensor-item>
+	</div>
+	<p>&nbsp;</p>
 </div>

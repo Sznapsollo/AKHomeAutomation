@@ -6,11 +6,11 @@
 		</button>
 	</div>
 	<div style="display: inline-block;vertical-align:top;">
-		<label for="device">{{translate('device')}}</label>
+		<label for="device">{{translate('device')}}:</label>
 		<select class="form-control" name="device" ng-model="onDevice.id" ng-options="device.id as (device.header) for device in devicesDictionary">
 		</select>
 		<p/>
-		<label for="delay">{{translate('delay')}}</label>
+		<label for="delay">{{translate('delay')}}(s):</label>
 		<input class="form-control" name="delay" type="number"  ng-model="onDevice.delay" />
 	</div>
 </div>
