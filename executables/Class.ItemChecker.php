@@ -15,8 +15,7 @@ class ItemChecker
 	
 	public function __construct() {
 	
-		$json = file_get_contents(dirname(__FILE__) . '/nodes.json');
-		
+		$json = file_get_contents(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR.'nodes.json');
 		$itemsObject = json_decode($json);
 	
         $this->nodes = array();

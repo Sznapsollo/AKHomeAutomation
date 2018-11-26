@@ -18,13 +18,13 @@ from email.MIMEText import MIMEText
 class Settings(object):
 
 	def __init__(self):
-		self.settingsFile = open(os.path.join(os.path.dirname(__file__),os.pardir,'settings.json'))
+		self.settingsFile = open(os.path.join(os.path.dirname(__file__),os.pardir,os.pardir,'configs','settings.json'))
 		self.data = json.load(self.settingsFile)
 		
 class ItemChecker(object):
 
 	def __init__(self):
-		self.nodesFile = open(os.path.join(os.path.dirname(__file__),os.pardir,'nodes.json'))
+		self.nodesFile = open(os.path.join(os.path.dirname(__file__),os.pardir,os.pardir,'configs','nodes.json'))
 		self.lists = json.load(self.nodesFile)
 		
 	def checkItem(self, name):

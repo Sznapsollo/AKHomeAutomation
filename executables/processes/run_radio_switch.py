@@ -20,23 +20,25 @@ helper = Helper()
 
 try:
 	radioLockFilePath = helper.settings.data["delayfilesPath"]+'{0}.lock'.format("radioLockFile")
-	radioLockFile = open(radioLockFilePath, 'w+')
-	while True:
-		try:
-			
-			fcntl.flock(radioLockFile, fcntl.LOCK_EX | fcntl.LOCK_NB)
-			helper.logMessage("[run_radio_switch] execute radio switch...")
-			call([namearg,codearg])
-			fcntl.flock(radioLockFile, fcntl.LOCK_UN)
-			break
-		except IOError as e:
-			# raise on unrelated IOErrors
-			if e.errno != errno.EAGAIN:
-				raise
-			else:
-				helper.logMessage("[run_radio_switch] radio transmission locked. Waiting to retry...")
-				time.sleep(0.2)
-			
+	if os.path.exists(helper.settings.data["delayfilesPath"]):
+		radioLockFile = open(radioLockFilePath, 'w+')
+		while True:
+			try:
+				
+				fcntl.flock(radioLockFile, fcntl.LOCK_EX | fcntl.LOCK_NB)
+				helper.logMessage("[run_radio_switch] execute radio switch...")
+				call([namearg,codearg])
+				fcntl.flock(radioLockFile, fcntl.LOCK_UN)
+				break
+			except IOError as e:
+				# raise on unrelated IOErrors
+				if e.errno != errno.EAGAIN:
+					raise
+				else:
+					helper.logMessage("[run_radio_switch] radio transmission locked. Waiting to retry...")
+					time.sleep(0.2)
+	else:
+		call([namearg,codearg])
 except Exception, e:
 	message = "[run_radio_switch] node " + namearg + " " + codearg + " exc " + str(e)
 	helper.writeExceptionToFile(message)

@@ -6,9 +6,7 @@ class Settings
 	public $sudo;
 	
 	public function __construct() {
-	
-		$json = file_get_contents(dirname(__FILE__) . '/settings.json');
-		
+		$json = file_get_contents(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR.'settings.json');
 		$this->settings = json_decode($json);
 		$this->sudo = "sudo ";
     }

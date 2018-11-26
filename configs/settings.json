@@ -2,9 +2,9 @@
 	"webServerAddress":"http://88.88.88.88/home",
 	"satelliteServerAddresses":[],
 	"mainPath":"/var/www/html/home/",
-	"delayfilesPath":"/var/www/html/home/executables/delayfiles/",
-	"regularactionfilesPath":"/var/www/html/home/executables/regularactionfiles/",
-	"sensorsettingsfilesPath":"/var/www/html/home/executables/sensorsettingsfiles/",
+	"delayfilesPath":"/var/www/html/home/processing_files/delayfiles/",
+	"regularactionfilesPath":"/var/www/html/home/processing_files/regularactionfiles/",
+	"sensorsettingsfilesPath":"/var/www/html/home/processing_files/sensorsettingsfiles/",
 	"codeSendPath":"/var/www/html/home/RadioDevices/codesend",
 	"conradCodeSendPath":"/var/www/html/home/RadioDevices/codesendConrad",
 	"sensorAlarmMail":{  
