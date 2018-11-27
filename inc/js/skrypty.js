@@ -49,6 +49,19 @@ var automation = function() {
 	_translations = null;
 	_itemsDictionary = null;
 	
+	function CheckRequiredFields(requiredFields, collection) {
+		if(!collection)
+			return false;
+		
+		for(var requiredIndex = 0; requiredIndex < requiredFields.length; requiredIndex++) {
+			for(var devicesIndex = 0; devicesIndex < collection.length; devicesIndex++) {
+				if(!collection[devicesIndex][requiredFields[requiredIndex]])
+					return false;
+			}
+		}
+		return true;
+	}
+	
 	function GetIcon(name, value) {
 		
 		switch(name) {
@@ -120,6 +133,9 @@ var automation = function() {
 	return {
 		BoolValue: function(value) {
 			return value == 'true';
+		},
+		CheckRequiredFields: function(requiredFields, collection) {
+			return CheckRequiredFields(requiredFields, collection);
 		},
 		GetIcon: function(name, value) {
 			return GetIcon(name, value);

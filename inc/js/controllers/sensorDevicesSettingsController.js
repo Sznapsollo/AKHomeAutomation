@@ -16,12 +16,7 @@
 		init();
 		
 		function isSaveEnabled() {
-			
-			var valid = true;
-						
-			// .....
-						
-			return valid;
+			return automation.CheckRequiredFields(['id'], $scope.onDevices);
 		}
 		
 		function init()
