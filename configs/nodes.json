@@ -175,6 +175,38 @@
 			"enableOff": true
 		},
 		{
+			"name": "regularactions",
+			"category": "advanced",
+			"header": "Regular Actions Service",
+			"regularActions": false,
+			"codeOn": [
+				"sudo pkill -9 -f regular_action.py",
+				"sudo python /var/www/html/wylaczniki/executables/processes/regular_action.py"
+			],
+			"codeOff": "sudo pkill -9 -f regular_action.py",
+			"questionOff": "Are you sure you want to stop Regular Actions Service?",
+			"sendOption": 4,
+			"enableOn": true,
+			"enableOff": true,
+			"codeDev": "--------"
+		},
+		{
+			"name": "sensorsservice",
+			"category": "advanced",
+			"header": "Sensors Service",
+			"regularActions": false,
+			"codeOn": [
+				"sudo pkill -9 -f check_sensors.py",
+				"sudo python /var/www/html/wylaczniki/executables/processes/check_sensors.py"
+			],
+			"codeOff": "sudo pkill -9 -f check_sensors.py",
+			"questionOff": "Are you sure you want to stop Sensors Service?",
+			"sendOption": 4,
+			"enableOn": true,
+			"enableOff": true,
+			"codeDev": "--------"
+		},
+		{
 			"name": "rasberryrebootitem",
 			"category": "advanced",
 			"header": "Reboot Rasberry Device",
@@ -182,11 +214,11 @@
 			"codeOn": [
 				"sudo reboot"
 			],
-			"codeOff": "sudo reboot",
-			"questionOff": "Are you sure you want to reboot raspberry device?",
+			"codeOff": "",
+			"questionOn": "Are you sure you want to reboot raspberry device?",
 			"sendOption": 4,
-			"enableOn": false,
-			"enableOff": true,
+			"enableOn": true,
+			"enableOff": false,
 			"codeDev": "--------"
 		},
 		{
@@ -195,7 +227,7 @@
 			"header": "Turn Off Rasberry Device",
 			"regularActions": false,
 			"codeOn": [
-				"sudo reboot"
+				""
 			],
 			"codeOff": "sudo poweroff",
 			"questionOff": "Are you sure you want to turn raspberry device off?",
