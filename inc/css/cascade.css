@@ -205,5 +205,14 @@
 
 .settingsSection {
 	padding:15px; 
-	border-bottom: 1px dotted #cecece
+	border-bottom: 1px dotted #cecece; 
+}
+
+.closeSubSectionButton {
+	position: absolute; 
+	margin: 0px 0 0 -15px; 
+	border-radius: 10px; 
+	padding: 2px 3px; 
+	line-height: 1; 
+	background: white; 
 }

@@ -35,8 +35,11 @@ if($id)
 			$item = json_decode($sensorInfoText);
 			$overrideSensorData = true;
 		}
+		$folderSecured = false;
+		if(file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'.htaccess'))
+			$folderSecured = true;
 		
-		$returnData = array('id' => $item->id, 'alarmTimeUnits' => $item->alarmTimeUnits, 'onAlarm' => $item->onAlarm, 'customData' => $overrideSensorData );
+		$returnData = array('id' => $item->id, 'alarmTimeUnits' => $item->alarmTimeUnits, 'onAlarm' => $item->onAlarm, 'customData' => $overrideSensorData, 'folderSecured' => $folderSecured );
 	}
 
 	echo json_encode($returnData);

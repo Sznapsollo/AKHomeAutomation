@@ -38,6 +38,7 @@
 	app.directive('regularSettings', function() {
 		return {
 			restrict: 'E',
+			transclude: true,
 			scope: {
 				outletId: '@',
 				regularActionData: '@',
@@ -79,6 +80,7 @@
 	app.directive('sensorAlarmDevicesSettings', function() {
 		return {
 			restrict: 'E',
+			transclude: true,
 			scope: {
 				outletId: '@',
 				sensorDevicesData: '@',

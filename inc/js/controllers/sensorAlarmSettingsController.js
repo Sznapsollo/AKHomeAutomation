@@ -9,6 +9,7 @@
 		$scope.devicesData = {};
 		$scope.saveAlarmTimeUnits = saveAlarmTimeUnits;
 		$scope.saveAlarmDevices = saveAlarmDevices;
+		$scope.folderSecured = false;
 		
 		init();
 		
@@ -19,6 +20,7 @@
 					$scope.regularActionData.timeUnits = dataResponse.data.alarmTimeUnits;
 					$scope.devicesData.onDevices = dataResponse.data.onAlarm;
 					$scope.alarmData = dataResponse.data;
+					$scope.folderSecured = $scope.alarmData.folderSecured;
 				},
 				function(response) {
 					var error = 'Sensor Alarm data read error for ' + $scope.outletId;

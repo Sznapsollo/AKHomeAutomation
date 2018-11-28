@@ -2,9 +2,21 @@
 <div class="sensorswitch">
 	<span class="switchHeader">{{header}}</span>
 	<img class="switchCalendarIcon" ng-click="toggleRegularOptions()" ng-src="graphics/{{calendarIconName}}" />
+	<button ng-if="showRegular" ng-click="toggleRegularOptions()" type="button" class="btn btn-sm closeSubSectionButton" >
+		<i class="fa fa-close"></i>
+	</button>
 	<img class="switchCalendarIcon" ng-click="toggleDevicesOptions()" ng-src="graphics/{{actionIconName}}" />
+	<button ng-if="showDevices" ng-click="toggleDevicesOptions()" type="button" class="btn btn-sm closeSubSectionButton" >
+		<i class="fa fa-close"></i>
+	</button>
 	<img ng-if="pageFlag('canChangeAlarmSettings')" class="switchCalendarIcon" ng-click="toggleAlarmsTimeUnits()" ng-src="graphics/{{alarmTimeUnitsIconName}}" />
+	<button ng-if="showAlarmTimeUnits" ng-click="toggleAlarmsTimeUnits()" type="button" class="btn btn-sm closeSubSectionButton" >
+		<i class="fa fa-close"></i>
+	</button>
 	<img ng-if="pageFlag('canChangeAlarmSettings')" class="switchCalendarIcon" ng-click="toggleAlarmsDevices()" ng-src="graphics/{{alarmDevicesIconName}}" />
+	<button ng-if="showAlarmDevices" ng-click="toggleAlarmsDevices()" type="button" class="btn btn-sm closeSubSectionButton" >
+		<i class="fa fa-close"></i>
+	</button>
 </div>
 
 <div ng-class="{'sub-section': showRegular || showDevices || showAlarmTimeUnits || showAlarmDevices}">

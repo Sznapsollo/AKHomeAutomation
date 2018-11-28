@@ -1,9 +1,17 @@
 <h4>{{translate('alarm_settings')}}</h4>
 
 <div ng-if="mode=='time'">
-	<regular-settings ng-if="alarmData" outlet-id="{{alarmData.id}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveAlarmTimeUnits(msg)"></regular-settings>
+	<regular-settings ng-if="alarmData" outlet-id="{{alarmData.id}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveAlarmTimeUnits(msg)">
+		<div ng-if="!folderSecured" class="alert alert-warning" role="alert">
+			If someone except for you would be using web UI of AKHomeAutomation system then secure executables/admin folder by passwording it by putting proper .htaccess and .htpasswd files inside of it. This way, when clicking on alarm icon in web UI, user would be promped with login & pass question which, if not answered correctly, would prevent unwanted users from messing with sensor alarm settings.
+		</div>
+	</regular-settings>
 </div>
 <div ng-if="mode=='devices'">
 	<sensor-alarm-devices-settings ng-if="alarmData" outlet-id="{{alarmData.id}}"
-	sensor-devices-data="{{devicesData}}" 	on-sensor-devices-settings-saved="saveAlarmDevices(msg)"></sensor-alarm-devices-settings>
+	sensor-devices-data="{{devicesData}}" 	on-sensor-devices-settings-saved="saveAlarmDevices(msg)">
+		<div ng-if="!folderSecured" class="alert alert-warning" role="alert">
+			If someone except for you would be using web UI of AKHomeAutomation system then secure executables/admin folder by passwording it by putting proper .htaccess and .htpasswd files inside of it. This way, when clicking on alarm icon in web UI, user would be promped with login & pass question which, if not answered correctly, would prevent unwanted users from messing with sensor alarm settings.
+		</div>
+	</sensor-alarm-devices-settings>
 </div>
