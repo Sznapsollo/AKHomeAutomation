@@ -1,17 +1,21 @@
 (function(){
   'use strict';
 
-	app.controller('LogsListController', function LogsListController($scope, $rootScope, $route, $compile, logsDataService, pageDataService) {
+	app.controller('LogsListController', function LogsListController($scope, $rootScope, $route, $compile, $filter, logsDataService, pageDataService) {
 		
 		$scope.itemscount = 0;
 		$scope.dataLoading = true;
 		$scope.pageTitle = '';
 		$scope.url="";
+		$scope.todayFileName = null;
 		
 		$scope.$on('$routeChangeSuccess',function(evt, absNewUrl, absOldUrl) {
 			initiatePageData();
 			checkItemsData();
 			$scope.logsType = $route.current.params.logsType;
+			
+			var date = new Date();
+			$scope.todayFileName = $scope.logsType + "_" + $filter('date')(new Date(), "yyyyMMdd") + ".log";
 		});
 		
 		$scope.showNoResults = function() {

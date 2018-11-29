@@ -5,6 +5,7 @@
 		
 		$scope.translate = translate;
 		$scope.dataLoading = true;
+		$scope.boolValue = function(value) {return automation.BoolValue(value)};
 		
 		init();
 		

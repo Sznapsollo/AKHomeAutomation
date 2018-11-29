@@ -22,7 +22,10 @@ $outletSource = isset($input->outletSource) ? $input->outletSource : (isset($_PO
 $additionalActions = array();
 
 function enableItem($signalSender, $item, $outletDelayed, &$additionalActions)
-{	
+{
+	if(!$item->enabled())
+		return;
+		
 	if($item instanceof WebItem)
 		$signalSender->enableWebItem($item, $outletDelayed, $additionalActions);
 	else if($item instanceof IntItem)

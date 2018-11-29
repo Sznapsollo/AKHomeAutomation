@@ -84,6 +84,13 @@ class BaseItem
 			//return "no_image.jpg";
 	}
 	
+	public function enabled() {
+		if(!property_exists($this->properties, "enabled")) {
+			$this->properties->enabled = true;
+		}
+		return $this->properties->enabled;
+	}
+	
 	public function __get($name) {
 		if(property_exists($this->properties, $name))
 			return $this->properties->$name;

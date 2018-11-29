@@ -2,8 +2,8 @@
 	
 	<h4>{{pageTitle}}</h4>
 	
-	<div ng-repeat="item in items track by $index">
-		<a href="" ng-click="getFileContent(item.name)">{{item.name}}</a>
+	<div style="display: inline-block; padding: 10px 5px" ng-repeat="item in items track by $index">
+		<a ng-class="{'font-weight-bold':todayFileName==item.name}" href="" ng-click="getFileContent(item.name)">{{item.name}}</a>
 	</div>
 	
 	<i ng-show="dataLoading" class="fa fa-spinner fa-4x fa-spin"></i>

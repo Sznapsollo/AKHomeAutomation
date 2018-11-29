@@ -132,7 +132,11 @@ var automation = function() {
 	
 	return {
 		BoolValue: function(value) {
-			return value == 'true';
+			if (typeof value === "boolean"){
+				return value;
+			}
+			else
+				return (value && (value.toLowerCase() == 'true'));
 		},
 		CheckRequiredFields: function(requiredFields, collection) {
 			return CheckRequiredFields(requiredFields, collection);
