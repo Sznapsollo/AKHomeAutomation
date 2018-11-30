@@ -1,0 +1,30 @@
+{
+	"sensors": [{
+		"id": "pir_ben_dover",
+		"header": "Pir Label",
+		"pin": 32,
+		"rebound": 20,
+		"timeUnits":[
+			{"timeStart":"00:00","timeEnd":"08:00","daysOfWeek":",0,1,2,3,4"},
+			{"timeStart":"15:30","timeEnd":"23:59","daysOfWeek":",0,1,2,3,4"},
+			{"timeStart":"00:00","timeEnd":"23:59","daysOfWeek":",5,6"}
+		],
+		"alarmTimeUnits":[
+			{"timeStart":"09:00","timeEnd":"15:00","daysOfWeek":",1,2,4"}
+		],
+		"on": [
+		{
+			"id": "roomlamp",
+			"delay": 600,
+			"rebound": 0,
+			"dependencyMethod": "checkLuminosity",
+			"dependencyOperation": "lwr",
+			"dependencyValue": 25
+		}],
+		"onAlarm": [
+		{
+			"id": "testswitch1",
+			"delay": 60
+		}]
+	}]
+}

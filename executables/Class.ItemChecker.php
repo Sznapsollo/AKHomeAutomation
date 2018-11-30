@@ -11,7 +11,6 @@ class SendMethod
 class ItemChecker
 {
 	public $nodes;
-	public $sensors;
 	
 	public function __construct() {
 	
@@ -19,7 +18,6 @@ class ItemChecker
 		$itemsObject = json_decode($json);
 	
         $this->nodes = array();
-		$this->sensors = $itemsObject->sensors;
 	
 		foreach($itemsObject->nodes as $node) 
 		{
@@ -58,17 +56,6 @@ class ItemChecker
 				return $node;
 		}
 	}
-
-	function getSensors() {
-		return $this->sensors;
-	}
-
-	function checkSensor($id) {
-		foreach ($this->sensors as $sensor) {
-			if($sensor->id == $id)
-				return $sensor;
-		}
-	}	
 }
 
 class BaseItem
@@ -81,7 +68,13 @@ class BaseItem
 			return $this->properties->image;
 		else
 			return null;
-			//return "no_image.jpg";
+	}
+	
+	public function icon() {
+		if(property_exists($this->properties, "icon"))
+			return $this->properties->icon;
+		else
+			return null;
 	}
 	
 	public function enabled() {

@@ -6,6 +6,7 @@
 			restrict: 'E',
 			scope: {
 				header: '@',
+				icon: '@',
 				image: '@',
 				outletId: '@',
 				delay: '@',

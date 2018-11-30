@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', true);
 
 require_once("Class.ItemChecker.php");
+require_once("Class.SensorChecker.php");
 require_once("Class.Settings.php");
 
 $category = null;
@@ -15,9 +16,8 @@ if(isset($input->receive))
 
 if($category)
 {
-	$itemChecker = new ItemChecker();
 	$settings = new Settings();
-
+	$itemChecker = new ItemChecker();
 	$items = array();
 	
 	$returnData = new stdClass();
@@ -25,10 +25,11 @@ if($category)
 	
 	if($category == 'sensors')
 	{
-		$items = $itemChecker->getSensors();
+		$sensorChecker = new SensorChecker();
+		$items = $sensorChecker->getSensors();
 
 		foreach ($items as $item) {
-			$filepathname = $settings->sensorsettingsfilesPath.$item->id.'.json';	
+			$filepathname = $settings->sensorsettingsfilesPath.$item->id.'.json';
 			$sensorInfoText = null;
 			$overrideSensorData = null;
 		
@@ -51,15 +52,16 @@ if($category)
 	}
 	else
 	{
+		$itemChecker = new ItemChecker();
 		$items = $itemChecker->getItems($category);	
 	
 		foreach ($items as $item) {
 		
 			$defaultDelayValue = $item->delay ? ($item->delay < 0 ? -1 :ceil($item->delay/60)) : null;
 			if($item instanceof IntItem)
-				array_push($returnData->items, array('id' => $item->name, 'hotword' => $item->hotword, 'image'=> $item->image(), 'delay' => $defaultDelayValue, 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => "I", 'enabled' => $item->enabled()));
+				array_push($returnData->items, array('id' => $item->name, 'hotword' => $item->hotword, 'icon'=> $item->icon(), 'image'=> $item->image(), 'delay' => $defaultDelayValue, 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => "I", 'enabled' => $item->enabled()));
 			else if($item instanceof GroupItem || $item instanceof MacItem)
-				array_push($returnData->items, array('id' => $item->name, 'hotword' => $item->hotword, 'image'=> $item->image(), 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => $item instanceof MacItem ? "M" : "G", 'enabled' => $item->enabled()));
+				array_push($returnData->items, array('id' => $item->name, 'hotword' => $item->hotword, 'icon'=> $item->icon(), 'image'=> $item->image(), 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => $item instanceof MacItem ? "M" : "G", 'enabled' => $item->enabled()));
 		}
 	}
 	

@@ -1,5 +1,6 @@
 
 <div class="powerswitch">
+	<i ng-if="icon" class="{{icon}}"></i>
 	<img ng-if="image" class="switchIcon" ng-class="{'switchIconClickable':delay}" ng-click="toggleSliderOptions()" ng-src="graphics/icons/{{image}}" />
 	<span class="switchHeader" ng-class="{'switchHeaderClickable':delay}" ng-click="toggleSliderOptions()">{{header}}</span>
 	<button ng-if="showTimer" ng-click="toggleSliderOptions()" type="button" class="btn btn-sm closeSubSectionButton" >

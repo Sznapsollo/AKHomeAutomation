@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
-require_once("../Class.ItemChecker.php");
+require_once("../Class.SensorChecker.php");
 require_once("../Class.Settings.php");
 
 $id = null;
@@ -15,10 +15,10 @@ if(isset($input->receive))
 
 if($id)
 {
-	$itemChecker = new ItemChecker();
+	$sensorChecker = new SensorChecker();
 	$settings = new Settings();
 
-	$item = $itemChecker->checkSensor($id);	
+	$item = $sensorChecker->checkSensor($id);	
 	
 	$returnData = new stdClass();
 	

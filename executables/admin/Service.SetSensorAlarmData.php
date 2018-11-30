@@ -2,11 +2,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
-require_once("../Class.ItemChecker.php");
+require_once("../Class.SensorChecker.php");
 require_once("../Class.Settings.php");
 require_once("../Class.Helpers.php");
 
-$itemChecker = new ItemChecker();
+$sensorChecker = new SensorChecker();
 $settings = new Settings();
 $id = null;
 $timeLine = null;
@@ -26,7 +26,7 @@ if(isset($input->receive))
 
 if($id)
 {
-	$item = $itemChecker->checkSensor($id);	
+	$item = $sensorChecker->checkSensor($id);	
 
 	if(!Helpers::MakeDir($settings->sensorsettingsfilesPath))
 		return "No sensoractionfiles dir";

@@ -44,6 +44,12 @@ class ItemChecker(object):
 	def codeOn(self, node):
 		return str(node["codeOn"][0])
 
+class SensorChecker(object):
+
+	def __init__(self):
+		self.nodesFile = open(os.path.join(os.path.dirname(__file__),os.pardir,os.pardir,'configs','sensors.json'))
+		self.lists = json.load(self.nodesFile)
+
 	def checkSensor(self, id):
 		for sensor in self.lists["sensors"]:
 			if sensor["id"] == id:

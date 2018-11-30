@@ -10,11 +10,11 @@ from pprint import pprint
 from threading import Thread
 from subprocess import call
 
-from helpers import ItemChecker
+from helpers import SensorChecker
 from helpers import Helper
 from helpers import RequestPropertyManager
 
-itemChecker = ItemChecker()
+sensorChecker = SensorChecker()
 helper = Helper()
 
 sensorsList = []
@@ -318,10 +318,10 @@ if __name__ == "__main__":
 
 	try:
 
-		if itemChecker.getSensors() is None:
+		if sensorChecker.getSensors() is None:
 			sys.exit(0)
 
-		for sensor in itemChecker.getSensors():
+		for sensor in sensorChecker.getSensors():
 			sensorsList.append(Sensor(sensor))
 		
 		sensorsOverrideList = SensorBox()
