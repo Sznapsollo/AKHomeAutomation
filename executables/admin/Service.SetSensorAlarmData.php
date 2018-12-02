@@ -26,12 +26,12 @@ if(isset($input->receive))
 
 if($id)
 {
-	$item = $sensorChecker->checkSensor($id);	
+	$item = $sensorChecker->checkSensor($id);
 
 	if(!Helpers::MakeDir($settings->sensorsettingsfilesPath))
 		return "No sensoractionfiles dir";
 	
-	$filepathname = $settings->sensorsettingsfilesPath.$item->id.'.json';	
+	$filepathname = $settings->sensorsettingsfilesPath.$item->id.'.json';
 
 	$sensorInfoText = null;
 	$sensorInfoObject = null;

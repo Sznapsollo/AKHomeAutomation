@@ -20,6 +20,11 @@ var app = {};
 			controller: 'TabController',
 			fromValue: 'sensors'
 		})
+		.when('/manageitems', {
+			templateUrl: 'templates/manageitems.html',
+			controller: 'TabController',
+			fromValue: 'manageitems'
+		})
 		.when('/logsList/:logsType/:startIndex/:itemsPerPage', {
 			templateUrl: 'templates/logsList.html',
 			controller: 'LogsListController'

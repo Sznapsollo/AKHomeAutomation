@@ -65,6 +65,32 @@
 		};
 	});
 	
+	app.directive('manageItem', function() {
+		return {
+			restrict: 'E',
+			scope: {
+				header: '@',
+				id: '@',
+				icon: '@',
+				image: '@',
+				enabled: '@'
+			},
+			templateUrl: 'templates/directives/manageitem.html',
+			controller: 'ManageItemController',
+		};
+	});
+	
+	app.directive('itemForm', function() {
+		return {
+			restrict: 'E',
+			scope: {
+				id: '@'
+			},
+			templateUrl: 'templates/directives/itemform.html',
+			controller: 'ItemFormController',
+		};
+	});
+	
 	app.directive('sensorDevicesSettings', function() {
 		return {
 			restrict: 'E',

@@ -23,7 +23,7 @@ $additionalActions = array();
 
 function enableItem($signalSender, $item, $outletDelayed, &$additionalActions)
 {
-	if(!$item->enabled())
+	if(!$item->enabled)
 		return;
 		
 	if($item instanceof WebItem)

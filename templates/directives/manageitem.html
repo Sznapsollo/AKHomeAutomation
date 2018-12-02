@@ -1,0 +1,12 @@
+
+<div class="powerswitch" ng-class="{'turnedOff': !automation.BoolValue(enabled)}">
+	<i ng-if="icon" class="{{icon}}"></i>
+	<img ng-if="image" class="switchIcon" ng-class="{'switchIconClickable':true}" ng-click="openManageItemPanel()" ng-src="graphics/icons/{{image}}" />
+	<span class="switchHeader" ng-class="{'switchHeaderClickable':true}" ng-click="openManageItemPanel()">{{header}}</span>
+	<img class="switchCalendarIcon" ng-click="openManageItemPanel()" ng-src="graphics/{{settingIconName}}" />
+</div>
+
+<div ng-class="{'sub-section': false}">
+
+</div>
+

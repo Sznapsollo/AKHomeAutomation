@@ -3,6 +3,7 @@
 	"satelliteServerAddresses":[],
 	"mainPath":"/var/www/html/home/",
 	"delayfilesPath":"/var/www/html/home/processing_files/delayfiles/",
+
 	"regularactionfilesPath":"/var/www/html/home/processing_files/regularactionfiles/",
 	"sensorsettingsfilesPath":"/var/www/html/home/processing_files/sensorsettingsfiles/",
 	"codeSendPath":"/var/www/html/home/RadioDevices/codesend",
@@ -50,12 +51,20 @@
 			"description":"Homepage"
 		},
 		{  
-			"code":"tab2",
+			"code":"advanced",
 			"description":"Advanced"
 		},
 		{  
-			"code":"tab3",
+			"code":"admin",
+			"description":"Admin"
+		},
+		{  
+			"code":"sensors",
 			"description":"Sensors"
+		},
+		{  
+			"code":"items",
+			"description":"Items"
 		},
 		{  
 			"code":"close",
@@ -156,6 +165,45 @@
 		{  
 			"code":"no_delay",
 			"description":"No delay"
-		}
+		},
+		{"code":"itemAddNewItem","description":"Add new item"},
+		{"code":"itemAddNew","description":"Add new"},
+		{"code":"itemName","description":"Name"},
+		{"code":"itemNameHelp","description":"Unique name of item. Identifier."},
+		{"code":"itemEnabled","description":"Enabled"},
+		{"code":"itemEnabledHelp","description":"Defines if item is enabled."},
+		{"code":"itemHotWord","description":"Hotword"},
+		{"code":"itemHotWordHelp","description":"Spoken word for this item when using Google Voice kit"},
+		{"code":"itemImage","description":"Image"},
+		{"code":"itemImageHelp","description":"Image for item"},
+		{"code":"itemIcon","description":"Icon"},
+		{"code":"itemIconHelp","description":"Icon (from Font Awesome)"},
+		{"code":"itemCategory","description":"Category"},
+		{"code":"itemCategoryHelp","description":"On which tab item would be displayed"},
+		{"code":"itemHeader","description":"Header"},
+		{"code":"itemHeaderHelp","description":"Header of the item"},
+		{"code":"itemRegularActions","description":"Regular Actions"},
+		{"code":"itemRegularActionsHelp","description":"Defines if scheduled actions can be used for this item"},
+		{"code":"itemSendOption","description":"Send Option"},
+		{"code":"itemSendOptionHelp","description":"Defines what type of sending is used for this item"},
+		{"code":"itemCodeOn","description":"Code On"},
+		{"code":"itemCodeOnHelp","description":"Enabling queries for this item"},
+		{"code":"itemCodeOff","description":"Code Off"},
+		{"code":"itemCodeOffHelp","description":"Disabling query for this item"},
+		{"code":"itemDelay","description":"Delay"},
+		{"code":"itemDelayHelp","description":"Defines time in seconds after which this item will auto turn off"},
+		{"code":"itemEnableOn","description":"Display 'Enable' Button"},
+		{"code":"itemEnableOnHelp","description":"Defines if 'Enable' button will be displayed"},
+		{"code":"itemQuestionOn","description":"Question on Enable"},
+		{"code":"itemQuestionOnHelp","description":"Confirm question when 'Enable' button is clicked"},
+		{"code":"itemEnableOff","description":"Display 'Disable' Button"},
+		{"code":"itemEnableOffHelp","description":"Defines if 'Disable' button will be displayed"},
+		{"code":"itemQuestionOff","description":"Question on Disable"},
+		{"code":"itemQuestionOffHelp","description":"Confirm question when 'Disable' button is clicked"},
+		{"code":"itemDeviceIDs","description":"Devices"},
+		{"code":"itemDeviceIDsHelp","description":"If chosen this item would be group item sending Enable or Disable signals to selected items"},
+		{"code":"itemCodeDev","description":"Comments"},
+		{"code":"itemCodeDevHelp","description":"Just some internal comment for this item"},
+		{"code":"htaccessWarning","description":"If someone except for you would be using web UI of AKHomeAutomation system then secure executables/admin folder by passwording it( using .htaccess, .htpasswd). This way, when clicking on alarm icon or items admin setup in web UI, user would be promped with login & pass question which, if not answered correctly, would prevent unwanted users from messing with sensor alarm settings and items setup. This message is displayed because .htaccess file was not detected in executables/admin folder."}
 	]
 }

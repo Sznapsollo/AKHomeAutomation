@@ -39,11 +39,38 @@
 	
 	app.service('itemsDataService', function($http) {
 		this.checkItemsData = function(category) {
+		
+			var servicesHub = 'executables/Services.php';
+			if(category == 'manageitems')
+				servicesHub = 'executables/admin/Services.php';
+				
 			return $http({
-				url: 'executables/Services.php',
+				url: servicesHub,
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				data: {service: 'CheckItemsData', receive: '1', category: category}
+			});
+		};
+		this.checkItemData = function(id) {
+		
+			var servicesHub = 'executables/admin/Services.php';
+				
+			return $http({
+				url: servicesHub,
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				data: {service: 'CheckItemsData', receive: '1', id: id}
+			});
+		};
+		this.setItemData = function(item) {
+		
+			var servicesHub = 'executables/admin/Services.php';
+				
+			return $http({
+				url: servicesHub,
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				data: {service: 'SetItemData', receive: '1', item: item}
 			});
 		};
 	});

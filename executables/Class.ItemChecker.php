@@ -61,30 +61,14 @@ class ItemChecker
 class BaseItem
 {
 	public $properties;
-	public $image;
-	
-	public function image() {
-		if(property_exists($this->properties, "image"))
-			return $this->properties->image;
-		else
-			return null;
-	}
-	
-	public function icon() {
-		if(property_exists($this->properties, "icon"))
-			return $this->properties->icon;
-		else
-			return null;
-	}
-	
-	public function enabled() {
-		if(!property_exists($this->properties, "enabled")) {
-			$this->properties->enabled = true;
-		}
-		return $this->properties->enabled;
-	}
 	
 	public function __get($name) {
+		if($name == 'enabled') {
+			if(!property_exists($this->properties, $name)) {
+				$this->properties->$name = true;
+			}
+		}
+	
 		if(property_exists($this->properties, $name))
 			return $this->properties->$name;
 		else 

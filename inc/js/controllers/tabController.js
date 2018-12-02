@@ -3,7 +3,7 @@
 
 	app.controller('TabController', function TabController($scope, $rootScope, $route, itemsDataService, pageDataService) {
 		
-		$scope.translate = translate;
+		$scope.automation = automation;
 		$scope.dataLoading = true;
 		$scope.boolValue = function(value) {return automation.BoolValue(value)};
 		
@@ -13,6 +13,10 @@
 		{
 			initiatePageData();
 			checkItemsData();
+			
+			$rootScope.$on('refreshTab', function() {
+				checkItemsData();
+			});
 		};
 		
 		function checkItemsData() {
@@ -20,7 +24,7 @@
 			itemsDataService.checkItemsData($route.current.$$route.fromValue).then(
 				function(dataResponse) {
 					$scope.dataLoading = false;
-					$scope.items = dataResponse.data.items;
+					$scope.data = dataResponse.data;
 					if(dataResponse.data.itemsDictionary)
 						automation.SetItemsDictionary(dataResponse.data.itemsDictionary);
 				},
@@ -46,9 +50,6 @@
 				});
 		};
 		
-		function translate(code) {
-			return automation.Translate(code);
-		}
 	});
 	
 })();

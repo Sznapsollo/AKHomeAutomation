@@ -3,7 +3,7 @@ $(document).ready(function()
 	$("#bodyContainer").on("click", ".toggleOutlet", function(event)
 	{
 		toggleOutlet($(this));
-	});	
+	});
 });
 
 var toggleOutlet = function(buttonClicked) {
@@ -77,6 +77,9 @@ var automation = function() {
 			case "alarmDevices":
 				return "alarm_devices_icon"+value+".jpg";
 				break;
+			case "setting":
+				return "settings_icon"+value+".jpg";
+				break;
 			default:
 				return "";
 		} 
@@ -112,9 +115,19 @@ var automation = function() {
 	}
 	
 	function FillAndLaunchLogModal(title, logBody) {
-        $('#logsModal .logBody').html(logBody);
-		$('#logsModal .modal-title').html(title);
-	    $('#logsModal').modal('show');
+		$('#modalDialog .modal-body-p').html(logBody);
+		$('#modalDialog .modal-title').html(title);
+		$('#modalDialog').modal('show');
+	}
+	
+	function LaunchItemModal(body) {
+		$('#modalItemDialog .modal-content').html(body);
+		$('#modalItemDialog').modal('show');
+	}
+	
+	function CloseItemModal() {
+		$('#modalItemDialog .modal-content').html('');
+		$('#modalItemDialog').modal('toggle');
 	}
 	
 	function Confirm(id, status, delay, message) {
@@ -128,6 +141,17 @@ var automation = function() {
         $('#deleteModal .confirmMessage').html(message);
 
 	    $('#deleteModal').modal('show');
+	}
+	
+	function OmitKeys(obj, keys)
+	{
+		var dup = {};
+		for (var key in obj) {
+			if (keys.indexOf(key) == -1) {
+				dup[key] = obj[key];
+			}
+		}
+		return dup;
 	}
 	
 	return {
@@ -150,8 +174,20 @@ var automation = function() {
 		FillAndLaunchLogModal: function(title, logBody) {
 			return FillAndLaunchLogModal(title, logBody);
 		},
+		LaunchItemModal: function(body) {
+			return LaunchItemModal(body);
+		},
+		CloseItemModal: function() {
+			return CloseItemModal();
+		},
 		GetDevicesDictionary: function() {
 			return _itemsDictionary;
+		},
+		GlobalHTACCESSWarning: function() { 
+			return Translate("htaccessWarning");
+		},
+		OmitKeys: function(obj, keys) {
+			return OmitKeys(obj, keys);
 		},
 		Translate: function(code) {
 			return Translate(code);

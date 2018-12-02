@@ -20,6 +20,8 @@
 	<script src="inc/js/controllers/generalController.js"></script>
 	<script src="inc/js/controllers/tabController.js"></script>
 	<script src="inc/js/controllers/rfButtonsController.js"></script>
+	<script src="inc/js/controllers/itemFormController.js"></script>
+	<script src="inc/js/controllers/manageItemController.js"></script>
 	<script src="inc/js/controllers/sensorItemController.js"></script>
 	<script src="inc/js/controllers/sensorDevicesSettingsController.js"></script>
 	<script src="inc/js/controllers/sensorAlarmSettingsController.js"></script>
@@ -43,8 +45,16 @@
 		</button>
 		<div class="collapse navbar-collapse justify-content-stretch" id="navbarAutomation">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item" ng-class="{active: currentPath == '' || currentPath.indexOf('advanced') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/advanced">{{tab2Label}}</a></li>
-				<li class="nav-item" ng-class="{active: currentPath.indexOf('sensors') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/sensors">{{tab3Label}}</a></li>
+				<li class="nav-item" ng-class="{active: currentPath == '' || currentPath.indexOf('advanced') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/advanced">{{advancedLabel}}</a></li>
+				<li class="nav-item dropdown" ng-class="{active: currentPath.indexOf('sensors') >= 0 || currentPath.indexOf('manageitems') >= 0}">
+					<a class="nav-link dropdown-toggle" href="#/sensors" id="adminOptions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+						{{adminLabel}}
+					</a>
+					<div class="dropdown-menu" aria-labelledby="adminOptions">
+						<a data-toggle="collapse" data-target="#navbarAutomation" class="dropdown-item" href="#/sensors">{{sensorsLabel}}</a>
+						<a data-toggle="collapse" data-target="#navbarAutomation" class="dropdown-item" href="#/manageitems">{{itemsLabel}}</a>
+					</div>
+				</li>
 				<li class="nav-item" ng-class="{active: currentPath.indexOf('logsList/actions') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/logsList/actions/0/{{itemsPerPage}}">{{logsActionsLabel}}</a></li>
 				<li class="nav-item"  ng-class="{active: currentPath.indexOf('logsList/sensors') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/logsList/sensors/0/{{itemsPerPage}}">{{logsSensorsLabel}}</a></li>
 				<li class="nav-item" ng-class="{active: currentPath.indexOf('logsList/exceptions') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" ng-class="{redBlinker: pageFlag('todayexcexists')}" href="#/logsList/exceptions/0/{{itemsPerPage}}">{{logsExceptionsLabel}}</a></li>
@@ -81,21 +91,29 @@
 		</div>
 	</div>
 
-	<div id="logsModal" role="dialog" class="modal fade">
+	<div id="modalDialog" role="dialog" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<p class="logBody"></p>
+					<p class="modal-body-p"></p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" data-dismiss="modal" class="btn btn-default">{{closeLabel}}</button>
 				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="modalItemDialog" role="dialog" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				
 			</div>
 		</div>
 	</div>

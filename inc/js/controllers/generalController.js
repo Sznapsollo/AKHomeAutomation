@@ -16,8 +16,10 @@
 		
 		function translateAll() {
 			$scope.homeLabel = translate('homepage');
-			$scope.tab2Label = translate('tab2');
-			$scope.tab3Label = translate('tab3');
+			$scope.advancedLabel = translate('advanced');
+			$scope.sensorsLabel = translate('sensors');
+			$scope.adminLabel = translate('admin');
+			$scope.itemsLabel = translate('items');
 			$scope.carefulLabel = translate('careful');
 			$scope.disableLabel = translate('disable');
 			$scope.closeLabel = translate('close');
@@ -28,7 +30,7 @@
 		
 		var unbindEventHandler = $rootScope.$on('translationsReceived', translateAll);
 		$scope.$on('$destroy', function () {
-		  unbindEventHandler();
+			unbindEventHandler();
 		});
 	});
 	

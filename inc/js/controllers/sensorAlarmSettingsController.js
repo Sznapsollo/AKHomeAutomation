@@ -3,7 +3,7 @@
 
 	app.controller('SensorAlarmSettingsController', function SensorAlarmSettingsController($scope, $window, sensorsDataService) {
 	
-		$scope.translate = translate;
+		$scope.automation = automation;
 		$scope.alarmData = null;
 		$scope.regularActionData = {};
 		$scope.devicesData = {};
@@ -60,11 +60,6 @@
 		
 			$scope.onSensorAlarmSettingsSaved();
 		}
-		
-		function translate(code) {
-			return automation.Translate(code);
-		}
-		
 	});
 	
 })();

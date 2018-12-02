@@ -18,8 +18,8 @@ AKHomeAutomation is Raspberry Pi based home automation / smart home / smart hous
 - allows to define PIR sensor(s) connected to Raspberry pi and basing on their signal can operate defined devices and/or trigger alarm/sen alarm mails
 - can be easily integrated with Google Voice kit to use voice commands. Example script in one of my repositories.
 
-### How it looks
-- under **<a href="http://cultrides.com/test/Github/AKHomeAutomation" target="_blank">UI Demo address</a>** you can have a peek at user interface of AKHomeAutomation. It is just UI deployed on shared host with no functionality attached so you will not be able to do anything. It is just to present UI how it displays nodes, scheduling options  etc. It is generated from same nodes.json that is uploaded here.
+### How it looks - Demo
+- under **<a href="http://cultrides.com/test/Github/AKHomeAutomation" target="_blank">UI Demo address</a>** you can have a peek at user interface of AKHomeAutomation. It is just UI deployed on shared host with no functionality attached so you will not be able to actually operate predefined devices or change their data. It is just to present UI how it displays nodes, scheduling options  etc. It is generated from same nodes.json, settings.json that are uploaded here.
 
 ## Installation & Usage
 
