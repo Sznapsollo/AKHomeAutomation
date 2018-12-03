@@ -154,10 +154,7 @@
 			"questionOff": "Oh no! The darkness!",
 			"itemIDs": [
 				"tvlamp",
-				"roomlamp",
-				"roomlampsecond",
-				"kitchenlights",
-				"lavalamp"
+				"roomlamp"
 			],
 			"enableOn": true,
 			"enableOff": true

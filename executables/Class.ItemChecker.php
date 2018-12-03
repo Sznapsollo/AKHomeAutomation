@@ -6,6 +6,8 @@ class SendMethod
 	const ConradRadioSignal = 1;
 	const WebAddressSignal = 2;
 	const MacAddressSignal = 3;
+	const ShellSignal = 4;
+	const GroupItem = 5;
 }
 
 class ItemChecker
@@ -21,15 +23,15 @@ class ItemChecker
 	
 		foreach($itemsObject->nodes as $node) 
 		{
-			if(property_exists($node, "sendOption") && ($node->sendOption == 0 || $node->sendOption == 1))
+			if(property_exists($node, "sendOption") && ($node->sendOption == SendMethod::StandardRadioSignal || $node->sendOption == SendMethod::ConradRadioSignal))
 				array_push($this->nodes, new IntItem($node));
-			else if(property_exists($node, "sendOption") && ($node->sendOption == 2))
+			else if(property_exists($node, "sendOption") && ($node->sendOption == SendMethod::WebAddressSignal))
 				array_push($this->nodes, new WebItem($node));
-			else if(property_exists($node, "sendOption") && ($node->sendOption == 3))
+			else if(property_exists($node, "sendOption") && ($node->sendOption == SendMethod::MacAddressSignal))
 				array_push($this->nodes, new MacItem($node));
-			else if(property_exists($node, "sendOption") && ($node->sendOption == 4))
+			else if(property_exists($node, "sendOption") && ($node->sendOption == SendMethod::ShellSignal))
 				array_push($this->nodes, new ShellItem($node));
-			else if(property_exists($node, "itemIDs") && ($node->itemIDs))
+			else if((property_exists($node, "sendOption") && ($node->sendOption == SendMethod::GroupItem)) || (property_exists($node, "itemIDs") && ($node->itemIDs)))
 				array_push($this->nodes, new GroupItem($node));
 		}
     }

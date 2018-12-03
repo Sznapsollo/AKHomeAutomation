@@ -11,8 +11,9 @@
 		$scope.item = {};
 		$scope.dataLoading = true;
 		$scope.isSaveEnabled = isSaveEnabled;
+		$scope.manageItemData = manageItemData;
 		$scope.categoriesDictionary = [{id:'general',description:'General'}, {id:'advanced',description: 'Advanced'}];
-		$scope.sendOptionDictionary = [{id:0,description:'Radio Type 1'}, {id:1,description: 'Radio Type 2'}, {id:2,description: 'Web Type'},{id:3,description: 'Mac Addr. Type'}, {id:4,description: 'Shell Type'}];
+		$scope.sendOptionDictionary = [{id:0,description:automation.Translate('sendOption_0')}, {id:1,description: automation.Translate('sendOption_1')}, {id:2,description: automation.Translate('sendOption_2')},{id:3,description: automation.Translate('sendOption_3')}, {id:4,description: automation.Translate('sendOption_4')}, {id:5,description: automation.Translate('sendOption_5')}];
 		$scope.devicesDictionary = automation.GetDevicesDictionary();
 		$scope.addNewCollectionItem = addNewCollectionItem;
 		$scope.remove = function(array, index){
@@ -73,6 +74,7 @@
 								}
 							}
 						}
+						manageItemData();
 					}
 				},
 				function(response) {
@@ -84,7 +86,14 @@
 		};
 		
 		function isSaveEnabled() {
+			manageItemData();
 			return automation.CheckRequiredFields($scope.requiredFields, [$scope.item]);
+		}
+		
+		function manageItemData() {
+			if($scope.item && $scope.item.itemIDs_Local && $scope.item.itemIDs_Local.length > 0) {
+				$scope.item.sendOption = 5;
+			}
 		}
 		
 		function save() {

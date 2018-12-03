@@ -204,6 +204,14 @@
 		{"code":"itemDeviceIDsHelp","description":"If chosen this item would be group item sending Enable or Disable signals to selected items"},
 		{"code":"itemCodeDev","description":"Comments"},
 		{"code":"itemCodeDevHelp","description":"Just some internal comment for this item"},
+		{"code":"itemAddress","description":"Address"},
+		{"code":"itemAddressHelp","description":"Address for web type device. Contains mail url base while 'code on' and 'code odd' would contain url arguments"},
+		{"code":"sendOption_0","description":"Radio Item 1"},
+		{"code":"sendOption_1","description":"Radio Item 2"},
+		{"code":"sendOption_2","description":"Web Item"},
+		{"code":"sendOption_3","description":"Mac Address Item"},
+		{"code":"sendOption_4","description":"Shell Item"},
+		{"code":"sendOption_5","description":"Group Item"},
 		{"code":"htaccessWarning","description":"If someone except for you would be using web UI of AKHomeAutomation system then secure executables/admin folder by passwording it( using .htaccess, .htpasswd). This way, when clicking on alarm icon or items admin setup in web UI, user would be promped with login & pass question which, if not answered correctly, would prevent unwanted users from messing with sensor alarm settings and items setup. This message is displayed because .htaccess file was not detected in executables/admin folder."}
 	]
 }

@@ -58,9 +58,15 @@
 		</div>
 		<div class="form-group">
 			<label for="itemSendOption">{{automation.Translate('itemSendOption')}}:</label>
-			<select class="form-control" name="itemSendOption" ng-model="item.sendOption" ng-options="sendOption.id as (sendOption.description) for sendOption in sendOptionDictionary">
+			<select ng-disabled="item.itemIDs_Local.length > 0" class="form-control" name="itemSendOption" ng-model="item.sendOption" ng-options="sendOption.id as (sendOption.description) for sendOption in sendOptionDictionary" >
 			</select>
 			<small id="itemSendOptionHelp" class="form-text text-muted">{{automation.Translate('itemSendOptionHelp')}}</small>
+			<p/>
+		</div>
+		<div ng-show="item.sendOption == 2" class="form-group">
+			<label for="itemAddress">{{automation.Translate('itemAddress')}}:</label>
+			<input class="form-control" name="itemAddress" type="text" ng-model="item.address" />
+			<small id="itemAddressHelp" class="form-text text-muted">{{automation.Translate('itemAddressHelp')}}</small>
 			<p/>
 		</div>
 		<div class="form-group">

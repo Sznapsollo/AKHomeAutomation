@@ -47,12 +47,12 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item" ng-class="{active: currentPath == '' || currentPath.indexOf('advanced') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/advanced">{{advancedLabel}}</a></li>
 				<li class="nav-item dropdown" ng-class="{active: currentPath.indexOf('sensors') >= 0 || currentPath.indexOf('manageitems') >= 0}">
-					<a class="nav-link dropdown-toggle" href="#/sensors" id="adminOptions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+					<a class="nav-link dropdown-toggle" id="adminOptions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
 						{{adminLabel}}
 					</a>
 					<div class="dropdown-menu" aria-labelledby="adminOptions">
-						<a data-toggle="collapse" data-target="#navbarAutomation" class="dropdown-item" href="#/sensors">{{sensorsLabel}}</a>
 						<a data-toggle="collapse" data-target="#navbarAutomation" class="dropdown-item" href="#/manageitems">{{itemsLabel}}</a>
+						<a data-toggle="collapse" data-target="#navbarAutomation" class="dropdown-item" href="#/sensors">{{sensorsLabel}}</a>
 					</div>
 				</li>
 				<li class="nav-item" ng-class="{active: currentPath.indexOf('logsList/actions') >= 0}"><a data-toggle="collapse" data-target="#navbarAutomation" class="nav-link" href="#/logsList/actions/0/{{itemsPerPage}}">{{logsActionsLabel}}</a></li>
