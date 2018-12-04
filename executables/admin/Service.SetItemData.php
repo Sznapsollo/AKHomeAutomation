@@ -6,9 +6,17 @@ require_once("../Class.ItemChecker.php");
 require_once("../Class.Settings.php");
 require_once("../Class.Helpers.php");
 
+class EditProcess
+{
+	const EditAction = 0;
+	const AddAction = 1;
+	const DeleteAction = 2;
+}
+
 $itemChecker = new ItemChecker();
 $settings = new Settings();
 $itemIncoming = null;
+$isNew = false;
 
 
 if(isset($input->receive))
@@ -18,27 +26,45 @@ if(isset($input->receive))
 	}
 }
 
-if($itemIncoming && $itemIncoming->name)
+if($itemIncoming && property_exists($itemIncoming,'name') && property_exists($itemIncoming,'header') && property_exists($itemIncoming,'category') && property_exists($itemIncoming,'__processAction'))
 {
 	$filepathname = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR.'nodes.json';
 	$json = file_get_contents($filepathname);
 	$nodesConfig = json_decode($json);
 	
 	if($nodesConfig) {
-		$existingItem = false;
-		$index = 0;
-		foreach($nodesConfig->nodes as $item) {
-			if($item->name == $itemIncoming->name) {
-				$swap = array($index => $itemIncoming);
-				$nodesConfig->nodes = array_replace($nodesConfig->nodes, $swap);
-				$item = $itemIncoming;
-				$existingItem = true;
-				break;
+		
+		if($itemIncoming->__processAction == EditProcess::EditAction)
+		{
+			unset($itemIncoming->__processAction);
+			$index = 0;
+			foreach($nodesConfig->nodes as $item) {
+				if($item->name == $itemIncoming->name) {
+					$swap = array($index => $itemIncoming);
+					$nodesConfig->nodes = array_replace($nodesConfig->nodes, $swap);
+					$item = $itemIncoming;
+					
+					break;
+				}
+				$index++;
 			}
-			$index++;
 		}
-		if(!$existingItem)
+		else if($itemIncoming->__processAction == EditProcess::AddAction)
+		{
+			unset($itemIncoming->__processAction);
 			array_push($nodesConfig->nodes,$itemIncoming);
+		}
+		else if($itemIncoming->__processAction == EditProcess::DeleteAction)
+		{
+			$index = 0;
+			foreach($nodesConfig->nodes as $item) {
+				if($item->name == $itemIncoming->name) {
+					array_splice($nodesConfig->nodes, $index, 1);
+					break;
+				}
+				$index++;
+			}
+		}
 		
 		file_put_contents($filepathname, json_encode($nodesConfig));
 		chmod($filepathname, 0755);

@@ -35,6 +35,10 @@
 			"description":"Alarm Settings"
 		},
 		{  
+			"code":"alarm_devices_trigger",
+			"description":"Trigger devices"
+		},
+		{  
 			"code":"availability_not_checked",
 			"description":"Check availability"
 		},
@@ -89,6 +93,14 @@
 		{  
 			"code":"save",
 			"description":"Save"
+		},
+		{  
+			"code":"delete",
+			"description":"Delete"
+		},
+		{  
+			"code":"delete_confirm",
+			"description":"Confirm delete"
 		},
 		{  
 			"code":"day1",

@@ -3,11 +3,14 @@
 
 	app.controller('ItemFormController', function ItemFormController($scope, $rootScope, itemsDataService) {
 	
+		$scope.confirmDeleteItem = false;
 		$scope.arraysToOverride = ['codeOn','itemIDs'];
 		$scope.arraysOverrideSuffix = "_Local";
 		$scope.requiredFields = ['name','header','category'];
 		$scope.automation = automation;
-		$scope.save = save;
+		$scope.saveItem = saveItem;
+		$scope.preDeleteItem = preDeleteItem;
+		$scope.deleteItem = deleteItem;
 		$scope.item = {};
 		$scope.dataLoading = true;
 		$scope.isSaveEnabled = isSaveEnabled;
@@ -91,12 +94,25 @@
 		}
 		
 		function manageItemData() {
-			if($scope.item && $scope.item.itemIDs_Local && $scope.item.itemIDs_Local.length > 0) {
-				$scope.item.sendOption = 5;
+			if($scope.item) {
+				if($scope.item.itemIDs_Local && $scope.item.itemIDs_Local.length > 0) {
+					$scope.item.sendOption = 5;
+				}
+				if($scope.item.sendOption == null)
+					$scope.item.sendOption = 0;
 			}
 		}
 		
-		function save() {
+		function preDeleteItem() {
+			$scope.confirmDeleteItem = true;
+		}
+		
+		function deleteItem() {
+			$scope.item.__delete = true;
+			saveItem();
+		}
+		
+		function saveItem() {
 			for (var property in $scope.item) {
 				if ($scope.item.hasOwnProperty(property)) {
 					if(property.endsWith($scope.arraysOverrideSuffix)) {
@@ -108,8 +124,15 @@
 				}
 			}
 			
+			$scope.item.__processAction = 0;
+			if(!$scope.id)
+				$scope.item.__processAction = 1;
+			else if($scope.item.__delete)
+				$scope.item.__processAction = 2;
+				
 			$scope.dataLoading = true;
 			var propertiesToOmmit = $scope.arraysToOverride.map(function(el){return el+$scope.arraysOverrideSuffix});
+
 			itemsDataService.setItemData(JSON.stringify(automation.OmitKeys($scope.item, propertiesToOmmit))).then(
 				function(dataResponse) {
 					$scope.dataLoading = false;

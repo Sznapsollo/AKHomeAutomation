@@ -5,13 +5,14 @@
 	
 		$scope.automation = automation;
 		$scope.settingIconName = automation.GetIcon('setting','');
-		$scope.openManageItemPanel = openManageItemPanel;
+		$scope.openItemFormPanel = openItemFormPanel;
 
-		function openManageItemPanel () {
-			var manageItemNode = document.createElement("item-form");
-			manageItemNode.setAttribute("id", $scope.id);
-			var manageItemScope = $scope.$new();
-			automation.LaunchItemModal($compile(manageItemNode)(manageItemScope));
+		function openItemFormPanel (id) {
+			var itemFormNode = document.createElement("item-form");
+			if(id)
+				itemFormNode.setAttribute("id", id);
+			var itemFormScope = $scope.$new();
+			automation.LaunchItemModal($compile(itemFormNode)(itemFormScope));
 		}
 	});
 	

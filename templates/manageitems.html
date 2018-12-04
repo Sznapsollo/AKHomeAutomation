@@ -4,6 +4,7 @@
 	<div ng-if="!data.folderSecured" class="alert alert-warning" role="alert">
 		{{automation.GlobalHTACCESSWarning()}}
 	</div>
+	<manage-item></manage-item>
 	<div ng-repeat="item in data.items">
 		<manage-item id="{{item.id}}" header="{{item.header}}" icon={{item.icon}} image={{item.image}} enabled={{item.enabled}} ></manage-item>
 	</div>

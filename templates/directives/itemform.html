@@ -9,7 +9,7 @@
 		<i ng-show="dataLoading" class="fa fa-spinner fa-4x fa-spin"></i>
 	
 		<div class="form-group">
-			<label for="itemName">{{automation.Translate('itemName')}}:</label>
+			<label for="itemName"><strong>{{automation.Translate('itemName')}}*:</strong>:</label>
 			<input class="form-control" name="itemName" type="text" ng-model="item.name" />
 			<small id="itemNameHelp" class="form-text text-muted">{{automation.Translate('itemNameHelp')}}</small>
 			<p/>
@@ -38,14 +38,14 @@
 			<p/>
 		</div>
 		<div class="form-group">
-			<label for="itemCategory">{{automation.Translate('itemCategory')}}:</label>
+			<label for="itemCategory"><strong>{{automation.Translate('itemCategory')}}*</strong>:</label>
 			<select class="form-control" name="itemCategory" ng-model="item.category" ng-options="category.id as (category.description) for category in categoriesDictionary">
 			</select>
 			<small id="itemCategoryHelp" class="form-text text-muted">{{automation.Translate('itemCategoryHelp')}}</small>
 			<p/>
 		</div>
 		<div class="form-group">
-			<label for="itemHeader">{{automation.Translate('itemHeader')}}:</label>
+			<label for="itemHeader"><strong>{{automation.Translate('itemHeader')}}*</strong>:</label>
 			<input class="form-control" name="itemHeader" type="text" ng-model="item.header" />
 			<small id="itemHeaderHelp" class="form-text text-muted">{{automation.Translate('itemHeaderHelp')}}</small>
 			<p/>
@@ -146,6 +146,8 @@
 	</p>
 </div>
 <div class="modal-footer">
-	<button ng-disabled="!isSaveEnabled()" type="button" class="btn btn-primary" ng-click="save()">{{automation.Translate('save')}}</button>
+	<button ng-if="id && !confirmDeleteItem" type="button" class="btn btn-danger mr-auto" ng-click="preDeleteItem()">{{automation.Translate('delete')}}</button>
+	<button ng-if="id && confirmDeleteItem" type="button" class="btn btn-danger mr-auto" ng-click="deleteItem()">{{automation.Translate('delete_confirm')}}</button>
+	<button ng-disabled="!isSaveEnabled()" type="button" class="btn btn-primary" ng-click="saveItem()">{{automation.Translate('save')}}</button>
 	<button type="button" data-dismiss="modal" class="btn btn-default">{{automation.Translate('close')}}</button>
 </div>

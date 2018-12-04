@@ -1,12 +1,9 @@
 
-<div class="powerswitch" ng-class="{'turnedOff': !automation.BoolValue(enabled)}">
+<div class="powerswitch" ng-class="{'turnedOff': !automation.BoolValue(enabled) && id}">
 	<i ng-if="icon" class="{{icon}}"></i>
-	<img ng-if="image" class="switchIcon" ng-class="{'switchIconClickable':true}" ng-click="openManageItemPanel()" ng-src="graphics/icons/{{image}}" />
-	<span class="switchHeader" ng-class="{'switchHeaderClickable':true}" ng-click="openManageItemPanel()">{{header}}</span>
-	<img class="switchCalendarIcon" ng-click="openManageItemPanel()" ng-src="graphics/{{settingIconName}}" />
-</div>
-
-<div ng-class="{'sub-section': false}">
-
+	<img ng-if="image" class="switchIcon" ng-class="{'switchIconClickable':true}" ng-click="openItemFormPanel(id)" ng-src="graphics/icons/{{image}}" />
+	<span ng-if="id" class="switchHeader" ng-class="{'switchHeaderClickable':true}" ng-click="openItemFormPanel(id)">{{header}}</span>
+	<span ng-if="!id" class="switchHeader" ng-class="{'switchHeaderClickable':true}" ng-click="openItemFormPanel(id)">{{automation.Translate('itemAddNewItem')}}</span>
+	<img ng-if="id" class="switchCalendarIcon" ng-click="openItemFormPanel(id)" ng-src="graphics/{{settingIconName}}" />
 </div>
 
