@@ -10,8 +10,21 @@
 	
 		<div class="form-group">
 			<label for="itemName"><strong>{{automation.Translate('itemName')}}*:</strong>:</label>
-			<input class="form-control" name="itemName" type="text" ng-model="item.name" />
+			<input ng-disabled="id" ng-class="{'invalidInput':invalidName}" class="form-control" name="itemName" type="text" ng-model="item.name" />
 			<small id="itemNameHelp" class="form-text text-muted">{{automation.Translate('itemNameHelp')}}</small>
+			<p/>
+		</div>
+		<div class="form-group">
+			<label for="itemCategory"><strong>{{automation.Translate('itemCategory')}}*</strong>:</label>
+			<select class="form-control" name="itemCategory" ng-model="item.category" ng-options="category.id as (category.description) for category in categoriesDictionary">
+			</select>
+			<small id="itemCategoryHelp" class="form-text text-muted">{{automation.Translate('itemCategoryHelp')}}</small>
+			<p/>
+		</div>
+		<div class="form-group">
+			<label for="itemHeader"><strong>{{automation.Translate('itemHeader')}}*</strong>:</label>
+			<input class="form-control" name="itemHeader" type="text" ng-model="item.header" />
+			<small id="itemHeaderHelp" class="form-text text-muted">{{automation.Translate('itemHeaderHelp')}}</small>
 			<p/>
 		</div>
 		<div class="form-check">
@@ -35,19 +48,6 @@
 			<label for="itemIcon">{{automation.Translate('itemIcon')}}:</label>
 			<input class="form-control" name="itemIcon" type="text" ng-model="item.icon" />
 			<small id="itemIconHelp" class="form-text text-muted">{{automation.Translate('itemIconHelp')}}</small>
-			<p/>
-		</div>
-		<div class="form-group">
-			<label for="itemCategory"><strong>{{automation.Translate('itemCategory')}}*</strong>:</label>
-			<select class="form-control" name="itemCategory" ng-model="item.category" ng-options="category.id as (category.description) for category in categoriesDictionary">
-			</select>
-			<small id="itemCategoryHelp" class="form-text text-muted">{{automation.Translate('itemCategoryHelp')}}</small>
-			<p/>
-		</div>
-		<div class="form-group">
-			<label for="itemHeader"><strong>{{automation.Translate('itemHeader')}}*</strong>:</label>
-			<input class="form-control" name="itemHeader" type="text" ng-model="item.header" />
-			<small id="itemHeaderHelp" class="form-text text-muted">{{automation.Translate('itemHeaderHelp')}}</small>
 			<p/>
 		</div>
 		<div class="form-check">
@@ -137,6 +137,17 @@
 			<small id="itemDeviceIDsHelp" class="form-text text-muted">{{automation.Translate('itemDeviceIDsHelp')}}</small>
 			<p/>
 		</div>
+		
+		
+		<div class="form-group">
+			<label for="itemReorder">{{automation.Translate('itemReorder')}}:</label>
+			<select class="form-control" name="itemReorder" ng-model="item.__reorder" ng-options="reorderOption.id as (reorderOption.description) for reorderOption in reorderDictionary" >
+			</select>
+			<small id="itemReorderHelp" class="form-text text-muted">{{automation.Translate('itemReorderHelp')}}</small>
+			<p/>
+		</div>
+		
+		
 		<div class="form-group">
 			<label for="itemCodeDev">{{automation.Translate('itemCodeDev')}}:</label>
 			<input class="form-control" name="itemCodeDev" type="text" ng-model="item.codeDev" />

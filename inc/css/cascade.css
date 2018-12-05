@@ -216,3 +216,7 @@
 	line-height: 1; 
 	background: white; 
 }
+
+.invalidInput {
+	border:2px solid red;
+}

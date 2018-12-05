@@ -7,6 +7,7 @@
 		$scope.arraysToOverride = ['codeOn','itemIDs'];
 		$scope.arraysOverrideSuffix = "_Local";
 		$scope.requiredFields = ['name','header','category'];
+		$scope.invalidName = false;
 		$scope.automation = automation;
 		$scope.saveItem = saveItem;
 		$scope.preDeleteItem = preDeleteItem;
@@ -15,8 +16,9 @@
 		$scope.dataLoading = true;
 		$scope.isSaveEnabled = isSaveEnabled;
 		$scope.manageItemData = manageItemData;
-		$scope.categoriesDictionary = [{id:'general',description:'General'}, {id:'advanced',description: 'Advanced'}];
-		$scope.sendOptionDictionary = [{id:0,description:automation.Translate('sendOption_0')}, {id:1,description: automation.Translate('sendOption_1')}, {id:2,description: automation.Translate('sendOption_2')},{id:3,description: automation.Translate('sendOption_3')}, {id:4,description: automation.Translate('sendOption_4')}, {id:5,description: automation.Translate('sendOption_5')}];
+		$scope.categoriesDictionary = [];
+		$scope.sendOptionDictionary = [];
+		$scope.reorderDictionary = [];
 		$scope.devicesDictionary = automation.GetDevicesDictionary();
 		$scope.addNewCollectionItem = addNewCollectionItem;
 		$scope.remove = function(array, index){
@@ -27,6 +29,18 @@
 		
 		function init()
 		{
+			$scope.categoriesDictionary = [{id:'general',description:automation.Translate('homepage')}, {id:'advanced',description: automation.Translate('advanced')}];
+			
+			$scope.sendOptionDictionary = [{id:0,description:automation.Translate('sendOption_0')}, {id:1,description: automation.Translate('sendOption_1')}, {id:2,description: automation.Translate('sendOption_2')},{id:3,description: automation.Translate('sendOption_3')}, {id:4,description: automation.Translate('sendOption_4')}, {id:5,description: automation.Translate('sendOption_5')}];
+
+			// build reorder dictionary start
+			$scope.reorderDictionary.push({id:-1, description:automation.Translate('itemReorderFirst')});
+			$scope.devicesDictionary.forEach(function(el, array, index) {
+				$scope.reorderDictionary.push({id:el.id, description:automation.Translate('itemReorderAfter')+el.header});
+			});
+			$scope.reorderDictionary.push({id:99, description:automation.Translate('itemReorderLast')});
+			// build reorder dictionary end
+			
 			checkItemsData();
 		};
 		
@@ -90,6 +104,16 @@
 		
 		function isSaveEnabled() {
 			manageItemData();
+			if($scope.item.name && $scope.item.name.length > 0) {
+				for(var devIndex = 0; devIndex < $scope.devicesDictionary.length; devIndex++) {
+					if(($scope.devicesDictionary[devIndex].id != $scope.id) && ($scope.item.name == $scope.devicesDictionary[devIndex].id))
+					{
+						$scope.invalidName = true;
+						return false;
+					}
+				}
+			}
+			$scope.invalidName = false;
 			return automation.CheckRequiredFields($scope.requiredFields, [$scope.item]);
 		}
 		
@@ -100,6 +124,12 @@
 				}
 				if($scope.item.sendOption == null)
 					$scope.item.sendOption = 0;
+				if($scope.item.enabled == null)
+					$scope.item.enabled = true;
+				if($scope.item.enableOff == null)
+					$scope.item.enableOff = true;
+				if($scope.item.enableOn == null)
+					$scope.item.enableOn = true;
 			}
 		}
 		

@@ -28,7 +28,7 @@ if(isset($input->receive))
 
 if($itemIncoming && property_exists($itemIncoming,'name') && property_exists($itemIncoming,'header') && property_exists($itemIncoming,'category') && property_exists($itemIncoming,'__processAction'))
 {
-	$filepathname = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR.'nodes.json';
+	$filepathname = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR.$itemChecker->nodesFileName();
 	$json = file_get_contents($filepathname);
 	$nodesConfig = json_decode($json);
 	
@@ -43,7 +43,7 @@ if($itemIncoming && property_exists($itemIncoming,'name') && property_exists($it
 					$swap = array($index => $itemIncoming);
 					$nodesConfig->nodes = array_replace($nodesConfig->nodes, $swap);
 					$item = $itemIncoming;
-					
+					reorderNodes($index, $nodesConfig->nodes);
 					break;
 				}
 				$index++;
@@ -53,6 +53,7 @@ if($itemIncoming && property_exists($itemIncoming,'name') && property_exists($it
 		{
 			unset($itemIncoming->__processAction);
 			array_push($nodesConfig->nodes,$itemIncoming);
+			reorderNodes(count($nodesConfig->nodes)-1, $nodesConfig->nodes);
 		}
 		else if($itemIncoming->__processAction == EditProcess::DeleteAction)
 		{
@@ -70,4 +71,43 @@ if($itemIncoming && property_exists($itemIncoming,'name') && property_exists($it
 		chmod($filepathname, 0755);
 	}
 }
+
+function reorderNodes($index, &$nodes) {
+	$node = $nodes[$index];
+	if(!property_exists($node,'__reorder'))
+		return;
+		
+	if($node->__reorder == -1 && $index != 0) {
+		// first
+		unset($node->__reorder);
+		array_splice($nodes, $index, 1);
+		array_unshift($nodes, $node);
+	}
+	else if($node->__reorder == 99) {
+		unset($node->__reorder);
+		array_splice($nodes, $index, 1);
+		array_push($nodes, $node);
+	}
+	else {
+		// after something
+		$indexAfter = 0;
+		foreach($nodes as $item) {
+			if($item->name == $node->__reorder) {
+				break;
+			}
+			$indexAfter++;
+		}
+		
+		if($indexAfter != $index) {
+			$indexAfter++;
+			array_splice($nodes, $index, 1);
+			if($indexAfter > $index)
+				$indexAfter--;
+			
+			unset($node->__reorder);
+			array_splice($nodes, $indexAfter, 0, array($node));
+		}
+	}
+}
+
 ?>
