@@ -16,6 +16,7 @@
 				questionOn: '@',
 				questionOff: '@',
 				regularActions: '@',
+				relatedItems: '@'
 			},
 			templateUrl: 'templates/directives/powerswitch.html',
 			controller: 'RFButtonsController',

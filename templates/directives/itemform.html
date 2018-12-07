@@ -123,7 +123,7 @@
 			<ul class="list-group">
 				<li class="list-group-item" ng-repeat="subItem in item.itemIDs_Local">
 					<div class="input-group">
-						<select class="form-control" name="itemDeviceIDs" ng-model="subItem.value" ng-options="device.id as (device.header) for device in devicesDictionary" >
+						<select ng-class="{'invalidInput':subItem.value.length == 0}" class="form-control" name="itemDeviceIDs" ng-model="subItem.value" ng-options="device.id as (device.header) for device in devicesDictionary | excludeFrom:otherElements(subItem,item.itemIDs_Local)" >
 						</select>
 						<span class="input-group-btn">
 							<button type="button" style="float: left" class="btn btn-default" aria-label="Left Align" ng-click="remove(item.itemIDs_Local, $index)">

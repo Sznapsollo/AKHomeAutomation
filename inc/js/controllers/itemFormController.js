@@ -20,6 +20,7 @@
 		$scope.sendOptionDictionary = [];
 		$scope.reorderDictionary = [];
 		$scope.devicesDictionary = automation.GetDevicesDictionary();
+		$scope.otherElements = otherElements;
 		$scope.addNewCollectionItem = addNewCollectionItem;
 		$scope.remove = function(array, index){
 			array.splice(index, 1);
@@ -104,6 +105,8 @@
 		
 		function isSaveEnabled() {
 			manageItemData();
+			
+			// no duplicated item names
 			if($scope.item.name && $scope.item.name.length > 0) {
 				for(var devIndex = 0; devIndex < $scope.devicesDictionary.length; devIndex++) {
 					if(($scope.devicesDictionary[devIndex].id != $scope.id) && ($scope.item.name == $scope.devicesDictionary[devIndex].id))
@@ -114,6 +117,12 @@
 				}
 			}
 			$scope.invalidName = false;
+			
+			// no empty related Items
+			if($scope.item.itemIDs_Local && $scope.item.itemIDs_Local.length > 0 && $scope.item.itemIDs_Local.filter(function(el){return el.value.length == 0}).length > 0) {
+				return false;
+			}
+			
 			return automation.CheckRequiredFields($scope.requiredFields, [$scope.item]);
 		}
 		
@@ -176,6 +185,12 @@
 					console.log(response);
 				});
 			
+		}
+		
+		function otherElements(item, dictionary) {
+			return dictionary.filter(function(el) {
+				return el.value != item.value;
+			})
 		}
 	});
 	

@@ -62,6 +62,16 @@ class ItemChecker
 				return $node;
 		}
 	}
+	
+	function getItemHeaders($ids) {
+		$itemHeaders = array();
+		foreach ($this->nodes as $node) {
+			if (in_array($node->name, $ids)) {
+				array_push($itemHeaders, $node->header);
+			}
+		}
+		return $itemHeaders;
+	}
 }
 
 class BaseItem

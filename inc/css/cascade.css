@@ -220,3 +220,7 @@
 .invalidInput {
 	border:2px solid red;
 }
+
+.relatedItems {
+	font-size: 8pt; color: #666666; padding-bottom: 2px;
+}

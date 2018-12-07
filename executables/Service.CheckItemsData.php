@@ -53,15 +53,23 @@ if($category)
 	else
 	{
 		$itemChecker = new ItemChecker();
-		$items = $itemChecker->getItems($category);	
+		$items = $itemChecker->getItems($category);
 	
 		foreach ($items as $item) {
 		
 			$defaultDelayValue = $item->delay ? ($item->delay < 0 ? -1 :ceil($item->delay/60)) : null;
 			if($item instanceof IntItem)
+			{
 				array_push($returnData->items, array('id' => $item->name, 'hotword' => $item->hotword, 'icon'=> $item->icon, 'image'=> $item->image, 'delay' => $defaultDelayValue, 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => "I", 'enabled' => $item->enabled));
+			}
 			else if($item instanceof GroupItem || $item instanceof MacItem)
-				array_push($returnData->items, array('id' => $item->name, 'hotword' => $item->hotword, 'icon'=> $item->icon, 'image'=> $item->image, 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => $item instanceof MacItem ? "M" : "G", 'enabled' => $item->enabled));
+			{
+				$relatedItems = array();
+				if($item->itemIDs) {
+					$relatedItems = $itemChecker->getItemHeaders($item->itemIDs);
+				}
+				array_push($returnData->items, array('id' => $item->name, 'hotword' => $item->hotword, 'icon'=> $item->icon, 'image'=> $item->image, 'header' => $item->header, 'questionOff' => $item->questionOff, 'questionOn' => $item->questionOn, 'enableOn' => $item->enableOn, 'enableOff' => $item->enableOff, 'regularActions' => $item->regularActions, 'subtype' => $item instanceof MacItem ? "M" : "G", 'enabled' => $item->enabled, 'relatedItems' => $relatedItems));
+			}
 		}
 	}
 	

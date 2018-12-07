@@ -1,5 +1,5 @@
-
 <div class="powerswitch">
+	
 	<i ng-if="icon" class="{{icon}}"></i>
 	<img ng-if="image" class="switchIcon" ng-class="{'switchIconClickable':delay}" ng-click="toggleSliderOptions()" ng-src="graphics/icons/{{image}}" />
 	<span class="switchHeader" ng-class="{'switchHeaderClickable':delay}" ng-click="toggleSliderOptions()">{{header}}</span>
@@ -20,7 +20,9 @@
 		<hours-and-minutes ng-click="toggleSliderOptions()" class="timerNormal" ng-if="!showTimer" delay-value="delayValue"></hours-and-minutes>
 	</div>
 </div>
-
+<div ng-if="relatedItems" class="relatedItems">
+	{{relatedItems}}
+</div>
 <div ng-class="{'sub-section': showRegular || showTimer}">
 
 	<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)" ></regular-settings>
