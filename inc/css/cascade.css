@@ -224,3 +224,7 @@
 .relatedItems {
 	font-size: 8pt; color: #666666; padding-bottom: 2px;
 }
+
+.navbar-light .navbar-nav .active {
+	font-weight: 700;
+}
