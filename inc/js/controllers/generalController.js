@@ -1,7 +1,7 @@
 (function(){
 	'use strict';
 
-	app.controller('GeneralController', function GeneralController($scope, $rootScope, $location) {
+	app.controller('GeneralController', function GeneralController($scope, $rootScope, $location, $route) {
 		
 		function translate(code) {
 			return automation.Translate(code);
@@ -11,6 +11,7 @@
 		$scope.currentPath = '';
 		$scope.$on('$routeChangeSuccess',function(evt, absNewUrl, absOldUrl) {
 			$scope.currentPath = $location.path();
+			$scope.currentFromValue = $route.current.$$route.fromValue;
 			$scope.itemsPerPage = GetLocalStorage(itemsPerPageStorageName, itemsPerPageDefault);
 		});
 		
