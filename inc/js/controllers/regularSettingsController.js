@@ -89,12 +89,12 @@
 		function saveRegularSettings() {
 
 			var timeLine = '';
-		
+
 			for(var i=0; i < $scope.timeUnits.length; i++) {
-				if($scope.timeUnits[i].timeStart)
+				if($scope.timeUnits[i].timeStart && !isNaN($scope.timeUnits[i].timeStart.getTime()))
 					timeLine += $scope.timeUnits[i].timeStart.getHours()+":"+$scope.timeUnits[i].timeStart.getMinutes();
 				timeLine += '#';
-				if($scope.timeUnits[i].timeEnd)
+				if($scope.timeUnits[i].timeEnd && !isNaN($scope.timeUnits[i].timeEnd.getTime()))
 					timeLine += $scope.timeUnits[i].timeEnd.getHours()+":"+$scope.timeUnits[i].timeEnd.getMinutes();
 				timeLine += '#';
 				timeLine += $scope.timeUnits[i].daysOfWeek;
