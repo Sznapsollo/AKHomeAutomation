@@ -9,28 +9,18 @@ import time
 from subprocess import call
 from pprint import pprint
 
-from helpers import ItemChecker
 from helpers import Helper
 from helpers import RequestPropertyManager
 from helpers import ProcessKill
 
-itemChecker = ItemChecker()
 helper = Helper()
 
 class Process(object):
-	def __init__(self, process, node):
+	def __init__(self, process):
 		self.status = 'OFF'
 		self.dayoffperformed = None
 		self.name = process['name']
-		self.sendOption = node['sendOption']
 		self.update(process)
-		
-		if (node["sendOption"] == 2):
-			self.codeOn = itemChecker.getWebAction(node, 'codeOn')
-			self.codeOff = itemChecker.getWebAction(node, 'codeOff')
-		else:
-			self.codeOn = itemChecker.codeOn(node)
-			self.codeOff = node['codeOff']
 
 	def update(self, process):
 		self.timeUnits = process['timeUnits']
@@ -47,13 +37,8 @@ class ProcessBox(object):
 		return False
 
 	def addProcess(self, process):
-		node = itemChecker.checkItem(process["name"])
-		
-		if node is None:
-			helper.writeExceptionToFile("Not found regular process to add "+process["name"])
-		else:
-			self.processList.append(Process(process, node))
-			helper.logMessage("added")
+		self.processList.append(Process(process))
+		helper.logMessage("added")
 			
 	def updateProcess(self, process):
 		for processinList in self.processList:
@@ -67,7 +52,7 @@ class ProcessBox(object):
 
 	def displayprocessList(self):
 		for process in self.processList:
-			helper.logDetailedMessage ("(status:%s) name: %s codeOn: %s codeOff: %s option: %s, day off perf: %s" % (process.status, process.name, process.codeOn, process.codeOff, process.sendOption, process.dayoffperformed))
+			helper.logDetailedMessage ("(status:%s) name: %s , day off perf: %s" % (process.status, process.name, process.dayoffperformed))
 			for timeUnit in process.timeUnits:
 				helper.logDetailedMessage ("------ start: %s end: %s days: %s" % (timeUnit['timeStart'], timeUnit['timeEnd'], timeUnit['daysOfWeek']))
 		helper.logDetailedMessage('--------------------------------')
