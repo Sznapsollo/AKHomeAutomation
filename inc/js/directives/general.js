@@ -44,7 +44,8 @@
 			scope: {
 				outletId: '@',
 				regularActionData: '@',
-				onRegularSettingsSaved:'&'
+				onRegularSettingsSaved:'&',
+				randomEnabled:'='
 			},
 			templateUrl: 'templates/directives/regularsettings.html',
 			controller: 'RegularSettingsController',

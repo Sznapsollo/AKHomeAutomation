@@ -53,7 +53,7 @@
 							valid = false;
 							break;
 						}
-						else if($scope.timeUnits[i].timeEnd.getHours() == $scope.timeUnits[i].timeStart.getHours() && ($scope.timeUnits[i].timeEnd.getMinutes() < $scope.timeUnits[i].timeStart.getMinutes())) {
+						else if($scope.timeUnits[i].timeEnd.getHours() == $scope.timeUnits[i].timeStart.getHours() && ($scope.timeUnits[i].timeEnd.getMinutes() <= $scope.timeUnits[i].timeStart.getMinutes())) {
 							valid = false;
 							break;
 						}
@@ -75,7 +75,7 @@
 				$scope.regularActionData = JSON.parse($scope.regularActionData);
 				if(!($scope.regularActionData.length == 0)) {
 					$scope.regularActionData.timeUnits.forEach(function(element, index) { 
-						$scope.timeUnits.push({timeStart:new Date(1970,0,1,element.timeStart.split(':')[0],element.timeStart.split(':')[1],0),timeEnd:new Date(1970,0,1,element.timeEnd.split(':')[0],element.timeEnd.split(':')[1],0),daysOfWeek:element.daysOfWeek});
+						$scope.timeUnits.push({timeStart:new Date(1970,0,1,element.timeStart.split(':')[0],element.timeStart.split(':')[1],0),timeEnd:new Date(1970,0,1,element.timeEnd.split(':')[0],element.timeEnd.split(':')[1],0),daysOfWeek:element.daysOfWeek,random:element.random});
 					});
 				}
 			}
@@ -98,6 +98,13 @@
 					timeLine += $scope.timeUnits[i].timeEnd.getHours()+":"+$scope.timeUnits[i].timeEnd.getMinutes();
 				timeLine += '#';
 				timeLine += $scope.timeUnits[i].daysOfWeek;
+				if($scope.randomEnabled) {
+					timeLine += '#';
+					if($scope.timeUnits[i].random)
+						timeLine += 'true';
+					else
+						timeLine += 'false';
+				}
 				timeLine += '|';
 			}
 

@@ -25,7 +25,7 @@
 </div>
 <div ng-class="{'sub-section': showRegular || showTimer}">
 
-	<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)" ></regular-settings>
+	<regular-settings ng-if="showRegular" outlet-id="{{outletId}}" regular-action-data="{{regularActionData}}" on-regular-settings-saved="saveRegularSettings(msg)" random-enabled="true" ></regular-settings>
 
 	<hours-and-minutes class="timerChoice" ng-if="showTimer" show-date="true" delay-value="delayValue" calculated-time="calculatedTime" on-delayed-disable-clicked="clickButton({'outletId':outletId,'status':'offd','delay':delayValue*60})"></hours-and-minutes>
 	<div ng-if="showTimer" class="input-group">

@@ -182,6 +182,7 @@
 		{"code":"itemAddNew","description":"Add new"},
 		{"code":"itemName","description":"Name"},
 		{"code":"itemNameHelp","description":"Unique name of item. Identifier."},
+		{"code":"itemRandom","description":"Random"},
 		{"code":"itemEnabled","description":"Enabled"},
 		{"code":"itemEnabledHelp","description":"Defines if item is enabled."},
 		{"code":"itemHotWord","description":"Hotword"},

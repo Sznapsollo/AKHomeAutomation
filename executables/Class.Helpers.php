@@ -2,6 +2,14 @@
 
 class Helpers
 {
+	public static function ToBoolean($value) {
+		if ($value && strtolower($value) !== "false") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public static function MakeDir($path)
 	{
 		return is_dir($path) || mkdir($path, 0777, true);

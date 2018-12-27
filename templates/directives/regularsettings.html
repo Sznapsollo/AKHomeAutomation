@@ -13,6 +13,9 @@
 			</button>
 			<input type="time" ng-model="timeUnit.timeStart" name="time_start" class="form-control">&nbsp-&nbsp<input type="time" ng-model="timeUnit.timeEnd" name="time_end" class="form-control">
 		</div>
+		<div ng-if="randomEnabled" class="checkbox" style="margin: 10px auto 10px auto; text-align: center; margin-top: 10px;">
+			<label class="checkbox-inline"><input type="checkbox" ng-model="timeUnit.random" style="margin-right: 10px">{{translate('itemRandom')}}</label>
+		</div>
 	</div>
 	<div style="margin: 10px auto 10px auto; text-align: center">
 		<p style="margin-top: 10px">

@@ -8,6 +8,7 @@ import time
 
 from subprocess import call
 from pprint import pprint
+from random import randint
 
 from helpers import Helper
 from helpers import RequestPropertyManager
@@ -16,14 +17,24 @@ from helpers import ProcessKill
 helper = Helper()
 
 class Process(object):
-	def __init__(self, process):
+	def __init__(self, fromProcess):
 		self.status = 'OFF'
 		self.dayoffperformed = None
-		self.name = process['name']
-		self.update(process)
+		self.randomStart = None
+		self.randomEnd = None
+		self.name = fromProcess['name']
+		self.update(fromProcess)
 
-	def update(self, process):
-		self.timeUnits = process['timeUnits']
+	def disable(self):
+		self.status = 'OFF'
+		self.randomStart = None
+		self.randomEnd = None
+
+	def enable(self):
+		self.status = 'ON'
+
+	def update(self, fromProcess):
+		self.timeUnits = fromProcess['timeUnits']
 
 class ProcessBox(object):
 	processList = []
@@ -37,8 +48,9 @@ class ProcessBox(object):
 		return False
 
 	def addProcess(self, process):
-		self.processList.append(Process(process))
-		helper.logMessage("added")
+		processForList = Process(process)
+		self.processList.append(processForList)
+		helper.logMessage("added %s" % (processForList.name))
 			
 	def updateProcess(self, process):
 		for processinList in self.processList:
@@ -64,6 +76,16 @@ class Checker(object):
 	def __init__(self, process):
 		self.process = process
 
+	def parseHoursAndMinutes(self, timeStart, timeEnd):
+		return {
+			"hourStart" : timeStart.split(':')[0] if timeStart else '0',
+			"minuteStart" : timeStart.split(':')[1] if timeStart else '0',
+			"secondStart" : '0',
+			"hourEnd" : timeEnd.split(':')[0] if timeEnd else '23',
+			"minuteEnd" : timeEnd.split(':')[1] if timeEnd else '59',
+			"secondEnd" : '59' if not timeEnd else '0'
+		}
+
 	def validate(self):
 
 		timeUnits = self.process.timeUnits
@@ -72,18 +94,66 @@ class Checker(object):
 		actionToPerform = "NONE"
 
 		for timeUnit in timeUnits:
+
 			timeStart = timeUnit['timeStart']
 			timeEnd = timeUnit['timeEnd']
-		
-			hourStart = timeStart.split(':')[0] if timeStart else '0'
-			minuteStart = timeStart.split(':')[1] if timeStart else '0'
-			secondStart = 0
-			hourEnd = timeEnd.split(':')[0] if timeEnd else '23'
-			minuteEnd = timeEnd.split(':')[1] if timeEnd else '59'
-			secondEnd = 59 if not timeEnd else 0
 
-			todayDateTimeStart = datetime.datetime(today.year, today.month, today.day, int(hourStart), int(minuteStart), secondStart)
-			todayDateTimeEnd = datetime.datetime(today.year, today.month, today.day, int(hourEnd), int(minuteEnd), secondEnd)
+			hoursAndMinutes = self.parseHoursAndMinutes(timeStart, timeEnd)
+			hourStart = hoursAndMinutes["hourStart"]
+			minuteStart = hoursAndMinutes["minuteStart"]
+			secondStart = hoursAndMinutes["secondStart"]
+			hourEnd = hoursAndMinutes["hourEnd"]
+			minuteEnd = hoursAndMinutes["minuteEnd"]
+			secondEnd = hoursAndMinutes["secondEnd"]
+
+			if 'random' in timeUnit and timeUnit['random']:
+			
+				if self.process.randomStart is None and self.process.randomEnd is None:
+
+					startHourForRand = max(today.hour, int(hourStart))
+					if today.hour > int(hourStart) - 2:
+						startHourForRand = int(hourStart)
+					endHourForRand = int(hourEnd)
+
+					randHourStart = randint(startHourForRand, endHourForRand)
+					randHourEnd = randint(randHourStart, endHourForRand)
+					
+					startMinMinuteForRand = int(minuteStart) if randHourStart == int(hourStart) else 0
+					startMaxMinuteForRand = int(minuteEnd) if randHourStart == int(hourEnd) else 59
+					
+					endMinMinuteForRand = int(minuteStart) if int(hourStart) == randHourEnd else 0
+					endMaxMinuteForRand = int(minuteEnd) if randHourEnd == int(hourEnd) else 59
+
+					randMinuteStart = randint(startMinMinuteForRand, startMaxMinuteForRand)
+					randMinuteEnd = randint(endMinMinuteForRand, endMaxMinuteForRand)
+					if(randHourStart == randHourEnd):
+						while randMinuteEnd <= randMinuteStart:
+							randMinuteStart = randint(startMinMinuteForRand, startMaxMinuteForRand)
+							randMinuteEnd = randint(endMinMinuteForRand, endMaxMinuteForRand)
+
+					timeStart = str(randHourStart) + ":" + str(randMinuteStart)
+					timeEnd = str(randHourEnd) + ":" + str(randMinuteEnd)
+					
+					self.process.randomStart = timeStart
+					self.process.randomEnd = timeEnd
+					
+					helper.logMessage ("------ generated random start: %s end: %s for %s" % (timeStart, timeEnd, self.process.name))
+				else:
+					timeStart = self.process.randomStart
+					timeEnd = self.process.randomEnd
+					
+					helper.logDetailedMessage ("------ obtained random start: %s end: %s for %s" % (timeStart, timeEnd, self.process.name))
+
+			hoursAndMinutes = self.parseHoursAndMinutes(timeStart, timeEnd)
+			hourStart = hoursAndMinutes["hourStart"]
+			minuteStart = hoursAndMinutes["minuteStart"]
+			secondStart = hoursAndMinutes["secondStart"]
+			hourEnd = hoursAndMinutes["hourEnd"]
+			minuteEnd = hoursAndMinutes["minuteEnd"]
+			secondEnd = hoursAndMinutes["secondEnd"]
+
+			todayDateTimeStart = datetime.datetime(today.year, today.month, today.day, int(hourStart), int(minuteStart), int(secondStart))
+			todayDateTimeEnd = datetime.datetime(today.year, today.month, today.day, int(hourEnd), int(minuteEnd), int(secondEnd))
 
 			days = timeUnit['daysOfWeek'].split(',')
 
@@ -98,13 +168,13 @@ class Checker(object):
 
 		if actionToPerform == "ON" and self.process.status == "OFF":
 			self.processRun(self.process, True)
-			self.process.status = "ON"
+			self.process.enable()
 		elif actionToPerform == "NONE" and self.process.status == "ON":    
 			self.processRun(self.process, False)
-			self.process.status = "OFF"
+			self.process.disable()
 		elif actionToPerform == "OFF":    
 			self.processRun(self.process, False)
-			self.process.status = "OFF"
+			self.process.disable()
 			self.process.dayoffperformed = today.weekday()
 
 	def processRun(self, process, enable):

@@ -22,31 +22,36 @@ if(isset($input->receive))
 
 if($id)
 {
-	$item = $itemChecker->checkItem($id);	
+	$item = $itemChecker->checkItem($id);
 
 	if(!Helpers::MakeDir($settings->regularactionfilesPath))
 		return "No regularactionfiles dir";
 	
-	$filepathname = $settings->regularactionfilesPath.$item->name.'_regular_action.json';	
+	$filepathname = $settings->regularactionfilesPath.$item->name.'_regular_action.json';
 
 	if($timeLine)
 	{
 		$timeUnits = explode("|",$timeLine);
 		
 		$index = 0;
-	
+		$timesArray = array();
+		
 		foreach($timeUnits as $timeUnitLine)
 		{
 			$timeUnitData = explode("#", $timeUnitLine);
+			if(count($timeUnitData) < 3)
+				continue;
 			
-			if(count($timeUnitData) == 3)
+			$timeUnit = new stdClass();
+			$timeUnit->timeStart = $timeUnitData[0];
+			$timeUnit->timeEnd = $timeUnitData[1];
+			$timeUnit->daysOfWeek = $timeUnitData[2];
+			
+			if(count($timeUnitData) > 3)
 			{
-				$timesArray[] = array('timeStart' => $timeUnitData[0], 'timeEnd' => $timeUnitData[1], 'daysOfWeek' => $timeUnitData[2]);
+				$timeUnit->random = Helpers::ToBoolean($timeUnitData[3]);
 			}
-			else if(count($timeUnitData) == 2)
-			{
-				$timesArray[] = array('timeStart' => $timeUnitData[0], 'timeEnd' => $timeUnitData[1], 'daysOfWeek' => '');
-			}
+			array_push($timesArray, $timeUnit);
 		}
 		
 		$regularActionData = json_encode(array('name' => $item->name, 'timeUnits' => $timesArray, 'delay' => $item->delay));
