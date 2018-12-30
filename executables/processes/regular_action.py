@@ -128,8 +128,9 @@ class Checker(object):
 					randMinuteEnd = randint(endMinMinuteForRand, endMaxMinuteForRand)
 					if(randHourStart == randHourEnd):
 						while randMinuteEnd <= randMinuteStart:
-							randMinuteStart = randint(startMinMinuteForRand, startMaxMinuteForRand)
-							randMinuteEnd = randint(endMinMinuteForRand, endMaxMinuteForRand)
+							if randMinuteStart == 0:
+								break
+							randMinuteStart--;
 
 					timeStart = str(randHourStart) + ":" + str(randMinuteStart)
 					timeEnd = str(randHourEnd) + ":" + str(randMinuteEnd)
