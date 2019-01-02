@@ -178,15 +178,18 @@ class Helper(object):
 			self.writeExceptionToFile(message)
 			self.logMessage(message)
 			pass
-			
+
 	def logDetailedMessage(self, message):
 		if self.loggingEnabled and self.detailedLogging:
 			self.logMessage (message)
 
 	def logMessage(self, message):
 		if self.loggingEnabled:
-			timestamp = time.strftime('[%Y-%m-%d %H:%M:%S]: ')
-			print (timestamp+message+"\n")
+			self.logMessageWithDate (message)
+
+	def logMessageWithDate(self, message):
+		timestamp = time.strftime('[%Y-%m-%d %H:%M:%S]: ')
+		print (timestamp+message+"\n")
 
 	def runDeviceAction(self, requestProperties):
 		self.runDeviceActionInner(self.settings.data["webServerAddress"], requestProperties)

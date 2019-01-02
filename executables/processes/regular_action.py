@@ -64,10 +64,16 @@ class ProcessBox(object):
 
 	def displayprocessList(self):
 		for process in self.processList:
-			helper.logDetailedMessage ("(status:%s) name: %s , day off perf: %s" % (process.status, process.name, process.dayoffperformed))
+			helper.logMessageWithDate ("(status:%s) name: %s , day off perf: %s" % (process.status, process.name, process.dayoffperformed))
 			for timeUnit in process.timeUnits:
-				helper.logDetailedMessage ("------ start: %s end: %s days: %s" % (timeUnit['timeStart'], timeUnit['timeEnd'], timeUnit['daysOfWeek']))
-		helper.logDetailedMessage('--------------------------------')
+				randomTimes = ""
+				if 'random' in timeUnit and timeUnit['random']:
+					if process.randomStart is not None:
+						randomTimes += " randomStart: " + process.randomStart
+					if process.randomEnd is not None:
+						randomTimes += " randomEnd: " + process.randomEnd
+				helper.logMessageWithDate ("------ start: %s end: %s %s days: %s" % (timeUnit['timeStart'], timeUnit['timeEnd'], randomTimes, timeUnit['daysOfWeek']))
+		helper.logMessageWithDate('--------------------------------')
 
 	def processCount(self):
 		return len(self.processList)
@@ -130,7 +136,7 @@ class Checker(object):
 						while randMinuteEnd <= randMinuteStart:
 							if randMinuteStart == 0:
 								break
-							randMinuteStart--;
+							randMinuteStart -= 1
 
 					timeStart = str(randHourStart) + ":" + str(randMinuteStart)
 					timeEnd = str(randHourEnd) + ":" + str(randMinuteEnd)
