@@ -120,7 +120,7 @@ class Checker(object):
 				if self.process.randomStart is None and self.process.randomEnd is None:
 
 					startHourForRand = max(today.hour, int(hourStart))
-					if today.hour > int(hourStart) - 2:
+					if today.hour > int(hourEnd) - 2:
 						startHourForRand = int(hourStart)
 					endHourForRand = int(hourEnd)
 
