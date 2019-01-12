@@ -138,6 +138,8 @@ class Checker(object):
 					if(randHourStart == randHourEnd):
 						while randMinuteEnd <= randMinuteStart:
 							if randMinuteStart == 0:
+								if randMinuteEnd == 0:
+									randMinuteEnd += 5
 								break
 							randMinuteStart -= 1
 
