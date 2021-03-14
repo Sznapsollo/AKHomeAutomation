@@ -103,13 +103,16 @@ class Sensor(object):
 		GPIO.setup(self.pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 		self.messageSensorInfo("Initiating")
 
+	def isNotNullOrEmpty(self, prop):
+		return prop is not None and prop 
+
 	def checkDependency(self, device, message):
 
 		if "dependencyMethod" not in device or "dependencyValue" not in device or "dependencyOperation" not in device:
 			return True
 			
 		#dependency will come for now only from helper class
-		if device["dependencyMethod"] is not None and device["dependencyOperation"] is not None and device["dependencyValue"] is not None:
+		if self.isNotNullOrEmpty(device["dependencyMethod"]) and self.isNotNullOrEmpty(device["dependencyOperation"]) and self.isNotNullOrEmpty(device["dependencyValue"]):
 
 			if device["dependencyOperation"] == "grtr":
 				currentValue = getattr(helper, device["dependencyMethod"])()
