@@ -1,5 +1,8 @@
 # AKHomeAutomation
 
+Before you read: I updated AKHomeAutomation and switched to vertx based system which makes if easier to work with and faster to deploy (does not need apache, php, problems with file permissions etc). It is in another repository under name TichHome.
+
+
 ## About
 
 AKHomeAutomation is Raspberry Pi based home automation / smart home / smart house solution based on common and cheap components, works realiably and I think is very convenient to use.
